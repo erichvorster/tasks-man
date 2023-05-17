@@ -1,23 +1,33 @@
-'use server'
+"use server";
 
-import prisma from '../../lib/prisma';
-
-const createTodo = async () => {
-   
-    const newTodo = await prisma.todo.create({
-      data: {
-        title: 'My first todo',
-        description: 'This is my first todo',
-      },
-    });
-    console.log(newTodo);
-  };
-
-  const getTodos = async () => {
-    const todos = await prisma.todo.findMany();
-    return todos
-  };
+import prisma from "../../lib/prisma";
 
 
+//Create a todo
+const createTodo = async (data) => {
+  const newTodo = await prisma.todo.create({
+    data: {
+      title: data.title,
+      description: data.description,
+    },
+  });
+};
 
-  export { createTodo, getTodos};
+//List all todos
+const getTodos = async () => {
+  const todos = await prisma.todo.findMany();
+  return todos;
+};
+
+//delete a todo
+const deleteTodo = async (id:number) => {
+  const todo = await prisma.todo.delete({
+    where: {
+      id: id,
+    },
+  });
+ 
+};
+
+
+export { createTodo, getTodos, deleteTodo };

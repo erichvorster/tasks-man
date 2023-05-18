@@ -14,7 +14,7 @@ const Todo: React.FC<TodoProps> = ({ todo, handleDeleteTodo }) => {
   
 
   return (
-    <div className="bg-slate-200 rounded p-6">
+    <div className="bg-white rounded-lg p-6 w-11/12 mx-auto my-4 border-2">
       <h2>{todo.title}</h2>
       <p>{todo.description}</p>
       <TrashIcon onClick={() => handleDeleteTodo(todo.id)} className="h-12 w-12 cursor-pointer"/>

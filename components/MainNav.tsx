@@ -5,6 +5,7 @@ import {
   CalendarDaysIcon,
   InboxIcon,
 } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 const MainNav = () => {
   return (
@@ -19,8 +20,8 @@ const MainNav = () => {
             Home
           </li>
           <li className="cursor-pointer mb-3 flex items-center">
-            <BriefcaseIcon className="w-4 h-4 mr-2" />
-            Projects
+            <Link href="/Projects"><BriefcaseIcon className="w-4 h-4 mr-2" />
+            Projects</Link>
           </li>
           <li className="cursor-pointer mb-3 flex items-center">
             <CalendarDaysIcon className="w-4 h-4 mr-2" />

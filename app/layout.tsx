@@ -2,6 +2,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import MainNav from "../components/MainNav";
 import Dashboard from "@/components/Dashboard";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
@@ -12,10 +13,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div id="modal-root">
         <MainNav />
         <Dashboard>{children}</Dashboard>
-        </div>
+        <div id="overlay"></div>
+        <div id="root"></div>
       </body>
     </html>
   );

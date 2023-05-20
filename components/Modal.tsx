@@ -1,11 +1,22 @@
+import ProjectForm from "./ProjectForm";
+
 interface ModalProps {
-  content: string;
+  children?: React.ReactNode;
+  hideOverlay: () => void;
+  setProjects?: React.Dispatch<React.SetStateAction<never[]>>;
+  setActiveProject?: React.Dispatch<React.SetStateAction<{}>>;
 }
-export const Modal = (props: ModalProps) => {
+
+
+export const Modal = ({ children, hideOverlay, setProjects, setActiveProject}: ModalProps) => {
   return (
     <div className={"modalContent"}>
-      <span className={"close"}>×</span>
-      <p>{props.content}</p>
+      <span onClick={hideOverlay} className={"close"}>
+        ×
+      </span>
+      <div className="p-8">
+        <ProjectForm setProjects={setProjects} setActiveProject={setActiveProject} hideOverlay={hideOverlay} />
+      </div>
     </div>
   );
 };

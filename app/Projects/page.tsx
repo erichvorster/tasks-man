@@ -1,14 +1,23 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import NoProjects from "@/components/NoProjects";
 import Projects from "@/components/Projects";
 import { Modal } from "@/components/Modal";
 import { Overlay } from "@/components/Overlay";
+import ProjectForm from "@/components/ProjectForm";
+import ProjectContext from "@/context/ProjectContext";
 
 const page = () => {
   const [hasProjects, setHasProjects] = useState(false);
   const [show, setShow] = useState<boolean>(false);
+  // const [projects, setProjects] = useState([]);
+  const [activeProject, setActiveProject] = useState({});
+
+  const { projects, setProjects } = useContext(ProjectContext);
+
+
+
   const showModal = () => {
     setShow(true);
   };
@@ -18,16 +27,16 @@ const page = () => {
 
   return (
     <div>
-      {hasProjects ? (
-        <Projects hasProjects={hasProjects} />
+      {projects.length != 0 ? (
+        <Projects hasProjects={hasProjects} activeProject={activeProject} />
       ) : (
-        <NoProjects hasProjects={hasProjects} />
+        <NoProjects hasProjects={hasProjects} showModal={showModal} />
       )}
       {show && (
-        <Overlay hideOverlay={hideModal}>
-          <Modal content="LearnBestCoding Modal" />
+        <Overlay >
+          <Modal hideOverlay={hideModal} setProjects={setProjects} setActiveProject={setActiveProject}/>
         </Overlay>
-      )}
+      )} 
       <button onClick={showModal}>Show Modal</button>
     </div>
   );

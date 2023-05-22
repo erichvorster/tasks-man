@@ -5,7 +5,7 @@ import { Inter } from "next/font/google";
 import MainNav from "../components/MainNav";
 import Dashboard from "@/components/Dashboard";
 import ProjectContext from "@/context/ProjectContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,21 +14,28 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
-
-
-
-
   const [projects, setProjects] = useState([]);
   const [activeProject, setActiveProject] = useState({});
- 
 
-  console.log("projects", projects);
+  useEffect(() => {
+    // Save projects to local storage whenever it changes
+    localStorage.setItem("projects", JSON.stringify(projects));
+  }, [projects]);
+
+  useEffect(() => {
+    // Load projects from local storage on initial render
+    const storedProjects = localStorage.getItem("projects");
+    if (storedProjects) {
+      setProjects(JSON.parse(storedProjects));
+    }
+  }, []);
 
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ProjectContext.Provider value={{ projects, setProjects, activeProject, setActiveProject}}>
+        <ProjectContext.Provider
+          value={{ projects, setProjects, activeProject, setActiveProject }}
+        >
           <MainNav projects={projects} setProjects={setProjects} />
           <Dashboard>{children}</Dashboard>
         </ProjectContext.Provider>

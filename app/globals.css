@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
+/* Modal and overlay styles */
 .overlay {
     position: fixed;
     width: 100%;
@@ -30,3 +32,49 @@
     font-size: 30px;
     font-weight: bold;
   }
+
+
+  Calendar Styles
+
+/* Calendar Styles*/
+.calendar-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.calendar-table {
+  width: 100%;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+}
+
+.calendar-table caption {
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+}
+
+.calendar-table thead th,
+.calendar-table tbody td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.calendar-table tbody td {
+  height: 100px;
+  width: calc(100% / 7);
+}
+
+.calendar-table .empty-cell {
+  background-color: #f0f0f0;
+}
+
+.calendar-table tbody td.highlight {
+  background-color: red;
+  color: white;
+}

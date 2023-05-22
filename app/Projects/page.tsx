@@ -7,12 +7,14 @@ import { Modal } from "@/components/Modal";
 import { Overlay } from "@/components/Overlay";
 import ProjectForm from "@/components/ProjectForm";
 import ProjectContext from "@/context/ProjectContext";
+import Project from "../Project/[projectid]/page";
+
 
 const page = () => {
   const [hasProjects, setHasProjects] = useState(false);
   const [show, setShow] = useState<boolean>(false);
   // const [projects, setProjects] = useState([]);
-  const [activeProject, setActiveProject] = useState({});
+  const {activeProject, setActiveProject } = useContext(ProjectContext);
 
   const { projects, setProjects } = useContext(ProjectContext);
 
@@ -28,7 +30,7 @@ const page = () => {
   return (
     <div>
       {projects.length != 0 ? (
-        <Projects hasProjects={hasProjects} activeProject={activeProject} />
+        <Project hasProjects={hasProjects} activeProject={activeProject} />
       ) : (
         <NoProjects hasProjects={hasProjects} showModal={showModal} />
       )}

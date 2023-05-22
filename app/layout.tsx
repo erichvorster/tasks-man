@@ -20,7 +20,7 @@ export default function RootLayout({
 
 
   const [projects, setProjects] = useState([]);
-
+  const [activeProject, setActiveProject] = useState({});
  
 
   console.log("projects", projects);
@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ProjectContext.Provider value={{ projects, setProjects}}>
+        <ProjectContext.Provider value={{ projects, setProjects, activeProject, setActiveProject}}>
           <MainNav projects={projects} setProjects={setProjects} />
           <Dashboard>{children}</Dashboard>
         </ProjectContext.Provider>

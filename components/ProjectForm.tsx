@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import ProjectContext from "@/context/ProjectContext";
 
 type ProjectFormProps = {
   setProjects?: React.Dispatch<React.SetStateAction<never[]>>;
@@ -8,7 +9,6 @@ type ProjectFormProps = {
 
 const ProjectForm = ({
   setProjects,
-  setActiveProject,
   hideOverlay,
 }: ProjectFormProps) => {
   const [project, setProject] = useState({
@@ -17,7 +17,9 @@ const ProjectForm = ({
     tags: "",
     priority: "",
     todos: [],
+    id:""
   });
+  const {activeProject, setActiveProject } = useContext(ProjectContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

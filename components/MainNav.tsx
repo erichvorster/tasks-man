@@ -1,4 +1,4 @@
-import React from "react";
+
 import {
   HomeIcon,
   BriefcaseIcon,
@@ -11,11 +11,16 @@ import {
 import Link from "next/link";
 import { Modal } from "@/components/Modal";
 import { Overlay } from "@/components/Overlay";
+import { useContext, useState } from "react";
+import ProjectContext from "@/context/ProjectContext";
+
 
 const MainNav = ({projects, setProjects}) => {
-  const [showProjects, setShowProjects] = React.useState(false);
+  const [showProjects, setShowProjects] = useState(false);
+  const {activeProject, setActiveProject } = useContext(ProjectContext);
 
-  const [show, setShow] = React.useState<boolean>(false);
+
+  const [show, setShow] = useState<boolean>(false);
 
   const showModal = () => {
     setShow(true);
@@ -44,8 +49,8 @@ const MainNav = ({projects, setProjects}) => {
             </Link>
           </li>
           {projects.length !== 0 && <div className="ml-8">
-               {projects.map((project) => (
-                 <li className="cursor-pointer mb-3 flex items-center">
+               {projects.map((project, i) => (
+                 <li className="cursor-pointer mb-3 flex items-center" key={i} onClick={() => setActiveProject(project)}>
                    <Link href={`/Projects/${project.id}`} className="flex items-center hover:bg-slate-400/25 p-2 rounded-md w-11/12">
                       <ArrowLongRightIcon className="w-5 h-5 mr-2 " />
                       {project.name} 

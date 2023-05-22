@@ -19,8 +19,6 @@ const Todos = () => {
     id: "",
   });
 
-  console.log(todos);
-
   React.useEffect(() => {
     getTodos().then((data: Todo[]) => setTodos(data));
   }, []);
@@ -115,7 +113,6 @@ const Todos = () => {
               ))}
             </div>
           </div>
-    
         </div>
       </div>
     </div>

@@ -7,6 +7,10 @@ type ProjectFormProps = {
   hideOverlay: () => void;
 };
 
+const generateRandomId = () => {
+  return Math.floor(Math.random() * 1000000); // Adjust the range as per your needs
+};
+
 const ProjectForm = ({
   setProjects,
   hideOverlay,
@@ -17,7 +21,7 @@ const ProjectForm = ({
     tags: "",
     priority: "",
     todos: [],
-    id:""
+    id: generateRandomId().toString(), // Generate a random ID for the project
   });
   const {activeProject, setActiveProject } = useContext(ProjectContext);
 

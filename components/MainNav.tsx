@@ -12,6 +12,9 @@ import { Modal } from "@/components/Modal";
 import { Overlay } from "@/components/Overlay";
 import { useContext, useState } from "react";
 import ProjectContext from "@/context/ProjectContext";
+import Image from "next/image";
+import logo from "../public/logo.svg";
+import Button from "@/components/Button";
 
 const MainNav = ({ projects, setProjects }) => {
   const { activeProject, setActiveProject } = useContext(ProjectContext);
@@ -27,10 +30,11 @@ const MainNav = ({ projects, setProjects }) => {
   };
 
   return (
-    <div className="bg-gray-100 w-72  absolute top-0 bottom-0 left-0">
+    <div className="bg-gray-100 w-72  absolute top-0 bottom-0 left-0 flex flex-col justify-between">
       <div className=" flex flex-col justify-between h-44">
-        <div className="border-b-2 pl-4 py-2">
-          <h1 className="text-3xl font-bold">Taski</h1>
+        <div className="border-b-2 pl-4 py-2 flex">
+          <Image src={logo} height={40} width={40} alt="logo"/>
+          <h1 className="text-3xl font-extrabold pl-2 mt-1">HEX</h1>
         </div>
         <ul className="flex flex-col py-4 pl-4 border-b-2 ">
           <Link
@@ -67,7 +71,7 @@ const MainNav = ({ projects, setProjects }) => {
                       onClick={() => setActiveProject(project)}
                     >
                       <Link
-                        href={`/Projects/${project.id}`}
+                        href={`/Project/${project.id}`}
                         className="flex items-center hover:bg-slate-400/25 p-2 rounded-md w-11/12"
                       >
                         <ArrowLongRightIcon className="w-5 h-5 mr-2 " />
@@ -100,6 +104,9 @@ const MainNav = ({ projects, setProjects }) => {
           <li className="cursor-pointer mb-3">Calender</li>
           <li className="cursor-pointer mb-3">Inbox</li>
         </ul>
+      </div>
+      <div className="mb-6" onClick={showModal}>
+        <Button btnText="New project"/>
       </div>
       {show && (
         <Overlay>

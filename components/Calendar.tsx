@@ -1,10 +1,26 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import ProjectContext from "@/context/ProjectContext";
 
 function Calendar() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  const dates = ["8/21/2023", "8/24/2023", "8/29/2023"];
+  const {projects} = useContext(ProjectContext);
+  const dates = extractDeadlines(projects);
+
+  
+  function extractDeadlines(objects) {
+    var dates = [];
+  
+    for (var i = 0; i < objects.length; i++) {
+      var obj = objects[i];
+      if (obj.hasOwnProperty("deadline")) {
+        dates.push(obj.deadline);
+      }
+    }
+  
+    return dates;
+  }
 
   const getMonthDays = (year, month) => {
     return new Date(year, month + 1, 0).getDate();

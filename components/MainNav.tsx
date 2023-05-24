@@ -16,8 +16,8 @@ import Image from "next/image";
 import logo from "../public/logo.svg";
 import Button from "@/components/Button";
 
-const MainNav = ({ projects, setProjects }) => {
-  const { activeProject, setActiveProject } = useContext(ProjectContext);
+const MainNav = () => {
+  const { activeProject, setActiveProject,projects, setProjects } = useContext(ProjectContext);
   const [showProjects, setShowProjects] = useState(false);
 
   const [show, setShow] = useState<boolean>(false);
@@ -39,18 +39,18 @@ const MainNav = ({ projects, setProjects }) => {
         <ul className="flex flex-col py-4 pl-4 border-b-2 ">
           <Link
             href="/Home"
-            className="flex items-center p-2 hover:bg-slate-400/25 rounded-md w-11/12 group"
+            className="flex items-center p-2 hover:bg-slate-400/25 rounded-md w-11/12 group transition-colors ease-in-out"
           >
             <li className="cursor-pointer  flex items-center">
               <HomeIcon className="w-6 h-6 mr-2" />
               Home
             </li>
           </Link>
-          <li className="cursor-pointer mb-3 flex items-center">
+          <li className="cursor-pointer flex items-center">
             <Link
               href="/Projects"
               onClick={() => setShowProjects(!showProjects)}
-              className="flex items-center p-2 hover:bg-slate-400/25 rounded-md w-11/12 group"
+              className={`flex items-center p-2 hover:bg-slate-400/25 rounded-md w-11/12 group transition-colors ease-in-out ${showProjects && "bg-slate-400/25 rounded-bl-none rounded-br-none"}`}
             >
               <BriefcaseIcon className="w-6 h-6 mr-2" />
               Projects
@@ -60,10 +60,10 @@ const MainNav = ({ projects, setProjects }) => {
               />
             </Link>
           </li>
-          {showProjects && (
-            <div>
+          {showProjects && ( 
+            <div className={showProjects && "bg-slate-300/25 rounded-bl-lg rounded-br-lg mr-6"}>
               {projects.length !== 0 && (
-                <div className="ml-8">
+                <div className="mt-3">
                   {projects.map((project, i) => (
                     <li
                       className="cursor-pointer mb-3 flex items-center"
@@ -72,7 +72,7 @@ const MainNav = ({ projects, setProjects }) => {
                     >
                       <Link
                         href={`/Project/${project.id}`}
-                        className="flex items-center hover:bg-slate-400/25 p-2 rounded-md w-11/12"
+                        className="flex items-center hover:bg-slate-400/25 p-2 rounded-md w-full mx-3 text-sm transition-colors ease-in-out"
                       >
                         <ArrowLongRightIcon className="w-5 h-5 mr-2 " />
                         {project.name}
@@ -83,16 +83,12 @@ const MainNav = ({ projects, setProjects }) => {
               )}
             </div>
           )}
-          <Link href="/Calendar">
-            <li className="cursor-pointer mb-3 flex items-center">
+          <Link href="/Calendar" className="flex items-center p-2 hover:bg-slate-400/25 rounded-md w-11/12 transition-colors ease-in-out">
+            <li className="cursor-pointer flex items-center">
               <CalendarDaysIcon className="w-6 h-6 mr-2" />
               Calender
             </li>
           </Link>
-          <li className="cursor-pointer mb-3 flex items-center">
-            <InboxIcon className="w-6 h-6 mr-2" />
-            Inbox
-          </li>
         </ul>
         <ul className="flex flex-col h-52 py-4 pl-4 border-b-2 ">
           <li className="cursor-pointer mb-3">Home</li>
@@ -110,7 +106,7 @@ const MainNav = ({ projects, setProjects }) => {
       </div>
       {show && (
         <Overlay>
-          <Modal hideOverlay={hideModal} setProjects={setProjects} />
+          <Modal hideOverlay={hideModal} setProjects={setProjects} form={"project"} />
         </Overlay>
       )}
     </div>

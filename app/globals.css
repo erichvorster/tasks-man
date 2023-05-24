@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 
+tbody tr:last-child {
+  border-bottom: 0;
+}
+
 /* Modal and overlay styles */
 .overlay {
     position: fixed;

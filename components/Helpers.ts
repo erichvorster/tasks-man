@@ -23,7 +23,7 @@ function formatDate(dateString) {
   function getPriorityClass(priority) {
 
 
-    console.log("priority", priority);
+
   
     if (priority === 'high') {
       return 'bg-red-300/25';

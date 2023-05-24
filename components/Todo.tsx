@@ -10,13 +10,13 @@ interface TodoProps {
   handleDeleteTodo: (id: number) => void;
 }
 
-const Todo: React.FC<TodoProps> = ({ todo, handleDeleteTodo }) => {
-  
+const Todo: React.FC<TodoProps> = ({ todo, handleDeleteTodo, title, description }) => {
+
 
   return (
     <div className="bg-white rounded-lg p-6 w-11/12 mx-auto my-4 border-2">
-      <h2>{todo.title}</h2>
-      <p>{todo.description}</p>
+      <h2>{title}</h2>
+      <p>{description}</p>
       <TrashIcon onClick={() => handleDeleteTodo(todo.id)} className="h-12 w-12 cursor-pointer"/>
     </div>
   );

@@ -18,8 +18,12 @@ export default function RootLayout({
     return JSON.parse(localStorage.getItem("projects")) || []
   })
 
+  console.log(projects);
+
+  
   const [activeProject, setActiveProject] = useState({});
 
+console.log(activeProject)
 
   useEffect(() => {
     if (projects.length > 0) {localStorage.setItem("projects", JSON.stringify(projects))}
@@ -45,7 +49,7 @@ export default function RootLayout({
   //   }
   // }, []);
 
-  console.log("projects", projects);
+
 
   return (
     <html lang="en">
@@ -53,7 +57,7 @@ export default function RootLayout({
         <ProjectContext.Provider
           value={{ projects, setProjects, activeProject, setActiveProject }}
         >
-          <MainNav projects={projects} setProjects={setProjects} />
+          <MainNav />
           <Dashboard>{children}</Dashboard>
         </ProjectContext.Provider>
         <div id="overlay"></div>

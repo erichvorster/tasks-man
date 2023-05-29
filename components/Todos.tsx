@@ -18,7 +18,7 @@ type Todo = {
 
 const Todos = () => {
   const [show, setShow] = useState<boolean>(false);
-  const {activeProject} = useContext(ProjectContext)
+
 
   const showModal = () => {
     setShow(true);

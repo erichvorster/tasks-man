@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import ProjectContext from '@/context/ProjectContext';
 
 const TodoForm = () => {
-  const { projects, setProjects, activeProject, setActiveProject } = useContext(ProjectContext);
+  const { projects, setProjects, activeProject, setActiveProject, params } = useContext(ProjectContext);
   const [todoInput, setTodoInput] = useState('');
   const [categoryInput, setCategoryInput] = useState('todo');
   const [descriptionInput, setDescriptionInput] = useState('');

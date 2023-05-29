@@ -12,7 +12,7 @@ export const Modal = ({
   children,
   hideOverlay,
   setProjects,
- 
+  params,
   form,
 }: ModalProps) => {
   return (
@@ -28,7 +28,7 @@ export const Modal = ({
             hideOverlay={hideOverlay}
           />
         ) : (
-          <TodoForm />
+          <TodoForm params={params}/>
         )}
       </div>
     </div>

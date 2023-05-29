@@ -11,7 +11,7 @@ import { createTodo, deleteTodo, getTodos } from "@/app/models/models";
 import { PlusIcon } from "@heroicons/react/24/outline";
 
 const Project = ({params}) => {
-  const { activeProject, projects } = useContext(ProjectContext);
+  const {  projects } = useContext(ProjectContext);
   const [show, setShow] = useState<boolean>(false);
 
   const showModal = () => {
@@ -52,7 +52,7 @@ return (
       <div className="mt-6">
         {show && (
           <Overlay>
-            <Modal hideOverlay={hideModal} />
+            <Modal hideOverlay={hideModal} params={params}/>
           </Overlay>
         )}
         <div>

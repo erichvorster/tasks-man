@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import ProjectContext from "@/context/ProjectContext";
 
 const UpcomingTodos = () => {
-  const { projects, setProjects, activeProject, setActiveProject } =
+  const { projects, } =
     useContext(ProjectContext);
   return (
     <div>

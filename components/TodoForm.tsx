@@ -2,10 +2,11 @@ import React, { useContext, useState } from 'react';
 import ProjectContext from '@/context/ProjectContext';
 
 const TodoForm = () => {
-  const { projects, setProjects, activeProject, setActiveProject } = useContext(ProjectContext);
+  const { projects, setProjects, activeProject, setActiveProject, params } = useContext(ProjectContext);
   const [todoInput, setTodoInput] = useState('');
   const [categoryInput, setCategoryInput] = useState('todo');
   const [descriptionInput, setDescriptionInput] = useState('');
+  const [dueDate, setDueDate] = useState('');
 
   const generateRandomId = () => {
     const timestamp = Date.now().toString();
@@ -44,6 +45,10 @@ const TodoForm = () => {
     setDescriptionInput(event.target.value);
   };
 
+  const handleDueDateChange = event => {
+    setDueDate(event.target.value);
+  };
+
   const handleAddTodo = (event, projectId) => {
     event.preventDefault();
 
@@ -56,11 +61,13 @@ const TodoForm = () => {
       text: todoInput,
       category: categoryInput,
       description: descriptionInput,
+      dueDate: dueDate,
     };
     addTodo(projectId, newTodo);
     setTodoInput('');
     setCategoryInput('todo');
     setDescriptionInput('');
+    setDueDate('');
   };
 
   return (
@@ -84,6 +91,11 @@ const TodoForm = () => {
           onChange={handleDescriptionInputChange}
           placeholder="Enter description..."
         ></textarea>
+        <input
+          type="date"
+          value={dueDate}
+          onChange={handleDueDateChange}
+        />
         <button type="submit">Add Todo</button>
       </form>
     </div>

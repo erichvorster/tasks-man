@@ -3,7 +3,7 @@ import ProjectContext from "@/context/ProjectContext";
 
 type ProjectFormProps = {
   setProjects?: React.Dispatch<React.SetStateAction<never[]>>;
-  setActiveProject?: React.Dispatch<React.SetStateAction<{}>>;
+ 
   hideOverlay: () => void;
 };
 
@@ -23,7 +23,7 @@ const ProjectForm = ({
     todos: [],
     id: generateRandomId().toString(), // Generate a random ID for the project
   });
-  const {activeProject, setActiveProject } = useContext(ProjectContext);
+  const {setActiveProject } = useContext(ProjectContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

@@ -28,7 +28,6 @@ const Todos = () => {
   };
 
 
-console.log(activeProject)
 
 
   return (

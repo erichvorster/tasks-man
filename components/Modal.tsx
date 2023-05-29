@@ -5,7 +5,6 @@ interface ModalProps {
   children?: React.ReactNode;
   hideOverlay: () => void;
   setProjects?: React.Dispatch<React.SetStateAction<never[]>>;
-  setActiveProject?: React.Dispatch<React.SetStateAction<{}>>;
   form: string;
 }
 
@@ -13,7 +12,7 @@ export const Modal = ({
   children,
   hideOverlay,
   setProjects,
-  setActiveProject,
+ 
   form,
 }: ModalProps) => {
   return (
@@ -25,7 +24,7 @@ export const Modal = ({
         {form === "project" ? (
           <ProjectForm
             setProjects={setProjects}
-            setActiveProject={setActiveProject}
+          
             hideOverlay={hideOverlay}
           />
         ) : (

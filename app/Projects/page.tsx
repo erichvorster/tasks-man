@@ -14,7 +14,7 @@ const page = () => {
   const [hasProjects, setHasProjects] = useState(false);
   const [show, setShow] = useState<boolean>(false);
   // const [projects, setProjects] = useState([]);
-  const {activeProject, setActiveProject } = useContext(ProjectContext);
+  const { } = useContext(ProjectContext);
 
   const { projects, setProjects } = useContext(ProjectContext);
 
@@ -30,13 +30,13 @@ const page = () => {
   return (
     <div>
       {projects.length != 0 ? (
-        <Project hasProjects={hasProjects} activeProject={activeProject} />
+        <Project hasProjects={hasProjects}  />
       ) : (
         <NoProjects hasProjects={hasProjects} showModal={showModal} />
       )}
       {show && (
         <Overlay >
-          <Modal hideOverlay={hideModal} setProjects={setProjects} setActiveProject={setActiveProject}/>
+          <Modal hideOverlay={hideModal} setProjects={setProjects} />
         </Overlay>
       )} 
       <button onClick={showModal}>Show Modal</button>

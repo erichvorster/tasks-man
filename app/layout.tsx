@@ -18,12 +18,12 @@ export default function RootLayout({
     return JSON.parse(localStorage.getItem("projects")) || []
   })
 
-  console.log(projects);
+
 
   
   const [activeProject, setActiveProject] = useState({});
 
-console.log(activeProject)
+
 
   useEffect(() => {
     if (projects.length > 0) {localStorage.setItem("projects", JSON.stringify(projects))}

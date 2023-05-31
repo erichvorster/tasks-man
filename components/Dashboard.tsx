@@ -6,7 +6,7 @@ type DashboardProps = {
 
 const Dashboard = ({ children }: DashboardProps) => {
   return (
-    <div className="absolute right-0 top-0 bottom-0 left-72 m-12">{children}</div>
+    <div className="absolute right-0 top-0 bottom-0 left-72 m-12 ">{children}</div>
   );
 };
 

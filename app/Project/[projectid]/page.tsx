@@ -56,7 +56,7 @@ return (
           </Overlay>
         )}
         <div>
-          <div className="grid grid-cols-3 bg-slate-100 rounded-lg">
+          <div className="grid grid-cols-3 bg-gray-100 rounded-lg">
             <div className="flex-col">
               <div className="text-center mt-4">
                 <h3 className="font-bold">To Do</h3>

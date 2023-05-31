@@ -85,11 +85,11 @@ const Todo: React.FC<TodoProps> = ({ todo, handleDeleteTodo, params }) => {
           } bg-white`}
         >
           <ul>
-            <li className="hover:bg-slate-100   py-1 transition ease-in-out">
+            <li className="hover:bg-gray-100   py-1 transition ease-in-out">
               <span className="pl-2">Move</span>
               <ul className="">
                 <li
-                  className="hover:bg-slate-200 cursor-pointer px-4 py-1 transition ease-in-out"
+                  className="hover:bg-gray-200 cursor-pointer px-4 py-1 transition ease-in-out"
                   onClick={() =>
                     handleUpdateCategory(params.projectid, todo.id, "todo")
                   }
@@ -97,7 +97,7 @@ const Todo: React.FC<TodoProps> = ({ todo, handleDeleteTodo, params }) => {
                   Todo
                 </li>
                 <li
-                  className="hover:bg-slate-200 cursor-pointer px-4 py-1 transition ease-in-out"
+                  className="hover:bg-gray-200 cursor-pointer px-4 py-1 transition ease-in-out"
                   onClick={() =>
                     handleUpdateCategory(
                       params.projectid,
@@ -109,7 +109,7 @@ const Todo: React.FC<TodoProps> = ({ todo, handleDeleteTodo, params }) => {
                   In Progress
                 </li>
                 <li
-                  className="hover:bg-slate-200 cursor-pointer px-4 py-1 transition ease-in-out"
+                  className="hover:bg-gray-200 cursor-pointer px-4 py-1 transition ease-in-out"
                   onClick={() =>
                     handleUpdateCategory(params.projectid, todo.id, "done")
                   }
@@ -121,7 +121,7 @@ const Todo: React.FC<TodoProps> = ({ todo, handleDeleteTodo, params }) => {
             <hr />
             <li
               onClick={() => deleteTodo(params.projectid, todo.id)}
-              className="hover:bg-slate-100 hover:text-red-500 hover:font-bold cursor-pointer py-1 transition ease-in-out flex justify-between"
+              className="hover:bg-gray-100 hover:text-red-500 hover:font-bold cursor-pointer py-1 transition ease-in-out flex justify-between"
             >
               <span className="pl-2">Delete</span>
               <TrashIcon className="w-6 h-6" />
@@ -130,20 +130,17 @@ const Todo: React.FC<TodoProps> = ({ todo, handleDeleteTodo, params }) => {
         </div>
       </div>
       <div className="mt-2">
-        <p className="text-sm" onClick={toggleDescription}>
+        <p className="text-sm cursor-pointer" onClick={toggleDescription}>
           {showFullDescription ? (
             todo.description
           ) : (
             <>
-              {todo.description.slice(0, 40)}
-              {todo.description.length > 40 && (
+              {todo.description.slice(0, 150)}
+              {todo.description.length > 150 && (
                 <span
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%)",
-                  }}
+                
                 >
-                  ...
+                  .......
                 </span>
               )}
             </>

@@ -6,7 +6,7 @@ const page = () => {
   return (
     <div>
       <Calendar year={2021} />
-      <CalendarRow year={2021} />
+      {/* <CalendarRow year={2021} /> */}
     </div>
   );
 };

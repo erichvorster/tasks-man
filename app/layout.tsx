@@ -7,7 +7,7 @@ import ProjectContext from "@/context/ProjectContext";
 import { useState, useEffect } from "react";
 import { Poppins } from "next/font/google";
 
-const poppins = Poppins({ subsets: ["latin"], weight:'400' });
+const poppins = Poppins({ subsets: ["latin"], weight:['400', '700'] });
 
 export default function RootLayout({
   children,
@@ -24,6 +24,7 @@ export default function RootLayout({
   const [activeProject, setActiveProject] = useState({});
 
 
+  console.log(JSON.stringify(projects))
 
   useEffect(() => {
     if (projects.length > 0) {localStorage.setItem("projects", JSON.stringify(projects))}
@@ -53,7 +54,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={poppins.className}>
+      <body className={`${poppins.className} bg-gray-100/50`}>
         <ProjectContext.Provider
           value={{ projects, setProjects, activeProject, setActiveProject }}
         >

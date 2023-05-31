@@ -20,7 +20,7 @@ export const Modal = ({
       <span onClick={hideOverlay} className={"close"}>
         ×
       </span>
-      <div className="p-8">
+      <div className="p-2">
         {form === "project" ? (
           <ProjectForm
             setProjects={setProjects}
@@ -28,7 +28,7 @@ export const Modal = ({
             hideOverlay={hideOverlay}
           />
         ) : (
-          <TodoForm params={params}/>
+          <TodoForm params={params} hideOverlay={hideOverlay}/>
         )}
       </div>
     </div>

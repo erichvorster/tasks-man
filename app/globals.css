@@ -7,6 +7,10 @@ tbody tr:last-child {
   border-bottom: 0;
 }
 
+body{
+  height: 100%;
+    overflow: hidden;
+}
 /* Modal and overlay styles */
 .overlay {
     position: fixed;

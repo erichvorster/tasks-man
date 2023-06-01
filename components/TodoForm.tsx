@@ -2,14 +2,15 @@ import React, { useContext, useState } from "react";
 import ProjectContext from "@/context/ProjectContext";
 import { RectangleStackIcon } from "@heroicons/react/24/outline";
 
-const TodoForm = ({hideOverlay, params}) => {
-  const { projects, setProjects, activeProject, setActiveProject, } =
+const TodoForm = ({ hideOverlay, params }) => {
+  const { projects, setProjects, activeProject, setActiveProject } =
     useContext(ProjectContext);
   const [todoInput, setTodoInput] = useState("");
   const [categoryInput, setCategoryInput] = useState("todo");
   const [descriptionInput, setDescriptionInput] = useState("");
   const [dueDate, setDueDate] = useState("");
-  const [priority, setPriority] = useState("low"); // Added priority state
+  const [priority, setPriority] = useState("low");
+  const [assigneeInput, setAssigneeInput] = useState(""); // Added assigneeInput state
 
   const generateRandomId = () => {
     const timestamp = Date.now().toString();
@@ -56,6 +57,10 @@ const TodoForm = ({hideOverlay, params}) => {
     setPriority(event.target.value);
   };
 
+  const handleAssigneeInputChange = (event) => {
+    setAssigneeInput(event.target.value);
+  }; // Added assignee input change handler
+
   const handleAddTodo = (event, projectId) => {
     event.preventDefault();
 
@@ -69,19 +74,23 @@ const TodoForm = ({hideOverlay, params}) => {
       category: categoryInput,
       description: descriptionInput,
       dueDate: dueDate,
-      priority: priority, // Added priority to newTodo object
+      priority: priority,
+      assignee: assigneeInput, // Added assignee to newTodo object
     };
     addTodo(projectId, newTodo);
     setTodoInput("");
     setCategoryInput("todo");
     setDescriptionInput("");
     setDueDate("");
-    setPriority("low"); // Reset priority to "low" after adding todo
+    setPriority("low");
+    setAssigneeInput(""); // Reset assigneeInput after adding todo
   };
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold flex"><RectangleStackIcon className="h-7 w-7 mr-2"/> Create Todo</h1>
+    <div className="">
+      <h1 className="text-2xl font-bold flex">
+        <RectangleStackIcon className="h-7 w-7 mr-2" /> Create Todo
+      </h1>
 
       <form onSubmit={(event) => handleAddTodo(event, activeProject.id)}>
         <div>
@@ -104,7 +113,16 @@ const TodoForm = ({hideOverlay, params}) => {
               className="h-24 border border-gray-300 rounded-md px-2 py-1 mt-1"
             ></textarea>
           </div>
-
+          <div className="flex flex-col mt-6">
+            <label className="text-xs font-bold">Assignee</label>
+            <input
+              type="text"
+              value={assigneeInput}
+              onChange={handleAssigneeInputChange}
+              placeholder="Enter assignee..."
+              className="border border-gray-300 rounded-md px-2 py-1 mt-1"
+            />
+          </div>
           <div className="grid grid-cols-3 gap-4 mt-6">
             <div className="flex flex-col ">
               <label className="text-xs font-bold">Priority</label>
@@ -141,8 +159,15 @@ const TodoForm = ({hideOverlay, params}) => {
             </div>
           </div>
           <div className="mt-24 grid grid-cols-2 gap-4">
-            <button onClick={hideOverlay} className="border rounded-md py-1">Cancel</button>
-            <button type="submit" className="border rounded-md py-1 bg-blue-400 text-white">Add Todo</button>
+            <button onClick={hideOverlay} className="border rounded-md py-1">
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="border rounded-md py-1 bg-blue-400 text-white"
+            >
+              Add Todo
+            </button>
           </div>
         </div>
       </form>

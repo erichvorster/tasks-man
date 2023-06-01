@@ -64,7 +64,7 @@ const TaskTable = () => {
     <div>
       <div className="flex justify-between mb-3">
         <div>
-          <h1 className="text-xl text-gray-700/25 font-bold">Projects</h1>
+          <h1 className="text-xl text-black/50 font-bold">Projects</h1>
         </div>
         <div className="flex">
         <div>

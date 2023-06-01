@@ -24,7 +24,7 @@ export default function RootLayout({
   const [activeProject, setActiveProject] = useState({});
 
 
-  console.log(JSON.stringify(projects))
+  console.log(projects)
 
   useEffect(() => {
     if (projects.length > 0) {localStorage.setItem("projects", JSON.stringify(projects))}

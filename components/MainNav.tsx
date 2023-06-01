@@ -6,6 +6,7 @@ import {
   ArrowLongRightIcon,
   CubeIcon,
   PlusIcon,
+  StopIcon
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { Modal } from "@/components/Modal";
@@ -62,9 +63,9 @@ const MainNav = () => {
             </div>
           </li>
           {showProjects && ( 
-            <div className={showProjects && "bg-gray-300/25 rounded-bl-lg rounded-br-lg mr-6"}>
+            <div className={showProjects && "bg-gray-100 border rounded-bl-lg rounded-br-lg mr-6 shadow-sm relative"}>
               {projects.length !== 0 && (
-                <div className="mt-3">
+                <div className="mt-3 max-h-[300px] overflow-auto ">
                   {projects.map((project, i) => (
                     <li
                       className="cursor-pointer mb-3 flex items-center"
@@ -75,13 +76,17 @@ const MainNav = () => {
                         href={`/Project/${project.id}`}
                         className="flex items-center hover:bg-gray-400/25 p-2 rounded-md w-full mx-3 text-sm transition-colors ease-in-out"
                       >
-                        <ArrowLongRightIcon className="w-5 h-5 mr-2 " />
+                        <StopIcon className="w-5 h-5 mr-2 " style={{ color: project.projectColor }} />
                         {project.name}
                       </Link>
                     </li>
                   ))}
+                     
                 </div>
               )}
+         
+
+         <div className="h-12 absolute bottom-0 left-0 right-0 bg-gradient-to-t from-gray-100 to-transparent"/>
             </div>
           )}
           <Link href="/Calendar" className="flex items-center p-2 hover:bg-gray-400/25 rounded-md w-11/12 transition-colors ease-in-out">

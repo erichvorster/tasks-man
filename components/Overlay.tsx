@@ -8,7 +8,7 @@ interface OverlayProps {
 export const Overlay = (props: OverlayProps) => {
   return ReactDOM.createPortal(
     <div className={"overlay"} >
-      <div>
+      <div className="">
       {props.children}
       </div>
     </div>,

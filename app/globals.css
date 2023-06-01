@@ -11,6 +11,27 @@ body{
   height: 100%;
     overflow: hidden;
 }
+
+::-webkit-scrollbar-track
+{
+	
+	background-color: transparent;
+}
+
+::-webkit-scrollbar
+{
+	width: 5px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+	background-color: lightgray;
+  border-radius: 0%;
+	
+}
+
+
 /* Modal and overlay styles */
 .overlay {
     position: fixed;
@@ -61,17 +82,18 @@ body{
 
 .calendar-table caption {
   font-size: 1.2rem;
-  font-weight: bold;
   padding: 10px;
   text-align: center;
+  
 }
 
 .calendar-table thead th,
 .calendar-table tbody td {
-  border: 1px solid #ccc;
-  padding: 10px;
-  text-align: center;
+
+  
+ 
 }
+
 
 .calendar-table tbody td {
   height: 100px;

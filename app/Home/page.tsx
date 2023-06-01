@@ -26,9 +26,9 @@ const page = () => {
         <HomeTiles />
       </div>
 
-      <div className="grid grid-rows-2 grid-flow-col gap-4">
-        <div className="row-span-1 col-span-1 "> <TaskTable /></div>
-        <div className="col-span-1 row-span-1"><UpcomingTodos /></div>
+      <div className="grid grid-rows-4 grid-flow-col gap-4">
+        <div className="row-span-1 col-span-1"> <TaskTable /></div>
+        <div className=" row-span-3 col-span-1"><UpcomingTodos /></div>
         <div className="row-span-2 col-span-1 bg-white rounded-md h-full w-full">03</div>
       </div>
 

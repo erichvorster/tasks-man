@@ -2,23 +2,28 @@
 
 import React, { useState, useContext } from "react";
 import ProjectContext from "@/context/ProjectContext";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
-function Calendar() {
+function Calendar({ setSelectedProject }) {
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  const {projects} = useContext(ProjectContext);
+  const { projects } = useContext(ProjectContext);
   const dates = extractDeadlines(projects);
 
-  
   function extractDeadlines(objects) {
-    var dates = [];
-  
+    var dates = {};
+
     for (var i = 0; i < objects.length; i++) {
       var obj = objects[i];
       if (obj.hasOwnProperty("deadline")) {
-        dates.push(obj.deadline);
+        const date = obj.deadline;
+        if (dates[date]) {
+          dates[date].push(obj);
+        } else {
+          dates[date] = [obj];
+        }
       }
     }
-  
+
     return dates;
   }
 
@@ -51,44 +56,96 @@ function Calendar() {
       }/${currentDate.getDate()}/${currentDate.getFullYear()}`;
 
       let tdClassName = "";
-      if (dates.includes(dateString)) {
+      let projectsData = [];
+
+      if (dates[dateString]) {
         tdClassName = "highlight";
+        projectsData = dates[dateString];
       }
 
       week.push(
-        <td key={`day-${day}`} className={tdClassName}>
-          {day}
+        <td
+          key={`day-${day}`}
+          className="font-normal pl-4 py-2 border relative pr-4"
+        >
+          <span className="absolute left-4 top-1">{day}</span>
+          {projectsData.length > 0 && (
+            <div className="project-names mt-4">
+              {projectsData.map((project) => (
+                <div
+                  key={project.id}
+                  className="project-name text-xs rounded-md p-1 mb-1"
+                  style={{ backgroundColor: project.projectColor }}
+                  onClick={() => setSelectedProject(project.id)}
+                >
+                  {project.name}
+                </div>
+              ))}
+            </div>
+          )}
         </td>
       );
 
       if (week.length === 7) {
-        monthRows.push(<tr key={`week-${day / 7}`}>{week}</tr>);
+        monthRows.push(
+          <tr className="font-normal pl-4 py-2 border" key={`week-${day / 7}`}>
+            {week}
+          </tr>
+        );
         week = [];
       }
     }
 
     if (week.length > 0) {
-      monthRows.push(<tr key={`week-${monthDays / 7 + 1}`}>{week}</tr>);
+      monthRows.push(
+        <tr
+          className="font-normal pl-4 py-2 border"
+          key={`week-${monthDays / 7 + 1}`}
+        >
+          {week}
+        </tr>
+      );
     }
 
     return (
-      <table className="calendar-table">
-        <caption>
-          {getMonthName(month)} {year}
-        </caption>
-        <thead>
-          <tr>
-            <th>Monday</th>
-            <th>Tuesday</th>
-            <th>Wednesday</th>
-            <th>Thursday</th>
-            <th>Friday</th>
-            <th>Saturday</th>
-            <th>Sunday</th>
-          </tr>
-        </thead>
-        <tbody>{monthRows}</tbody>
-      </table>
+      <div className="rounded-tl-md rounded-tr-md border bg-white mt-4">
+        <div className="flex justify-between py-4">
+          <div className="ml-4 text-sm text-black/75">
+            <p className="text-xl font-bold text-black/75">Project Schedule</p>
+            {getMonthName(month)} {year}
+          </div>
+          <div>
+            <div className="calendar-header flex mx-4">
+              <button
+                onClick={handlePrevMonth}
+                className="flex items-center justify-center mr-4"
+              >
+                <ChevronLeftIcon className="h-10 w-10 p-3 border shadow-sm rounded-full bg-gray-200/50 text-black/75 hover:bg-white hover:shadow-md transition-all ease-in-out" />
+              </button>
+              <button
+                onClick={handleNextMonth}
+                className="flex items-center justify-center"
+              >
+                <ChevronRightIcon className="h-10 w-10 p-3 border shadow-sm rounded-full bg-gray-200/50 text-black/75 hover:bg-white hover:shadow-md transition-all ease-in-out" />
+              </button>
+            </div>
+          </div>
+        </div>
+        <table className="calendar-table text-black/50 bg-white">
+          <thead className="text-sm text-left">
+            <tr className="font-normal">
+              <th className="font-normal pl-4 py-2 border">Monday</th>
+              <th className="font-normal pl-4 py-2 border">Tuesday</th>
+              <th className="font-normal pl-4 py-2 border">Wednesday</th>
+              <th className="font-normal pl-4 py-2 border">Thursday</th>
+              <th className="font-normal pl-4 py-2 border">Friday</th>
+              <th className="font-normal pl-4 py-2 border">Saturday</th>
+              <th className="font-normal pl-4 py-2 border">Sunday</th>
+            </tr>
+          </thead>
+          <tbody>{monthRows}</tbody>
+        </table>
+      </div>
     );
   };
 
@@ -110,7 +167,7 @@ function Calendar() {
     return monthNames[month];
   };
 
-  const goToPrevMonth = () => {
+  const handlePrevMonth = () => {
     const prevMonth = new Date(
       currentMonth.getFullYear(),
       currentMonth.getMonth() - 1
@@ -118,7 +175,7 @@ function Calendar() {
     setCurrentMonth(prevMonth);
   };
 
-  const goToNextMonth = () => {
+  const handleNextMonth = () => {
     const nextMonth = new Date(
       currentMonth.getFullYear(),
       currentMonth.getMonth() + 1
@@ -126,15 +183,7 @@ function Calendar() {
     setCurrentMonth(nextMonth);
   };
 
-  return (
-    <div className="calendar-container">
-      <div className="calendar-header">
-        <button onClick={goToPrevMonth}>Prev</button>
-        <button onClick={goToNextMonth}>Next</button>
-      </div>
-      {renderCalendar()}
-    </div>
-  );
+  return <div className="calendar">{renderCalendar()}</div>;
 }
 
 export default Calendar;

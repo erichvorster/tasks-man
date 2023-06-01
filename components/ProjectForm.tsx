@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 import ProjectContext from "@/context/ProjectContext";
+import ColorPicker from "./ColorPicker";
 
 type ProjectFormProps = {
   setProjects?: React.Dispatch<React.SetStateAction<never[]>>;
- 
   hideOverlay: () => void;
 };
 
@@ -22,8 +22,17 @@ const ProjectForm = ({
     priority: "",
     todos: [],
     id: generateRandomId().toString(), // Generate a random ID for the project
+    projectColor: "", // Add a new property for project color
+    projectDescription: "", // Add a new property for project description
   });
-  const {setActiveProject } = useContext(ProjectContext);
+  const { setActiveProject } = useContext(ProjectContext);
+
+  const handleColorChange = (color) => {
+    setProject((prevState) => ({
+      ...prevState,
+      projectColor: color, // Update the project color in state
+    }));
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -54,6 +63,7 @@ const ProjectForm = ({
 
   return (
     <form onSubmit={handleSubmit}>
+      <ColorPicker onColorChange={handleColorChange} />
       <div className="mb-6">
         <label>
           <input
@@ -104,6 +114,17 @@ const ProjectForm = ({
             <option value="medium">Medium</option>
             <option value="high">High</option>
           </select>
+        </label>
+      </div>
+      <div className="mt-2">
+        <label>
+          Description:
+          <textarea
+            name="projectDescription"
+            value={project.projectDescription}
+            onChange={handleChange}
+            className="p-2 border border-gray-300 rounded"
+          ></textarea>
         </label>
       </div>
       <div className="mt-6 flex justify-between">

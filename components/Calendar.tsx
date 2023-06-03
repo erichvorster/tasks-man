@@ -70,15 +70,22 @@ function Calendar({ setSelectedProject }) {
         >
           <span className="absolute left-4 top-1">{day}</span>
           {projectsData.length > 0 && (
-            <div className="project-names mt-4">
+            <div className="project-names mt-4 ">
               {projectsData.map((project) => (
                 <div
                   key={project.id}
-                  className="project-name text-xs rounded-md p-1 mb-1"
-                  style={{ backgroundColor: project.projectColor }}
+                  className="project-name text-xs rounded-md px-1 py-2 mb-1 text-black/75 flex shadow-sm border cursor-pointer hover:shadow-md transition-all ease-in-out"
                   onClick={() => setSelectedProject(project.id)}
                 >
-                  {project.name}
+                  <div className="w-1/12">
+                    <div
+                      className=" h-full w-[3px] rounded-lg"
+                      style={{
+                        backgroundColor: project.projectColor,
+                      }}
+                    />
+                  </div>
+                  <div className="w-11/12">{project.name}</div>
                 </div>
               ))}
             </div>

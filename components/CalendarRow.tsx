@@ -1,20 +1,26 @@
-"use client"
+"use client";
 
 import React, { useState, useContext } from "react";
 import ProjectContext from "@/context/ProjectContext";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
-function CalendarRow({ year }) {
-  const [currentMonth, setCurrentMonth] = useState(new Date(year, 0));
+function CalendarRow({ setSelectedProject }) {
+  const [currentMonth, setCurrentMonth] = useState(new Date());
   const { projects } = useContext(ProjectContext);
   const dates = extractDeadlines(projects);
 
   function extractDeadlines(objects) {
-    var dates = [];
+    var dates = {};
 
     for (var i = 0; i < objects.length; i++) {
       var obj = objects[i];
       if (obj.hasOwnProperty("deadline")) {
-        dates.push(obj.deadline);
+        const date = obj.deadline;
+        if (dates[date]) {
+          dates[date].push(obj);
+        } else {
+          dates[date] = [obj];
+        }
       }
     }
 
@@ -30,68 +36,100 @@ function CalendarRow({ year }) {
   };
 
   const renderCalendar = () => {
+    const month = currentMonth.getMonth();
     const year = currentMonth.getFullYear();
-  
-    const monthRows = [];
-  
-    let month = currentMonth.getMonth();
-    let monthDays = getMonthDays(year, month);
-    let monthFirstDay = getMonthFirstDay(year, month);
-  
-    while (month <= 11) {
-      const monthName = getMonthName(month);
-      const monthRowsForMonth = [];
-  
-      monthRowsForMonth.push(
-        <tr key={`month-${month}`}>
-          <td className="month-name" colSpan="7">{monthName} {year}</td>
+
+    const monthDays = getMonthDays(year, month);
+    const monthFirstDay = getMonthFirstDay(year, month);
+
+    const calendarRows = [];
+
+    calendarRows.push(
+      <tr className="font-normal pl-4 py-2 border" key={`month-name`}>
+        <td className="font-normal pl-4 py-2 border" colSpan={3}>
+          {getMonthName(month)} {year}
+        </td>
+      </tr>
+    );
+
+    for (let day = 0; day < monthDays; day++) {
+      const currentDate = new Date(year, month, day + 1);
+      const dateString = `${
+        currentDate.getMonth() + 1
+      }/${currentDate.getDate()}/${currentDate.getFullYear()}`;
+
+      let tdClassName = "";
+      let projectsData = [];
+
+      if (dates[dateString]) {
+        tdClassName = "highlight";
+        projectsData = dates[dateString];
+      }
+
+      calendarRows.push(
+        <tr className="font-normal pl-4 py-2 border" key={`day-${day}`}>
+          <td className="font-normal pl-4 py-2 border">{day + 1}</td>
         </tr>
       );
-  
-      let week = [];
-  
-      for (let i = 0; i < monthFirstDay; i++) {
-        week.push(<td key={`empty-${i}`} className="empty-cell"></td>);
-      }
-  
-      for (let day = 1; day <= monthDays; day++) {
-        const currentDate = new Date(year, month, day);
-        const dateString = `${
-          currentDate.getMonth() + 1
-        }/${currentDate.getDate()}/${currentDate.getFullYear()}`;
-  
-        let tdClassName = "";
-        if (dates.includes(dateString)) {
-          tdClassName = "highlight";
-        }
-  
-        week.push(
-          <td key={`day-${day}`} className={tdClassName}>
-            {day}
-          </td>
+
+      if (projectsData.length > 0) {
+        calendarRows.push(
+          <tr className="font-normal pl-4 py-2 border" key={`projects-${day}`}>
+            <td className="font-normal pl-4 py-2 border">
+              <div className="project-names mt-4">
+                {projectsData.map((project) => (
+                  <div
+                    key={project.id}
+                    className="project-name text-xs rounded-md px-1 py-2 mb-1 text-black/75 flex shadow-sm border cursor-pointer hover:shadow-md transition-all ease-in-out"
+                    onClick={() => setSelectedProject(project.id)}
+                  >
+                    <div className="w-1/12">
+                      <div
+                        className="h-full w-[3px] rounded-lg"
+                        style={{
+                          backgroundColor: project.projectColor,
+                        }}
+                      />
+                    </div>
+                    <div className="w-11/12">{project.name}</div>
+                  </div>
+                ))}
+              </div>
+            </td>
+          </tr>
         );
-  
-        if (week.length === 7) {
-          monthRowsForMonth.push(<tr key={`week-${day / 7}`}>{week}</tr>);
-          week = [];
-        }
       }
-  
-      if (week.length > 0) {
-        monthRowsForMonth.push(<tr key={`week-${monthDays / 7 + 1}`}>{week}</tr>);
-      }
-  
-      monthRows.push(monthRowsForMonth);
-  
-      month++;
-      monthDays = getMonthDays(year, month);
-      monthFirstDay = getMonthFirstDay(year, month);
     }
-  
-    return monthRows;
+
+    return (
+      <div className="rounded-tl-md rounded-tr-md border bg-white max-h-[600px] overflow-auto">
+        <div className="flex justify-between py-4">
+          <div className="ml-4 text-sm text-black/75">
+            <p className="text-xl font-bold text-black/75">Project Schedule</p>
+          </div>
+          <div>
+            <div className="calendar-header flex mx-4">
+              <button
+                onClick={handlePrevMonth}
+                className="flex items-center justify-center mr-4"
+              >
+                <ChevronLeftIcon className="h-10 w-10 p-3 border shadow-sm rounded-full bg-gray-200/50 text-black/75 hover:bg-white hover:shadow-md transition-all ease-in-out" />
+              </button>
+              <button
+                onClick={handleNextMonth}
+                className="flex items-center justify-center"
+              >
+                <ChevronRightIcon className="h-10 w-10 p-3 border shadow-sm rounded-full bg-gray-200/50 text-black/75 hover:bg-white hover:shadow-md transition-all ease-in-out" />
+              </button>
+            </div>
+          </div>
+        </div>
+        <table className="calendar-table text-black/50 bg-white ">
+          <tbody className="">{calendarRows}</tbody>
+        </table>
+      </div>
+    );
   };
-  
-  
 
   const getMonthName = (month) => {
     const monthNames = [
@@ -111,37 +149,23 @@ function CalendarRow({ year }) {
     return monthNames[month];
   };
 
-  const handleScroll = (e) => {
-    const scrollTop = e.target.scrollTop;
-    const scrollHeight = e.target.scrollHeight;
-    const clientHeight = e.target.clientHeight;
-    const maxScrollTop = scrollHeight - clientHeight;
-
-    if (scrollTop === maxScrollTop) {
-      const nextMonth = new Date(
-        currentMonth.getFullYear(),
-        currentMonth.getMonth() + 1
-      );
-      setCurrentMonth(nextMonth);
-    }
+  const handlePrevMonth = () => {
+    const prevMonth = new Date(
+      currentMonth.getFullYear(),
+      currentMonth.getMonth() - 1
+    );
+    setCurrentMonth(prevMonth);
   };
 
-  return (
-    <div
-      className="calendar-container"
-      style={{ height: "800px", overflowY: "auto" }}
-      onScroll={handleScroll}
-    >
-      {renderCalendar().map((monthRow, index) => (
-        <table key={`table-${index}`} className="calendar-table">
-          <caption>
-            {getMonthName(currentMonth.getMonth())} {currentMonth.getFullYear()}
-          </caption>
-          <tbody>{monthRow}</tbody>
-        </table>
-      ))}
-    </div>
-  );
+  const handleNextMonth = () => {
+    const nextMonth = new Date(
+      currentMonth.getFullYear(),
+      currentMonth.getMonth() + 1
+    );
+    setCurrentMonth(nextMonth);
+  };
+
+  return <div className="calendar">{renderCalendar()}</div>;
 }
 
 export default CalendarRow;

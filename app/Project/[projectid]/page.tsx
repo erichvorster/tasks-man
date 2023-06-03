@@ -15,12 +15,18 @@ import {
   CalendarIcon,
   TagIcon,
   TrashIcon,
-  CheckBadgeIcon
+  CheckBadgeIcon,
+  CubeTransparentIcon,
+  UserIcon,
+  QueueListIcon,
+  ViewColumnsIcon,
 } from "@heroicons/react/24/outline";
 
 const Project = ({ params }) => {
   const { projects } = useContext(ProjectContext);
   const [show, setShow] = useState<boolean>(false);
+  const [toggle, setToggle] = useState<boolean>(false);
+  const [filterOption, setFilterOption] = useState<string>("");
 
   const showModal = () => {
     setShow(true);
@@ -69,6 +75,20 @@ const Project = ({ params }) => {
     return count;
   };
 
+  const getFilteredTasksByStage = () => {
+    if (filterOption === "todo") {
+      return project.todos?.filter((todo) => todo.category === "todo");
+    } else if (filterOption === "inProgress") {
+      return project.todos?.filter((todo) => todo.category === "inProgress");
+    } else if (filterOption === "done") {
+      return project.todos?.filter((todo) => todo.category === "done");
+    } else {
+      return project.todos;
+    }
+  };
+
+  console.log("filter", getFilteredTasksByStage());
+
   return (
     <div>
       <div className="grid grid-cols-3 gap-3">
@@ -78,7 +98,7 @@ const Project = ({ params }) => {
               <div className="flex items-center">
                 <h1 className="text-3xl font-bold text-black/75 mr-8 flex items-center">
                   <StopIcon
-                    className="h-9 w-9 "
+                    className={`h-9 w-9 `}
                     style={{ color: project.projectColor }}
                   />{" "}
                   {project.name}
@@ -110,8 +130,12 @@ const Project = ({ params }) => {
               </p>
             </div>
             <div className="col-span-3 grid grid-cols-2 gap-4 mt-8 mb-4">
-              <button className="rounded-md shadow-sm border col-span-1 hover:bg-red-500/25 hover:shadow-md transition-all ease-in-out flex justify-center items-center"><TrashIcon className="h-10 w-10 text-black/25"/></button>
-              <button className="rounded-md shadow-sm border col-span-1 hover:bg-green-500/25 hover:shadow-md transition-all ease-in-out flex justify-center items-center"><CheckBadgeIcon className="h-10 w-10 text-black/25"/></button>
+              <button className="rounded-md shadow-sm border col-span-1 hover:bg-red-500/25 hover:shadow-md transition-all ease-in-out flex justify-center items-center">
+                <TrashIcon className="h-10 w-10 text-black/25" />
+              </button>
+              <button className="rounded-md shadow-sm border col-span-1 hover:bg-green-500/25 hover:shadow-md transition-all ease-in-out flex justify-center items-center">
+                <CheckBadgeIcon className="h-10 w-10 text-black/25" />
+              </button>
             </div>
           </div>
         </div>
@@ -138,84 +162,185 @@ const Project = ({ params }) => {
             </Overlay>
           )}
           <div>
-            <div className="grid grid-cols-3 bg-white border shadow-sm rounded-md overflow-auto max-h-[750px]">
-              <div className="flex-col">
-                <div className="text-center mt-4">
-                  <h3 className="font-bold text-black/75">To Do</h3>
-                  <button
-                    onClick={showModal}
-                    className="px-4 py-2 border rounded-md shadow-sm w-11/12 mt-2 bg-white hover:bg-gray-300/25 hover:shadow-md transition-all ease-in-out"
-                  >
-                    <PlusIcon className="h-4 w-4 mx-auto bg-white" />
-                  </button>
-                </div>
-                {project.todos?.map((todo) =>
-                  todo.category === "todo" ? (
-                    <Todo
-                      key={todo.id}
-                      todo={todo}
-                      title={todo.text}
-                      desc={todo.description}
-                      params={params}
-                    />
-                  ) : null
-                )}
+            <div className="flex ">
+              <div className="flex mr-6">
+                <button
+                  onClick={() => setToggle(false)}
+                  className={`text-sm text-black/75 rounded-tl-md p-2 border border-b-0 w-24 flex items-center justify-center ${
+                    toggle === true ? "bg-gray-200" : "bg-white"
+                  }`}
+                >
+                  <ViewColumnsIcon className="h-5 w-5 mr-1 text-black/75" />
+                  Kanban
+                </button>
+                <button
+                  onClick={() => setToggle(true)}
+                  className={`text-sm text-black/75 rounded-tr-md p-2 border border-b-0 w-24 flex items-center justify-center ${
+                    toggle === false ? "bg-gray-200" : "bg-white"
+                  }`}
+                >
+                  <QueueListIcon className="h-5 w-5 mr-1 text-black/75" />
+                  List
+                </button>
               </div>
-              <div className="flex-col">
-                <div className="text-center mt-4">
-                  <h3 className="font-bold text-black/75 ">In Progress</h3>
+              {toggle === true ? (
+                <div className="flex">
                   <button
-                    onClick={showModal}
-                    className="px-4 py-2 border rounded-md shadow-sm w-11/12 mt-2 bg-white hover:bg-gray-300/25 hover:shadow-md transition-all ease-in-out"
+                    className={`text-sm text-black/75 rounded-tl-md p-2 border border-b-0 w-24 flex items-center justify-center hover:bg-white transition-all ease-in-out ${
+                      filterOption === "todo" && "bg-white"
+                    } `}
+                    onClick={() => setFilterOption("todo")}
                   >
-                    <PlusIcon className="h-4 w-4 mx-auto bg-white " />
+                    To Do
                   </button>
-                </div>
-                {project.todos.length !== 0 ? (
-                  <div>
-                    {project.todos?.map((todo) =>
-                      todo.category === "inProgress" ? (
-                        <Todo
-                          key={todo.id}
-                          todo={todo}
-                          title={todo.text}
-                          desc={todo.description}
-                          params={params}
-                        />
-                      ) : null
-                    )}
-                  </div>
-                ) : (
-                  <div className="text-center mt-4">
-                    <p className="text-black/75 text-sm mt-44">
-                      This project does not have any active tasks
-                    </p>
-                  </div>
-                )}
-              </div>
-              <div className="flex-col">
-                <div className="text-center mt-4">
-                  <h3 className="font-bold text-black/75">Done</h3>
                   <button
-                    onClick={showModal}
-                    className="px-4 py-2 border rounded-md shadow-sm w-11/12 mt-2 bg-white hover:bg-gray-300/25 hover:shadow-md transition-all ease-in-out"
+                    className={`text-sm text-black/75  p-2 border border-b-0 w-24 flex items-center justify-center hover:bg-white transition-all ease-in-out ${
+                      filterOption === "inProgress" && "bg-white"
+                    }`}
+                    onClick={() => setFilterOption("inProgress")}
                   >
-                    <PlusIcon className="h-4 w-4 mx-auto bg-white" />
+                    In Progress
                   </button>
+                  <button
+                    className={`text-sm text-black/75 rounded-tr-md p-2 border border-b-0 w-24 flex items-center justify-center hover:bg-white transition-all ease-in-out ${
+                      filterOption === "done" && "bg-white "
+                    }`}
+                    onClick={() => setFilterOption("done")}
+                  >
+                    Done
+                  </button>
+                  {filterOption !== "" && (
+                    <button
+                      className={`text-sm text-black/75 rounded-tr-md p-2 border border-b-0 w-24 flex items-center justify-center hover:bg-white transition-all ease-in-out ${
+                        filterOption === "done" && "bg-white"
+                      }`}
+                      onClick={() => setFilterOption("")}
+                    >
+                      All
+                    </button>
+                  )}
                 </div>
-                {project.todos?.map((todo) =>
-                  todo.category === "done" ? (
-                    <Todo
-                      key={todo.id}
-                      todo={todo}
-                      title={todo.text}
-                      desc={todo.description}
-                      params={params}
-                    />
-                  ) : null
-                )}
-              </div>
+              ) : (
+                <div />
+              )}
             </div>
+            {toggle === false ? (
+              <div className="grid grid-cols-3 bg-white border shadow-sm rounded-br-md rounded-bl-md rounded-tr-md overflow-auto max-h-[750px]">
+                <div className="flex-col">
+                  <div className="text-center mt-4">
+                    <h3 className="font-bold text-black/75">To Do</h3>
+                    <button
+                      onClick={showModal}
+                      className="px-4 py-2 border rounded-md shadow-sm w-11/12 mt-2 bg-white hover:bg-gray-300/25 hover:shadow-md transition-all ease-in-out"
+                    >
+                      <PlusIcon className="h-4 w-4 mx-auto bg-white" />
+                    </button>
+                  </div>
+                  {project.todos?.map((todo) =>
+                    todo.category === "todo" ? (
+                      <Todo
+                        key={todo.id}
+                        todo={todo}
+                        title={todo.text}
+                        desc={todo.description}
+                        params={params}
+                      />
+                    ) : null
+                  )}
+                </div>
+                <div className="flex-col">
+                  <div className="text-center mt-4">
+                    <h3 className="font-bold text-black/75 ">In Progress</h3>
+                    <button
+                      onClick={showModal}
+                      className="px-4 py-2 border rounded-md shadow-sm w-11/12 mt-2 bg-white hover:bg-gray-300/25 hover:shadow-md transition-all ease-in-out"
+                    >
+                      <PlusIcon className="h-4 w-4 mx-auto bg-white " />
+                    </button>
+                  </div>
+                  {project.todos.length !== 0 ? (
+                    <div>
+                      {project.todos?.map((todo) =>
+                        todo.category === "inProgress" ? (
+                          <Todo
+                            key={todo.id}
+                            todo={todo}
+                            title={todo.text}
+                            desc={todo.description}
+                            params={params}
+                          />
+                        ) : null
+                      )}
+                    </div>
+                  ) : (
+                    <div className="text-center mt-4">
+                      <p className="text-black/75 text-sm mt-44">
+                        This project does not have any active tasks
+                      </p>
+                    </div>
+                  )}
+                </div>
+                <div className="flex-col">
+                  <div className="text-center mt-4">
+                    <h3 className="font-bold text-black/75">Done</h3>
+                    <button
+                      onClick={showModal}
+                      className="px-4 py-2 border rounded-md shadow-sm w-11/12 mt-2 bg-white hover:bg-gray-300/25 hover:shadow-md transition-all ease-in-out"
+                    >
+                      <PlusIcon className="h-4 w-4 mx-auto bg-white" />
+                    </button>
+                  </div>
+                  {project.todos?.map((todo) =>
+                    todo.category === "done" ? (
+                      <Todo
+                        key={todo.id}
+                        todo={todo}
+                        title={todo.text}
+                        desc={todo.description}
+                        params={params}
+                      />
+                    ) : null
+                  )}
+                </div>
+              </div>
+            ) : (
+              <div className="bg-white border shadow-sm rounded-br-md rounded-bl-md rounded-tr-md overflow-auto max-h-[750px]">
+                <div className="p-5 pt-12">
+                  {getFilteredTasksByStage().map((todo) => (
+                    <div className="border rounded-md shadow-sm text-black/75 p-4 mb-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center">
+                          <h5 className="flex items-center mr-2 text-xl font-bold ">
+                            <CubeTransparentIcon className="h-8 w-8 mr-2 text-black/75 " />
+                            {todo.text}
+                          </h5>
+                          <p className="text-sm text-black/75">
+                            {todo.category}
+                          </p>
+                        </div>
+                        <div></div>
+                      </div>
+                      <div className="text-sm my-2">{todo.description}</div>
+                      <hr />
+                      <div className="flex items-center text-sm mt-2">
+                        <div className="flex items-center mr-5">
+                          <UserIcon className="h-5 w-5 text-black/75 mr-2" />
+                          {todo.assignee}
+                        </div>
+                        <div
+                          className={`flex items-center rounded p-1 ${getPriorityClass(
+                            todo.priority
+                          )}`}
+                        >
+                          <ExclamationCircleIcon className="h-5 w-5 text-black/75 mr-2" />
+                          {todo.priority}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
         <div className="absolute bg-black h-44 left-0 -bottom-6 right-0 rounded-bl-md rounded-br-md bg-gradient-to-t from-gray-100 to bg-transparent"></div>

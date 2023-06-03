@@ -6,7 +6,7 @@ import {
   ArrowLongRightIcon,
   CubeIcon,
   PlusIcon,
-  StopIcon
+  StopIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { Modal } from "@/components/Modal";
@@ -17,9 +17,9 @@ import Image from "next/image";
 import logo from "../public/logo.svg";
 import Button from "@/components/Button";
 
-
 const MainNav = () => {
-  const {  setActiveProject,projects, setProjects } = useContext(ProjectContext);
+  const { setActiveProject, projects, setProjects } =
+    useContext(ProjectContext);
   const [showProjects, setShowProjects] = useState(false);
 
   const [show, setShow] = useState<boolean>(false);
@@ -35,7 +35,7 @@ const MainNav = () => {
     <div className="bg-gray-100 w-72 absolute top-0 bottom-0 left-0 flex flex-col justify-between">
       <div className=" flex flex-col justify-between h-44">
         <div className="border-b pl-4 py-2 flex">
-          <Image src={logo} height={40} width={40} alt="logo"/>
+          <Image src={logo} height={40} width={40} alt="logo" />
           <h1 className="text-3xl font-extrabold pl-2 mt-1">HEX</h1>
         </div>
         <ul className="flex flex-col py-4 pl-4 border-b ">
@@ -50,9 +50,10 @@ const MainNav = () => {
           </Link>
           <li className="cursor-pointer flex items-center">
             <div
-              
               onClick={() => setShowProjects(!showProjects)}
-              className={`flex items-center p-2 hover:bg-gray-400/25 rounded-md w-11/12 group transition-colors ease-in-out ${showProjects && "bg-gray-400/25 rounded-bl-none rounded-br-none"}`}
+              className={`flex items-center p-2 hover:bg-gray-400/25 rounded-md w-11/12 group transition-colors ease-in-out ${
+                showProjects && "bg-gray-400/25 rounded-bl-none rounded-br-none"
+              }`}
             >
               <BriefcaseIcon className="w-6 h-6 mr-2" />
               Projects
@@ -62,8 +63,13 @@ const MainNav = () => {
               />
             </div>
           </li>
-          {showProjects && ( 
-            <div className={showProjects && "bg-gray-100 border rounded-bl-lg rounded-br-lg mr-6 shadow-sm relative"}>
+          {showProjects && (
+            <div
+              className={
+                showProjects &&
+                "bg-gray-100 border rounded-bl-lg rounded-br-lg mr-6 shadow-sm relative"
+              }
+            >
               {projects.length !== 0 && (
                 <div className="mt-3 max-h-[300px] overflow-auto ">
                   {projects.map((project, i) => (
@@ -76,20 +82,28 @@ const MainNav = () => {
                         href={`/Project/${project.id}`}
                         className="flex items-center hover:bg-gray-400/25 p-2 rounded-md w-full mx-3 text-sm transition-colors ease-in-out"
                       >
-                        <StopIcon className="w-5 h-5 mr-2 " style={{ color: project.projectColor }} />
+                        <StopIcon
+                          className="w-5 h-5 mr-2 "
+                          style={{ color: project.projectColor }}
+                        />
                         {project.name}
                       </Link>
                     </li>
                   ))}
-                     
                 </div>
               )}
-         
 
-         <div className="h-12 absolute bottom-0 left-0 right-0 bg-gradient-to-t from-gray-100 to-transparent"/>
+              <div
+                className={`h-12 absolute bottom-0 left-0 right-0 bg-gradient-to-t from-gray-100 to-transparent ${
+                  projects.length >= 7 ? "visible" : "hidden"
+                }`}
+              />
             </div>
           )}
-          <Link href="/Calendar" className="flex items-center p-2 hover:bg-gray-400/25 rounded-md w-11/12 transition-colors ease-in-out">
+          <Link
+            href="/Calendar"
+            className="flex items-center p-2 hover:bg-gray-400/25 rounded-md w-11/12 transition-colors ease-in-out"
+          >
             <li className="cursor-pointer flex items-center">
               <CalendarDaysIcon className="w-6 h-6 mr-2" />
               Calender
@@ -108,11 +122,15 @@ const MainNav = () => {
         </ul>
       </div>
       <div className="mb-6" onClick={showModal}>
-        <Button btnText="New project"/>
+        <Button btnText="New project" />
       </div>
       {show && (
         <Overlay>
-          <Modal hideOverlay={hideModal} setProjects={setProjects} form={"project"} />
+          <Modal
+            hideOverlay={hideModal}
+            setProjects={setProjects}
+            form={"project"}
+          />
         </Overlay>
       )}
     </div>

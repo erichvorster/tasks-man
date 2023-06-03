@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React from "react";
 import Calendar from "@/components/Calendar";
@@ -10,8 +10,8 @@ const page = () => {
 
   return (
     <div>
-      <CalendarProjcet selectedProject={selectedProject}/>
-      <Calendar year={2021} setSelectedProject={setSelectedProject}/>
+      <CalendarProjcet selectedProject={selectedProject} />
+      <Calendar year={2021} setSelectedProject={setSelectedProject} />
       {/* <CalendarRow year={2021} /> */}
     </div>
   );

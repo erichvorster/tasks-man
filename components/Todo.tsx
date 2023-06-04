@@ -3,7 +3,7 @@ import {
   TrashIcon,
   EllipsisHorizontalIcon,
   CalendarIcon,
-  UserIcon
+  UserIcon,
 } from "@heroicons/react/24/outline";
 import ProjectContext from "@/context/ProjectContext";
 import { deleteTodo } from "@/app/models/models";
@@ -149,8 +149,17 @@ const Todo: React.FC<TodoProps> = ({ todo, handleDeleteTodo, params }) => {
           <h1 className="text-xs text-gray-400 mt-1">{todo.dueDate}</h1>
         </div>
         <div className="flex items-center">
-          <p className="flex text-xs items-center mr-3 bg-gray-200 p-1 rounded-md"><UserIcon className="h-4 w-4 mr-1 text-black/75"/>{todo.assignee ? todo.assignee : "Unassigned"}</p>
-          <p className={`text-xs p-1 rounded-md ${getPriorityClass(todo.priority)} `}>{todo.priority}</p>
+          <p className="flex text-xs items-center mr-3 bg-gray-200 p-1 rounded-md">
+            <UserIcon className="h-4 w-4 mr-1 text-black/75" />
+            {todo.assignee ? todo.assignee : "Unassigned"}
+          </p>
+          <p
+            className={`text-xs p-1 rounded-md ${getPriorityClass(
+              todo.priority
+            )} `}
+          >
+            {todo.priority}
+          </p>
         </div>
       </div>
     </div>

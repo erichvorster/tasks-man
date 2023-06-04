@@ -7,12 +7,10 @@ const UpcomingTodos = () => {
   const { projects } = useContext(ProjectContext);
   return (
     <div>
-      <h1 className="text-xl font-bold text-black/50 mb-3">
-        Upcoming todos
-      </h1>
+      <h1 className="text-xl font-bold text-black/50 mb-3">Upcoming todos</h1>
       <div className="rounded-lg border py-2 pt-0 bg-white shadow-sm max-h-[300px] overflow-auto ">
         <table className="w-full bg-white text-black/75 text-sm relative">
-          <thead className="border-b bg-gray-100">
+          <thead className="border-b bg-gray-100 sticky top-0 ">
             <tr className=" border-b">
               <th className="text-left py-2 text-gray-500/50 font-normal px-2 pl-6">
                 Task
@@ -40,7 +38,9 @@ const UpcomingTodos = () => {
                 return (
                   <tr className="border-b hover:bg-gray-100/50 cursor-pointer transition-colors ease-in-out">
                     <td className="text-left p-2 pl-6">{todo.text}</td>
-                    <td className="text-left p-2">{todo.assignee ? todo.assignee : "Unassigned"}</td>
+                    <td className="text-left p-2">
+                      {todo.assignee ? todo.assignee : "Unassigned"}
+                    </td>
                     <td className="text-left p-2">
                       {todo.description.slice(5, 35)}
                       <span className="text-md font-bold"> ...</span>
@@ -54,7 +54,7 @@ const UpcomingTodos = () => {
             })}
           </tbody>
         </table>
-        <div className="absolute -bottom-8 left-1 right-1 h-12 bg-gradient-to-t rounded-bl-md rounded-br-md from-white to-transparent"/>
+        <div className="absolute -bottom-8 left-1 right-1 h-12 bg-gradient-to-t rounded-bl-md rounded-br-md from-white to-transparent" />
       </div>
     </div>
   );

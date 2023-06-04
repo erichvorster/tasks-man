@@ -47,7 +47,6 @@ body{
   }
 
   .modalContent {
-    background-color: #ffffff;
     margin: auto;
     padding: 20px;
     width: 30%;
@@ -96,7 +95,7 @@ body{
 
 
 .calendar-table tbody td {
-  height: 100px;
+  
   width: calc(100% / 7);
 }
 

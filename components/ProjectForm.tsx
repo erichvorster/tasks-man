@@ -11,10 +11,7 @@ const generateRandomId = () => {
   return Math.floor(Math.random() * 1000000); // Adjust the range as per your needs
 };
 
-const ProjectForm = ({
-  setProjects,
-  hideOverlay,
-}: ProjectFormProps) => {
+const ProjectForm = ({ setProjects, hideOverlay }: ProjectFormProps) => {
   const [project, setProject] = useState({
     name: "",
     deadline: "",
@@ -63,79 +60,84 @@ const ProjectForm = ({
 
   return (
     <form onSubmit={handleSubmit}>
-      <ColorPicker onColorChange={handleColorChange} />
       <div className="mb-6">
         <label>
           <input
             type="text"
             name="name"
             value={project.name}
-            placeholder="Untitled"
-            className="text-4xl font-bold"
+            placeholder="Untitled..."
+            className="text-4xl font-bold rounded-md border px-2 bg-gray-100 shadow-sm"
             onChange={handleChange}
           />
         </label>
       </div>
-      <div className="mt-4">
-        <label>
-          Deadline:
-          <input
-            type="date"
-            name="deadline"
-            value={project.deadline}
-            onChange={handleDateChange}
-            className="p-2 border border-gray-300 rounded"
-          />
-        </label>
-      </div>
       <div className="mt-2">
-        <label>
-          Tags:
-          <input
-            type="text"
-            name="tags"
-            value={project.tags}
-            onChange={handleChange}
-            className="p-2 border border-gray-300 rounded"
-          />
-        </label>
-      </div>
-      <div className="mt-2">
-        <label>
-          Priority:
-          <select
-            name="priority"
-            value={project.priority}
-            onChange={handleChange}
-            className="p-2 border border-gray-300 rounded"
-          >
-            <option value="">Select priority</option>
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
-          </select>
-        </label>
-      </div>
-      <div className="mt-2">
-        <label>
+        <label className="flex flex-col text-xs font-bold mb-1 ">
           Description:
           <textarea
             name="projectDescription"
             value={project.projectDescription}
             onChange={handleChange}
-            className="p-2 border border-gray-300 rounded"
+            placeholder="Add a description"
+            className="p-2 border border-gray-300 rounded-md h-32 bg-gray-100 shadow-sm"
           ></textarea>
         </label>
       </div>
-      <div className="mt-6 flex justify-between">
+
+      <div className="flex justify-between">
+        <div className="mt-2">
+          <label className="flex flex-col text-xs font-bold mb-1">
+            Deadline:
+            <input
+              type="date"
+              name="deadline"
+              value={project.deadline}
+              onChange={handleDateChange}
+              className="p-2 border border-gray-300 rounded-md bg-gray-100 shadow-sm"
+            />
+          </label>
+        </div>
+        <div className="mt-2">
+          <label className="flex flex-col text-xs font-bold mb-1">
+            Tags:
+            <input
+              type="text"
+              name="tags"
+              value={project.tags}
+              onChange={handleChange}
+              className="p-2 border border-gray-300 rounded-md bg-gray-100 shadow-sm"
+            />
+          </label>
+        </div>
+        <div className="mt-2">
+          <label className="flex flex-col text-xs font-bold mb-1">
+            Priority:
+            <select
+              name="priority"
+              value={project.priority}
+              onChange={handleChange}
+              className="p-2 border border-gray-300 rounded-md bg-gray-100 shadow-sm"
+            >
+              <option value="">Select priority</option>
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </label>
+        </div>
+      </div>
+      <div>
+        <ColorPicker onColorChange={handleColorChange} />
+      </div>
+
+      <div className="mt-6 grid grid-cols-2 gap-4 mt-10">
+        <button className="border rounded-md py-1">Close</button>
         <button
           type="submit"
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          className="border rounded-md py-1 bg-blue-400 text-white"
         >
           Submit
-        </button>
-        <button className="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400">
-          Close
         </button>
       </div>
     </form>

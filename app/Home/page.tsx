@@ -5,6 +5,7 @@ import UpcomingTodos from "@/components/UpcomingTodos";
 import HomeTiles from "@/components/HomeTiles";
 import { getLongFormatDate } from "@/components/Helpers";
 import { HomeIcon, PlusIcon } from "@heroicons/react/24/outline";
+import CalendarRow from "@/components/CalendarRow";
 
 const page = () => {
   return (
@@ -27,11 +28,17 @@ const page = () => {
       </div>
 
       <div className="grid grid-rows-4 grid-flow-col gap-4">
-        <div className="row-span-1 col-span-1"> <TaskTable /></div>
-        <div className=" row-span-3 col-span-1"><UpcomingTodos /></div>
-        <div className="row-span-2 col-span-1 bg-white rounded-md h-full w-full">03</div>
+        <div className="row-span-1 col-span-1">
+          {" "}
+          <TaskTable />
+        </div>
+        <div className=" row-span-3 col-span-1">
+          <UpcomingTodos />
+        </div>
+        <div className="row-span-2 col-span-1 bg-white rounded-md ">
+          <CalendarRow year={2021} />
+        </div>
       </div>
-
     </div>
   );
 };

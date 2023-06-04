@@ -103,7 +103,7 @@ function CalendarRow({ setSelectedProject }) {
 
     return (
       <div className="rounded-tl-md rounded-tr-md border bg-white max-h-[600px] overflow-auto">
-        <div className="flex justify-between py-4">
+        <div className="flex justify-between py-4 sticky top-0 bg-white border-b">
           <div className="ml-4 text-sm text-black/75">
             <p className="text-xl font-bold text-black/75">Project Schedule</p>
           </div>

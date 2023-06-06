@@ -68,12 +68,12 @@ const TaskTable = () => {
         </div>
         <div className="flex">
         <div>
-            <button className={`border rounded-md px-2 mr-2 py-1 hover:bg-gray-200/50 focus:bg-gray-200/75 shadow-sm text-sm ${filterOption === 1 && "bg-gray-200/75"}`} onClick={() => handleFilter("")}>All</button>
-            <button className=" border rounded-md px-2 mr-2 py-1 hover:bg-gray-200/50 focus:bg-gray-200/75 shadow-sm text-sm" onClick={() => handleFilter("high")}>High</button>
-            <button className=" border rounded-md px-2 mr-2 py-1 hover:bg-gray-200/50 focus:bg-gray-200/75 shadow-sm text-sm" onClick={() => handleFilter("medium")}>Medium</button>
-            <button className=" border rounded-md px-2 mr-2 py-1 hover:bg-gray-200/50 focus:bg-gray-200/75 shadow-sm text-sm" onClick={() => handleFilter("low")}>Low</button>
+            <button className={`border rounded-md px-2 mr-2 py-1 hover:bg-gray-200/50 focus:bg-gray-200/75 shadow-sm text-sm dark:bg-neutral-800 dark:border-neutral-500 dark:text-neutral-300 dark:hover:bg-neutral-400/25 dark:transition-all dark:ease-in-out ${filterOption === 1 && "bg-gray-200/75"}`} onClick={() => handleFilter("")}>All</button>
+            <button className=" border rounded-md px-2 mr-2 py-1 hover:bg-gray-200/50 focus:bg-gray-200/75 shadow-sm text-sm dark:bg-neutral-800 dark:border-neutral-500 dark:text-neutral-300 dark:hover:bg-neutral-400/25 dark:transition-all dark:ease-in-out" onClick={() => handleFilter("high")}>High</button>
+            <button className=" border rounded-md px-2 mr-2 py-1 hover:bg-gray-200/50 focus:bg-gray-200/75 shadow-sm text-sm dark:bg-neutral-800 dark:border-neutral-500 dark:text-neutral-300 dark:hover:bg-neutral-400/25 dark:transition-all dark:ease-in-out" onClick={() => handleFilter("medium")}>Medium</button>
+            <button className=" border rounded-md px-2 mr-2 py-1 hover:bg-gray-200/50 focus:bg-gray-200/75 shadow-sm text-sm dark:bg-neutral-800 dark:border-neutral-500 dark:text-neutral-300 dark:hover:bg-neutral-400/25 dark:transition-all dark:ease-in-out" onClick={() => handleFilter("low")}>Low</button>
           </div>
-          <div className="flex items-center border rounded-md shadow-sm">
+          <div className="flex items-center border rounded-md shadow-sm dark:bg-neutral-800 dark:border-neutral-500 dark:text-neutral-300 dark:hover:bg-neutral-400/25 dark:transition-all dark:ease-in-out">
             <MagnifyingGlassIcon className="h-7 w-7 p-1" />
             <input
               placeholder="Search"
@@ -84,20 +84,20 @@ const TaskTable = () => {
           </div>
         </div>
       </div>
-      <div className="rounded-lg border py-2 min-h-[270px] overflow-y-auto pt-0 h-12 relative shadow-sm bg-white ">
-        <table className="w-full text-sm bg-white text-black/75">
-          <thead className="bg-gray-200/50">
-            <tr className="text-left border-b">
-              <th className="py-2 text-gray-500/50 font-normal pl-6">Name</th>
-              <th className="py-2 text-gray-500/50 font-normal">Priority</th>
-              <th className="py-2 text-gray-500/50 font-normal">Tags</th>
-              <th className="py-2 text-gray-500/50 font-normal">Due Date</th>
-              <th className="py-2 text-right text-gray-500/50 font-normal pr-6">
+      <div className="rounded-lg border py-2 h-[280px]  pt-0 relative shadow-sm bg-white dark:bg-neutral-800 dark:border-neutral-500 rounded-tl-md rounded-tr-md">
+        <table className="w-full text-sm bg-white text-black/75 dark:bg-neutral-800/25 dark:text-neutral-300 ">
+          <thead className="bg-gray-200/50 dark:bg-neutral-700/75">
+            <tr className="text-left border-b dark:border-b-neutral-500">
+              <th className="py-2 text-gray-500/50 dark:text-neutral-500 font-normal  pl-6">Name</th>
+              <th className="py-2 text-gray-500/50 dark:text-neutral-500 font-normal">Priority</th>
+              <th className="py-2 text-gray-500/50 dark:text-neutral-500 font-normal">Tags</th>
+              <th className="py-2 text-gray-500/50 dark:text-neutral-500 font-normal">Due Date</th>
+              <th className="py-2 text-right dark:text-neutral-500 text-gray-500/50 font-normal pr-6">
                 Actions
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white">
+          <tbody className="bg-white dark:bg-neutral-800 ">
             {filteredProjects.length === 0 ? (
               <tr>
                 <td colSpan={4} className="text-center py-2">
@@ -106,13 +106,14 @@ const TaskTable = () => {
               </tr>
             ) : (
               currentProjects.map((project, i) => (
-                <>
                 <tr
                   key={i}
-                  className="border-b hover:bg-gray-100/50 cursor-pointer transition-colors ease-in-out "
+                  className="border-b  hover:bg-gray-100/50 dark:border-b-neutral-700 dark:hover:bg-neutral-700/50 dark:transition-all dark:ease-in-out cursor-pointer transition-colors ease-in-out "
                 >
-                  <td className="py-2 pl-6">{project.name}</td>
+                  <td className="pl-6 ">  <Link href={`/Project/${project.id}`} ><p className="w-full py-2 ">{project.name}</p></Link></td>
                   <td>
+                  <Link href={`/Project/${project.id}`} >
+                    <div className="w-full">
                     <span
                       className={`${getPriorityClass(
                         project.priority
@@ -122,9 +123,11 @@ const TaskTable = () => {
                         ? "Not Prioritized"
                         : project.priority}
                     </span>
+                    </div>
+                    </Link>
                   </td>
-                  <td>{project.tags}</td>
-                  <td>{formatDate(project.deadline)}</td>
+                  <td><Link href={`/Project/${project.id}`} ><p className="w-full py-2 ">{project.tags}</p></Link></td>
+                  <td><Link href={`/Project/${project.id}`} ><p className="w-full py-2 ">{formatDate(project.deadline)}</p></Link></td>
                   <td className="text-right pr-5">
                     <div className="flex justify-end">
                       <PencilIcon className="h-6 w-6 p-1  cursor-pointer transition-colors ease-in-out" />
@@ -135,17 +138,17 @@ const TaskTable = () => {
                     </div>
                   </td>
                 </tr>
-               
-                </>
+              
+          
               ))
             )}
           </tbody>
         </table>
-        <div className="flex justify-between border-t py-2 px-6 absolute right-0 left-0 bottom-0 bg-white">
+        <div className="flex justify-between border-t rounded-bl-md rounded-br-md dark:border-t-neutral-500 py-2 px-6 absolute right-0 left-0 bottom-0 bg-white dark:bg-neutral-800">
         <button
           onClick={prevPage}
           disabled={currentPage === 1}
-          className="border  py-1 px-5 rounded-md cursor-pointer text-sm shadow-sm hover:bg-gray-300/25 hover:shadow-md transition-all ease-in-out"
+          className="border  py-1 px-5 rounded-md cursor-pointer text-sm shadow-sm hover:bg-gray-300/25 hover:shadow-md transition-all ease-in-out dark:border-neutral-500 dark:text-neutral-300 dark:hover:bg-neutral-400/25 dark:transition-all dark:ease-in-out"
         >
           Prev
         </button>
@@ -157,7 +160,7 @@ const TaskTable = () => {
           disabled={
             currentPage === Math.ceil(filteredProjects.length / projectsPerPage)
           }
-          className="border  py-1 px-5 rounded-md cursor-pointer text-sm shadow-sm hover:bg-gray-300/25 hover:shadow-md transition-all ease-in-out"
+          className="border  py-1 px-5 rounded-md cursor-pointer text-sm shadow-sm hover:bg-gray-300/25 hover:shadow-md transition-all ease-in-out  dark:border-neutral-500 dark:text-neutral-300 dark:hover:bg-neutral-400/25 dark:transition-all dark:ease-in-out"
         >
           Next
         </button>

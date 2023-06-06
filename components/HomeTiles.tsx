@@ -42,21 +42,21 @@ const HomeTiles = () => {
     const {projects} = useContext(ProjectContext)
   return (
     <div className='grid grid-cols-4 gap-4'>
-        <div className='border rounded-md p-4 shadow-sm bg-white'>
-            <h1 className='text-black/75'>Total Projects</h1>
-            <p className='text-3xl font-bold mt-2 text-black/75'>{projects.length}</p>
+        <div className='border rounded-md p-4 shadow-sm bg-white dark:bg-neutral-800 dark:border-neutral-600 '>
+            <h1 className='text-black/75 dark:text-neutral-300'>Total Projects</h1>
+            <p className='text-3xl font-bold mt-2 text-black/75 dark:text-neutral-300'>{projects.length}</p>
         </div>
-        <div className='border rounded-md p-4 shadow-sm bg-white'>
-            <h1 className='text-black/75'>Total Project Tasks</h1>
-            <p className='text-3xl font-bold mt-2 text-black/75'>{getTotalTodos(projects)}</p>
+        <div className='border rounded-md p-4 shadow-sm bg-white dark:bg-neutral-800 dark:border-neutral-600'>
+            <h1 className='text-black/75 dark:text-neutral-300'>Total Project Tasks</h1>
+            <p className='text-3xl font-bold mt-2 text-black/75 dark:text-neutral-300'>{getTotalTodos(projects)}</p>
         </div>
-        <div className='border rounded-md p-4 shadow-sm bg-white'>
-            <h1 className='text-black/75'>Tasks In Progress</h1>
-            <p className='text-3xl font-bold mt-2 text-black/75'>{getTotalTasksInProgress(projects)}</p>
+        <div className='border rounded-md p-4 shadow-sm bg-white dark:bg-neutral-800 dark:border-neutral-600'>
+            <h1 className='text-black/75 dark:text-neutral-300'>Tasks In Progress</h1>
+            <p className='text-3xl font-bold mt-2 text-black/75 dark:text-neutral-300'>{getTotalTasksInProgress(projects)}</p>
         </div>
-        <div className='border rounded-md p-4 shadow-sm bg-white'>
-            <h1 className='text-black/75'>Due Today</h1>
-            <p className='text-3xl font-bold mt-2 text-black/75'>{getTotalTasksDueToday(projects)}</p>
+        <div className='border rounded-md p-4 shadow-sm bg-white dark:bg-neutral-800 dark:border-neutral-600'>
+            <h1 className='text-black/75 dark:text-neutral-300'>Due Today</h1>
+            <p className='text-3xl font-bold mt-2 text-black/75 dark:text-neutral-300'>{getTotalTasksDueToday(projects)}</p>
         </div>
     </div>
   )

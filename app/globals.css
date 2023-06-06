@@ -6,11 +6,10 @@
 tbody tr:last-child {
   border-bottom: 0;
 }
-
+/* 
 body{
-  height: 100%;
-    overflow: hidden;
-}
+  height: 100vh;
+} */
 
 ::-webkit-scrollbar-track
 {
@@ -78,6 +77,11 @@ body{
   margin-bottom: 20px;
   border-collapse: collapse;
 }
+.calendar-table-row {
+  width: 100%;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+}
 
 .calendar-table caption {
   font-size: 1.2rem;
@@ -86,9 +90,9 @@ body{
   
 }
 
-.calendar-table thead th,
+/* .calendar-table thead th, */
 .calendar-table tbody td {
-
+height: 100px;
   
  
 }
@@ -107,3 +111,6 @@ body{
   background-color: red;
   color: white;
 }
+
+/* Theme switch  */
+

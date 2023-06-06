@@ -225,84 +225,95 @@ const Project = ({ params }) => {
               )}
             </div>
             {toggle === false ? (
-              <div className="grid grid-cols-3 bg-white border shadow-sm rounded-br-md rounded-bl-md rounded-tr-md overflow-auto max-h-[750px]">
-                <div className="flex-col">
-                  <div className="text-center mt-4">
-                    <h3 className="font-bold text-black/75">To Do</h3>
-                    <button
-                      onClick={showModal}
-                      className="px-4 py-2 border rounded-md shadow-sm w-11/12 mt-2 bg-white hover:bg-gray-300/25 hover:shadow-md transition-all ease-in-out"
-                    >
-                      <PlusIcon className="h-4 w-4 mx-auto bg-white" />
-                    </button>
-                  </div>
-                  {project.todos?.map((todo) =>
-                    todo.category === "todo" ? (
-                      <Todo
-                        key={todo.id}
-                        todo={todo}
-                        title={todo.text}
-                        desc={todo.description}
-                        params={params}
-                      />
-                    ) : null
-                  )}
-                </div>
-                <div className="flex-col">
-                  <div className="text-center mt-4">
-                    <h3 className="font-bold text-black/75 ">In Progress</h3>
-                    <button
-                      onClick={showModal}
-                      className="px-4 py-2 border rounded-md shadow-sm w-11/12 mt-2 bg-white hover:bg-gray-300/25 hover:shadow-md transition-all ease-in-out"
-                    >
-                      <PlusIcon className="h-4 w-4 mx-auto bg-white " />
-                    </button>
-                  </div>
-                  {project.todos.length !== 0 ? (
-                    <div>
-                      {project.todos?.map((todo) =>
-                        todo.category === "inProgress" ? (
-                          <Todo
-                            key={todo.id}
-                            todo={todo}
-                            title={todo.text}
-                            desc={todo.description}
-                            params={params}
-                          />
-                        ) : null
-                      )}
-                    </div>
-                  ) : (
+              <>
+                <div className="grid grid-cols-3 bg-white border border-b-0  rounded-br-0 rounded-bl-0 rounded-tr-md pb-4">
+                  <div className="flex-col">
                     <div className="text-center mt-4">
-                      <p className="text-black/75 text-sm mt-44">
-                        This project does not have any active tasks
-                      </p>
+                      <h3 className="font-bold text-black/75">To Do</h3>
+                      <button
+                        onClick={showModal}
+                        className="px-4 py-2 border rounded-md shadow-sm w-11/12 mt-2 bg-white hover:bg-gray-300/25 hover:shadow-md transition-all ease-in-out"
+                      >
+                        <PlusIcon className="h-4 w-4 mx-auto bg-white p-" />
+                      </button>
                     </div>
-                  )}
-                </div>
-                <div className="flex-col">
-                  <div className="text-center mt-4">
-                    <h3 className="font-bold text-black/75">Done</h3>
-                    <button
-                      onClick={showModal}
-                      className="px-4 py-2 border rounded-md shadow-sm w-11/12 mt-2 bg-white hover:bg-gray-300/25 hover:shadow-md transition-all ease-in-out"
-                    >
-                      <PlusIcon className="h-4 w-4 mx-auto bg-white" />
-                    </button>
                   </div>
-                  {project.todos?.map((todo) =>
-                    todo.category === "done" ? (
-                      <Todo
-                        key={todo.id}
-                        todo={todo}
-                        title={todo.text}
-                        desc={todo.description}
-                        params={params}
-                      />
-                    ) : null
-                  )}
+                  <div className="flex-col">
+                    <div className="text-center mt-4">
+                      <h3 className="font-bold text-black/75 ">In Progress</h3>
+                      <button
+                        onClick={showModal}
+                        className="px-4 py-2 border rounded-md shadow-sm w-11/12 mt-2 bg-white hover:bg-gray-300/25 hover:shadow-md transition-all ease-in-out"
+                      >
+                        <PlusIcon className="h-4 w-4 mx-auto bg-white " />
+                      </button>
+                    </div>
+                  </div>
+                  <div className="flex-col">
+                    <div className="text-center mt-4">
+                      <h3 className="font-bold text-black/75">Done</h3>
+                      <button
+                        onClick={showModal}
+                        className="px-4 py-2 border rounded-md shadow-sm w-11/12 mt-2 bg-white hover:bg-gray-300/25 hover:shadow-md transition-all ease-in-out"
+                      >
+                        <PlusIcon className="h-4 w-4 mx-auto bg-white" />
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
+
+                <div className="grid grid-cols-3 bg-white border shadow-sm rounded-br-md rounded-bl-md rounded-tr-0 overflow-auto max-h-[575px]">
+                  <div className="flex-col">
+                    {project.todos?.map((todo) =>
+                      todo.category === "todo" ? (
+                        <Todo
+                          key={todo.id}
+                          todo={todo}
+                          title={todo.text}
+                          desc={todo.description}
+                          params={params}
+                        />
+                      ) : null
+                    )}
+                  </div>
+                  <div className="flex-col">
+                    {project.todos.length !== 0 ? (
+                      <div>
+                        {project.todos?.map((todo) =>
+                          todo.category === "inProgress" ? (
+                            <Todo
+                              key={todo.id}
+                              todo={todo}
+                              title={todo.text}
+                              desc={todo.description}
+                              params={params}
+                            />
+                          ) : null
+                        )}
+                      </div>
+                    ) : (
+                      <div className="text-center mt-4">
+                        <p className="text-black/75 text-sm mt-44">
+                          This project does not have any active tasks
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex-col">
+                    {project.todos?.map((todo) =>
+                      todo.category === "done" ? (
+                        <Todo
+                          key={todo.id}
+                          todo={todo}
+                          title={todo.text}
+                          desc={todo.description}
+                          params={params}
+                        />
+                      ) : null
+                    )}
+                  </div>
+                </div>
+              </>
             ) : (
               <div className="bg-white border shadow-sm rounded-br-md rounded-bl-md rounded-tr-md overflow-auto max-h-[750px]">
                 <div className="p-5 pt-12">

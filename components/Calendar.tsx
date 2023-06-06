@@ -115,9 +115,9 @@ function Calendar({ setSelectedProject }) {
     }
 
     return (
-      <div className="rounded-tl-md rounded-tr-md border bg-white mt-4">
-        <div className="flex justify-between py-4">
-          <div className="ml-4 text-sm text-black/75">
+      <div className="rounded-tl-md rounded-tr-md border bg-white mt-4 ">
+        <div className="flex justify-between py-4 ">
+          <div className="ml-4 text-sm text-black/75 ">
             <p className="text-xl font-bold text-black/75">Project Schedule</p>
             {getMonthName(month)} {year}
           </div>

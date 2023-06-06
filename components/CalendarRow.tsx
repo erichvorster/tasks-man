@@ -74,8 +74,8 @@ function CalendarRow({ setSelectedProject }) {
 
       if (projectsData.length > 0) {
         calendarRows.push(
-          <tr className="font-normal pl-4 py-2 border" key={`projects-${day}`}>
-            <td className="font-normal pl-4 py-2 border">
+          <tr className="font-normal pl-4 py-2 border dark:border-b-neutral-500" key={`projects-${day}`}>
+            <td className="font-normal pl-4 py-2">
               <div className="project-names mt-4">
                 {projectsData.map((project) => (
                   <div
@@ -102,9 +102,9 @@ function CalendarRow({ setSelectedProject }) {
     }
 
     return (
-      <div className="rounded-tl-md rounded-tr-md border bg-white max-h-[600px] overflow-auto">
-        <div className="flex justify-between py-4 sticky top-0 bg-white border-b">
-          <div className="ml-4 text-sm text-black/75">
+      <div className="rounded-md border dark:border-neutral-500 bg-white dark:bg-neutral-800 max-h-[675px] overflow-auto">
+        <div className="flex justify-between py-4 sticky top-0 dark:bg-neutral-700  bg-white border-b">
+          <div className="ml-4 text-sm text-black/75 ">
             <p className="text-xl font-bold text-black/75">Project Schedule</p>
           </div>
           <div>
@@ -124,7 +124,7 @@ function CalendarRow({ setSelectedProject }) {
             </div>
           </div>
         </div>
-        <table className="calendar-table text-black/50 bg-white ">
+        <table className="calendar-table-row text-black/50  bg-white dark:bg-neutral-800 ">
           <tbody className="">{calendarRows}</tbody>
         </table>
       </div>

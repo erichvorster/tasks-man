@@ -11,31 +11,30 @@ const page = () => {
   return (
     <div>
       <div className="flex justify-between">
-        <h1 className="text-3xl font-bold flex items-center text-black/75">
+        <h1 className="text-3xl font-bold flex items-center text-black/75 dark:text-gray-200">
           <HomeIcon className="h-10 w-10 mr-2 mb-2" />
           Home
         </h1>
         <div>
-          <button className="border mt-6 rounded-md text-black/75 px-6 py-2 flex items-center shadow-sm hover:bg-white hover:shadow-md transition-all ease-in-out">
+          <button className="border mt-3 rounded-md text-black/75 px-6 py-2 flex items-center shadow-sm hover:bg-white hover:shadow-md transition-all ease-in-out">
             Create Project <PlusIcon className="w-4 h-4 ml-5" />
           </button>
         </div>
       </div>
-
-      <p className="ml-12 text-sm">{getLongFormatDate()}</p>
-      <div className="mt-7 mb-5">
+      <div className="mt-3 mb-5">
         <HomeTiles />
       </div>
 
-      <div className="grid grid-rows-4 grid-flow-col gap-4">
-        <div className="row-span-1 col-span-1">
-          {" "}
-          <TaskTable />
+      <div className="grid grid-cols-3 gap-4">
+        <div className="col-span-2 ">
+          <div className="">
+            <TaskTable />
+          </div>
+          <div className="">
+            <UpcomingTodos />
+          </div>
         </div>
-        <div className=" row-span-3 col-span-1">
-          <UpcomingTodos />
-        </div>
-        <div className="row-span-2 col-span-1 bg-white rounded-md ">
+        <div className="col-span-1">
           <CalendarRow year={2021} />
         </div>
       </div>

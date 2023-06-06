@@ -16,13 +16,17 @@ import ProjectContext from "@/context/ProjectContext";
 import Image from "next/image";
 import logo from "../public/logo.svg";
 import Button from "@/components/Button";
+import ThemeToggle from "./ThemeToggle";
+import ThemeSwitch from "./ThemeSwitch";
 
-const MainNav = () => {
-  const { setActiveProject, projects, setProjects } =
+const MainNav = ({toggleNav, setToggleNav}) => {
+  const { setActiveProject, projects, setProjects,  } =
     useContext(ProjectContext);
   const [showProjects, setShowProjects] = useState(false);
-
   const [show, setShow] = useState<boolean>(false);
+  const [isScrolledToTop, setIsScrolledToTop] = useState(false);
+  const [isScrolledToBottom, setIsScrolledToBottom] = useState(false);
+
 
   const showModal = () => {
     setShow(true);
@@ -31,39 +35,52 @@ const MainNav = () => {
     setShow(false);
   };
 
+  const handleScroll = (e) => {
+    const nav = e.target;
+    const scrollTop = nav.scrollTop;
+    const scrollHeight = nav.scrollHeight;
+    const clientHeight = nav.clientHeight;
+
+    setIsScrolledToTop(scrollTop === 0);
+
+    setIsScrolledToBottom(scrollTop + clientHeight === scrollHeight);
+  };
+
+  
+
   return (
-    <div className="bg-gray-100 w-72 absolute top-0 bottom-0 left-0 flex flex-col justify-between">
+    <div className={`bg-gray-100 ${!toggleNav ? "w-20" : "w-72" } absolute top-0 bottom-0 left-0 flex flex-col justify-between  transition-all ease-in-out`}>
       <div className=" flex flex-col justify-between h-44">
-        <div className="border-b pl-4 py-2 flex">
-          <Image src={logo} height={40} width={40} alt="logo" />
-          <h1 className="text-3xl font-extrabold pl-2 mt-1">HEX</h1>
+        <div className="border-b pl-5 py-2 flex">
+          <Image src={logo} height={40} width={40} alt="logo" className="cursor-pointer" onClick={() => setToggleNav(!toggleNav)}/>
+          {toggleNav && <h1 className="text-3xl font-extrabold pl-2 mt-1 cursor-pointer">HEX</h1>}
         </div>
-        <ul className="flex flex-col py-4 pl-4 border-b ">
+        <ul className="flex flex-col py-4 pl-5 border-b ">
           <Link
             href="/Home"
-            className="flex items-center p-2 hover:bg-gray-400/25 rounded-md w-11/12 group transition-colors ease-in-out"
+            className={`flex items-center p-2 hover:bg-gray-400/25 rounded-md ${!toggleNav ? "w-8/12" :"w-11/12" }  group transition-colors ease-in-out`}
           >
             <li className="cursor-pointer  flex items-center">
               <HomeIcon className="w-6 h-6 mr-2" />
-              Home
+              {toggleNav && "Home"}
             </li>
           </Link>
           <li className="cursor-pointer flex items-center">
             <div
               onClick={() => setShowProjects(!showProjects)}
-              className={`flex items-center p-2 hover:bg-gray-400/25 rounded-md w-11/12 group transition-colors ease-in-out ${
-                showProjects && "bg-gray-400/25 rounded-bl-none rounded-br-none"
+              className={`flex items-center p-2 hover:bg-gray-400/25 rounded-md ${!toggleNav ? "w-8/12" :"w-11/12" } group transition-colors ease-in-out ${
+                (toggleNav && showProjects) && "bg-gray-400/25 rounded-bl-none rounded-br-none"
               }`}
             >
-              <BriefcaseIcon className="w-6 h-6 mr-2" />
-              Projects
-              <PlusIcon
+              <BriefcaseIcon className=" w-6 h-6 mr-2" onClick={() => setToggleNav(true)} />
+              {toggleNav && "Projects"}
+              {toggleNav && <PlusIcon
                 onClick={showModal}
                 className="h-6 w-6 ml-auto text-transparent group-hover:text-black hover:bg-gray-600/75 hover:text-white rounded-md p-1 transition-colors ease-in-out"
-              />
+              />}
             </div>
           </li>
-          {showProjects && (
+          {(toggleNav && showProjects) && (
             <div
               className={
                 showProjects &&
@@ -71,7 +88,7 @@ const MainNav = () => {
               }
             >
               {projects.length !== 0 && (
-                <div className="mt-3 max-h-[300px] overflow-auto ">
+                <div className="mt-3 max-h-[500px] overflow-auto" onScroll={handleScroll}>
                   {projects.map((project, i) => (
                     <li
                       className="cursor-pointer mb-3 flex items-center"
@@ -83,7 +100,7 @@ const MainNav = () => {
                         className="flex items-center hover:bg-gray-400/25 p-2 rounded-md w-full mx-3 text-sm transition-colors ease-in-out"
                       >
                         <StopIcon
-                          className="w-5 h-5 mr-2 "
+                          className="w-5 h-5 mr-2"
                           style={{ color: project.projectColor }}
                         />
                         {project.name}
@@ -94,9 +111,10 @@ const MainNav = () => {
               )}
 
               <div
-                className={`h-12 absolute bottom-0 left-0 right-0 bg-gradient-to-t from-gray-100 to-transparent ${
-                  projects.length >= 7 ? "visible" : "hidden"
-                }`}
+                className={`h-24 absolute bottom-0 left-0 right-0 bg-gradient-to-t from-gray-100 to-transparent ${isScrolledToBottom && "hidden"}`}
+              />
+              <div
+                className={`h-24 absolute top-0 left-0 right-0 bg-gradient-to-b from-gray-100 to-transparent ${isScrolledToTop && "hidden"}`}
               />
             </div>
           )}
@@ -106,23 +124,18 @@ const MainNav = () => {
           >
             <li className="cursor-pointer flex items-center">
               <CalendarDaysIcon className="w-6 h-6 mr-2" />
-              Calender
+              {toggleNav && "Calendar"}
             </li>
           </Link>
         </ul>
-        <ul className="flex flex-col h-52 py-4 pl-4 border-b ">
-          <li className="cursor-pointer mb-3">Home</li>
-          <li className="cursor-pointer mb-3">Tasks</li>
-        </ul>
-        <ul className="flex flex-col h-52 py-4 pl-4 border-b ">
-          <li className="cursor-pointer mb-3">Home</li>
-          <li className="cursor-pointer mb-3">Tasks</li>
-          <li className="cursor-pointer mb-3">Calender</li>
-          <li className="cursor-pointer mb-3">Inbox</li>
-        </ul>
+      
+      </div>
+      <div>
+        <ThemeToggle />
+        {/* <ThemeSwitch/> */}
       </div>
       <div className="mb-6" onClick={showModal}>
-        <Button btnText="New project" />
+        <Button btnText="New project" toggleNav={toggleNav} />
       </div>
       {show && (
         <Overlay>

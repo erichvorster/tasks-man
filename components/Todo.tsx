@@ -65,32 +65,32 @@ const Todo: React.FC<TodoProps> = ({ todo, handleDeleteTodo, params }) => {
   }, []);
 
   return (
-    <div className="bg-gray-100/75 rounded-md shadow-sm p-4 w-11/12 mx-auto my-4 border hover:shadow-md hover:bg-white transition-colors 0.5s ease-in-out">
+    <div className="bg-gray-100/75 rounded-md shadow-sm p-4 w-11/12 mx-auto my-4 border dark:border-neutral-500 hover:shadow-md hover:bg-white dark:bg-neutral-700 transition-colors 0.5s ease-in-out">
       <div className="relative">
         <div
           className="flex justify-between"
           onClick={() => setDropDown(!dropDown)}
         >
           <div className="flex items-center">
-            <h2 className="text-xl font-bold text-black/75">{todo.text}</h2>
+            <h2 className="text-xl font-bold text-black/75 dark:text-neutral-300">{todo.text}</h2>
           </div>
           <EllipsisHorizontalIcon
-            className={`h-8 w-8 cursor-pointer text-gray-400 ${
-              dropDown && "text-black"
+            className={`h-8 w-8 cursor-pointer text-gray-400 dark:text-neutral-300 ${
+              dropDown && "text-black dark:text-neutral-300"
             }`}
           />
         </div>
         <div
-          className={`absolute right-0 t-0 rounded-md border shadow-md w-44 ${
+          className={`absolute right-0 t-0 rounded-md border dark:border-neutral-500 shadow-md w-44 ${
             dropDown ? "block" : "hidden"
-          } bg-white`}
+          } bg-white dark:bg-neutral-800`}
         >
           <ul>
-            <li className="hover:bg-gray-100   py-1 transition ease-in-out">
-              <span className="pl-2 text-black/75">Move</span>
+            <li className="hover:bg-gray-100 dark:hover:bg-neutral-600 py-1 transition ease-in-out">
+              <span className="pl-2 text-black/75 dark:text-neutral-300">Move</span>
               <ul className="">
                 <li
-                  className="hover:bg-gray-200 cursor-pointer px-4 py-1 transition ease-in-out text-black/75"
+                  className="hover:bg-gray-200 dark:hover:bg-neutral-500 cursor-pointer px-4 py-1 transition ease-in-out text-black/75 dark:text-neutral-300"
                   onClick={() =>
                     handleUpdateCategory(params.projectid, todo.id, "todo")
                   }
@@ -98,7 +98,7 @@ const Todo: React.FC<TodoProps> = ({ todo, handleDeleteTodo, params }) => {
                   Todo
                 </li>
                 <li
-                  className="hover:bg-gray-200 cursor-pointer px-4 py-1 transition ease-in-out text-black/75"
+                  className="hover:bg-gray-200 dark:hover:bg-neutral-500 cursor-pointer px-4 py-1 transition ease-in-out text-black/75 dark:text-neutral-300"
                   onClick={() =>
                     handleUpdateCategory(
                       params.projectid,
@@ -110,7 +110,7 @@ const Todo: React.FC<TodoProps> = ({ todo, handleDeleteTodo, params }) => {
                   In Progress
                 </li>
                 <li
-                  className="hover:bg-gray-200 cursor-pointer px-4 py-1 transition ease-in-out text-black/75"
+                  className="hover:bg-gray-200 dark:hover:bg-neutral-500 cursor-pointer px-4 py-1 transition ease-in-out text-black/75 dark:text-neutral-300"
                   onClick={() =>
                     handleUpdateCategory(params.projectid, todo.id, "done")
                   }
@@ -119,10 +119,10 @@ const Todo: React.FC<TodoProps> = ({ todo, handleDeleteTodo, params }) => {
                 </li>
               </ul>
             </li>
-            <hr />
+            <hr  className="dark:bg-neutral-500"/>
             <li
               onClick={() => deleteTodo(params.projectid, todo.id)}
-              className="hover:bg-gray-100 hover:text-red-500 hover:font-bold cursor-pointer py-1 transition ease-in-out flex justify-between text-black/75"
+              className="hover:bg-gray-100 dark:hover:bg-neutral-500 hover:text-red-500 hover:font-bold cursor-pointer py-1 transition ease-in-out flex justify-between text-black/75 dark:text-neutral-300"
             >
               <span className="pl-2">Delete</span>
               <TrashIcon className="w-6 h-6" />
@@ -145,12 +145,12 @@ const Todo: React.FC<TodoProps> = ({ todo, handleDeleteTodo, params }) => {
       <hr className="my-4" />
       <div className="flex justify-between">
         <div className="flex">
-          <CalendarIcon className="w-5 h-5 mr-1 text-gray-400" />
-          <h1 className="text-xs text-gray-400 mt-1">{todo.dueDate}</h1>
+          <CalendarIcon className="w-5 h-5 mr-1 text-gray-400 dark:text-neutral-300" />
+          <h1 className="text-xs text-gray-400 dark:text-neutral-300 mt-1">{todo.dueDate}</h1>
         </div>
         <div className="flex items-center">
-          <p className="flex text-xs items-center mr-3 bg-gray-200 p-1 rounded-md">
-            <UserIcon className="h-4 w-4 mr-1 text-black/75" />
+          <p className="flex text-xs items-center mr-3 bg-gray-200 dark:bg-neutral-500 p-1 rounded-md">
+            <UserIcon className="h-4 w-4 mr-1 text-black/75 dark:text-neutral-300" />
             {todo.assignee ? todo.assignee : "Unassigned"}
           </p>
           <p

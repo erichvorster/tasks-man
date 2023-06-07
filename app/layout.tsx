@@ -7,6 +7,7 @@ import ProjectContext from "@/context/ProjectContext";
 import { useState, useEffect } from "react";
 import { Poppins } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import MobileNav from "@/components/MobileNav";
 
 const poppins = Poppins({ subsets: ["latin"], weight:['400', '700'] });
 
@@ -58,6 +59,7 @@ export default function RootLayout({
           value={{ projects, setProjects, activeProject, setActiveProject }}
         >
           <ThemeProvider attribute="class">
+          <MobileNav toggleNav={toggleNav} setToggleNav={setToggleNav} />  
           <MainNav toggleNav={toggleNav} setToggleNav={setToggleNav} />
           <Dashboard toggleNav={toggleNav} setToggleNav={setToggleNav} >{children}</Dashboard>
           </ThemeProvider>

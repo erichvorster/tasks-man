@@ -67,8 +67,8 @@ function CalendarRow({ setSelectedProject }) {
       }
 
       calendarRows.push(
-        <tr className="font-normal pl-4 py-2 border" key={`day-${day}`}>
-          <td className="font-normal pl-4 py-2 border">{day + 1}</td>
+        <tr className="font-normal pl-4 py-2 border border-x-0 dark:border-neutral-500" key={`day-${day}`}>
+          <td className="font-normal pl-4 py-2 border border-x-0 dark:border-neutral-500">{day + 1}</td>
         </tr>
       );
 
@@ -102,7 +102,7 @@ function CalendarRow({ setSelectedProject }) {
     }
 
     return (
-      <div className="rounded-md border dark:border-neutral-500 bg-white dark:bg-neutral-800 max-h-[675px] overflow-auto">
+      <div className="rounded-md border dark:border-neutral-500 bg-white dark:bg-neutral-800 md:max-h-[675px] md:overflow-auto ">
         <div className="flex justify-between py-4 sticky top-0 dark:bg-neutral-700  bg-white border-b">
           <div className="ml-4 text-sm text-black/75 ">
             <p className="text-xl font-bold text-black/75">Project Schedule</p>

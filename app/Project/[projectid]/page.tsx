@@ -92,11 +92,11 @@ const Project = ({ params }) => {
   return (
     <div>
       <div className="grid grid-cols-3 gap-3">
-        <div className="col-span-2 bg-white dark:bg-neutral-800 dark:border-neutral-500 rounded-md shadow-sm border pl-5 pr-5">
+        <div className="col-span-3 md:col-span-2 bg-white dark:bg-neutral-800 dark:border-neutral-500 rounded-md shadow-sm border pl-5 pr-5">
           <div className="grid grid-cols-12">
-            <div className="col-span-9">
-              <div className="flex items-center">
-                <h1 className="text-3xl font-bold text-black/75 dark:text-neutral-300 mr-8 flex items-center">
+            <div className="col-span-12 md:col-span-9">
+              <div className="flex-col md:flex md:flex-row items-center">
+                <h1 className="text-2xl font-bold text-black/75 dark:text-neutral-300 mr-8 flex items-center">
                   <StopIcon
                     className={`h-9 w-9 `}
                     style={{ color: project.projectColor }}
@@ -141,16 +141,16 @@ const Project = ({ params }) => {
             </div>
           </div>
         </div>
-        <div className="col-span-1 grid grid-cols-3 gap-2 mt-8">
-          <div className="border rounded-md p-4 shadow-sm bg-white text-black/75 dark:text-neutral-300 dark:bg-neutral-800 dark:border-neutral-500">
+        <div className="col-span-3 md:col-span-1 grid grid-cols-3 gap-2 mt-8">
+          <div className="border col-span-3 md:col-span-1 rounded-md p-4 shadow-sm bg-white text-black/75 dark:text-neutral-300 dark:bg-neutral-800 dark:border-neutral-500">
             <p>Tasks not started</p>
             <p className="text-3xl font-bold mt-2">{getTasksInTodo()}</p>
           </div>
-          <div className="border rounded-md p-4 shadow-sm bg-white text-black/75 dark:text-neutral-300 dark:bg-neutral-800 dark:border-neutral-500">
+          <div className="border col-span-3 md:col-span-1 rounded-md p-4 shadow-sm bg-white text-black/75 dark:text-neutral-300 dark:bg-neutral-800 dark:border-neutral-500">
             <p>Tasks in progress</p>
             <p className="text-3xl font-bold mt-2">{getTasksInProgress()}</p>
           </div>
-          <div className="border rounded-md p-4 shadow-sm bg-white text-black/75 dark:text-neutral-300 dark:bg-neutral-800 dark:border-neutral-500">
+          <div className="border col-span-3 md:col-span-1 rounded-md p-4 shadow-sm bg-white text-black/75 dark:text-neutral-300 dark:bg-neutral-800 dark:border-neutral-500">
             <p>Tasks completed</p>
             <p className="text-3xl font-bold mt-2">{getTasksCompleted()}</p>
           </div>
@@ -165,7 +165,7 @@ const Project = ({ params }) => {
           )}
           <div>
             <div className="flex ">
-              <div className="flex mr-6">
+              <div className="mr-6 hidden md:flex">
                 <button
                   onClick={() => setToggle(false)}
                   className={`text-sm text-black/75 rounded-tl-md p-2 border dark:border-neutral-500 dark:border-b-0 border-b-0 w-24 flex items-center justify-center ${
@@ -200,7 +200,7 @@ const Project = ({ params }) => {
                     To Do
                   </button>
                   <button
-                    className={`text-sm text-black/75  p-2 border border-b-0 dark:border-neutral-500 dark:border-b-0  w-24 flex items-center justify-center hover:bg-white transition-all ease-in-out ${
+                    className={`text-sm text-black/75 dark:text-neutral-300  p-2 border border-b-0 dark:border-neutral-500 dark:border-b-0  w-24 flex items-center justify-center hover:bg-white transition-all ease-in-out ${
                       filterOption === "inProgress" && "bg-white"
                     }`}
                     onClick={() => setFilterOption("inProgress")}
@@ -208,7 +208,7 @@ const Project = ({ params }) => {
                     In Progress
                   </button>
                   <button
-                    className={`text-sm text-black/75 rounded-tr-md p-2 border dark:border-neutral-500 dark:border-b-0  border-b-0 w-24 flex items-center justify-center hover:bg-white transition-all ease-in-out ${
+                    className={`text-sm text-black/75 dark:text-neutral-300 rounded-tr-md p-2 border dark:border-neutral-500 dark:border-b-0  border-b-0 w-24 flex items-center justify-center hover:bg-white transition-all ease-in-out ${
                       filterOption === "done" && "bg-white "
                     }`}
                     onClick={() => setFilterOption("done")}
@@ -217,7 +217,7 @@ const Project = ({ params }) => {
                   </button>
                   {filterOption !== "" && (
                     <button
-                      className={`text-sm text-black/75 rounded-tr-md p-2 border border-b-0 dark:border-neutral-500 dark:border-b-0  w-24 flex items-center justify-center hover:bg-white transition-all ease-in-out ${
+                      className={`text-sm text-black/75 dark:text-neutral-300 rounded-tr-md p-2 border border-b-0 dark:border-neutral-500 dark:border-b-0  w-24 flex items-center justify-center hover:bg-white transition-all ease-in-out ${
                         filterOption === "done" && "bg-white"
                       }`}
                       onClick={() => setFilterOption("")}
@@ -261,7 +261,7 @@ const Project = ({ params }) => {
                   </div>
                   <div className="flex-col">
                     <div className="text-center mt-4">
-                      <h3 className="font-bold text-black/75 dark:bg-neutral-800">
+                      <h3 className="font-bold text-black/75 dark:text-neutral-300 dark:bg-neutral-800">
                         Done
                       </h3>
                       <button
@@ -327,7 +327,7 @@ const Project = ({ params }) => {
                 </div>
               </>
             ) : (
-              <div className="bg-white dark:bg-neutral-800 dark:border-neutral-500 border shadow-sm rounded-br-md rounded-bl-md rounded-tr-md overflow-auto max-h-[750px]">
+              <div className="bg-white dark:bg-neutral-800 dark:border-neutral-500 border shadow-sm rounded-br-md rounded-bl-md rounded-tr-md md:overflow-auto md:max-h-[750px]">
                 <div className="p-5 pt-12">
                   {getFilteredTasksByStage().map((todo) => (
                     <div className="border rounded-md shadow-sm text-black/75 dark:text-neutral-300  dark:border-neutral-500 p-4 mb-4">
@@ -366,7 +366,7 @@ const Project = ({ params }) => {
             )}
           </div>
         </div>
-        <div className="absolute bg-black dark:bg-neutral-800 h-44 left-0 -bottom-6 right-0 rounded-bl-md rounded-br-md bg-gradient-to-t from-neutral-800 to bg-transparent"></div>
+        <div className="absolute bg-black dark:bg-neutral-800 h-44 left-0 -bottom-6 right-0 rounded-bl-md rounded-br-md bg-gradient-to-t from-white to bg-transparent dark:from-neutral-800 to dark:bg-transparent hidden md:block"></div>
       </div>
     </div>
   );

@@ -10,11 +10,11 @@ const CalendarProject = ({ selectedProject }) => {
   const project = selectedProject !== "" ? projects.find((project) => project.id === selectedProject) : projects[0] 
 
   return (
-    <div className="w-full h-56 bg-white rounded-md shadow-sm border p-4">
+    <div className="w-full h-56 bg-white dark:bg-neutral-800 rounded-md shadow-sm border dark:border-neutral-500 p-4">
       <div className="grid grid-cols-2">
         <div className="col-span-1">
-            <h1 className="text-2xl font-bold text-black/75 flex items-center cursor-pointer ">{project.name} <Link href={`/Project/${project.id}`}><LinkIcon className="h-7 w-7 ml-2"/></Link></h1>
-            <p className="text-sm text-black/75 mt-2">{project.projectDescription}</p>
+            <h1 className="text-2xl font-bold text-black/75 dark:text-neutral-300 flex items-center cursor-pointer ">{project.name} <Link href={`/Project/${project.id}`}><LinkIcon className="h-7 w-7 ml-2"/></Link></h1>
+            <p className="text-sm text-black/75 dark:text-neutral-300 mt-2">{project.projectDescription}</p>
         </div>
         <div className="col-span-1"></div>
       </div>

@@ -46,7 +46,7 @@ function Calendar({ setSelectedProject }) {
     let week = [];
 
     for (let i = 0; i < monthFirstDay; i++) {
-      week.push(<td key={`empty-${i}`} className="empty-cell"></td>);
+      week.push(<td key={`empty-${i}`} className="empty-cell dark:bg-neutral-700"></td>);
     }
 
     for (let day = 1; day <= monthDays; day++) {
@@ -66,15 +66,15 @@ function Calendar({ setSelectedProject }) {
       week.push(
         <td
           key={`day-${day}`}
-          className="font-normal pl-4 py-2 border relative pr-4"
+          className="font-normal pl-4 py-2 border dark:border-neutral-500 relative pr-4"
         >
           <span className="absolute left-4 top-1">{day}</span>
           {projectsData.length > 0 && (
-            <div className="project-names mt-4 ">
+            <div className="project-names mt-4  rounded-md">
               {projectsData.map((project) => (
                 <div
                   key={project.id}
-                  className="project-name text-xs rounded-md px-1 py-2 mb-1 text-black/75 flex shadow-sm border cursor-pointer hover:shadow-md transition-all ease-in-out"
+                  className="project-name dark:bg-neutral-700 text-xs rounded-md px-1 py-2 mb-1 text-black/75 dark:text-neutral-300 flex shadow-sm border dark:border-neutral-500 cursor-pointer hover:shadow-md transition-all ease-in-out"
                   onClick={() => setSelectedProject(project.id)}
                 >
                   <div className="w-1/12">
@@ -95,7 +95,7 @@ function Calendar({ setSelectedProject }) {
 
       if (week.length === 7) {
         monthRows.push(
-          <tr className="font-normal pl-4 py-2 border" key={`week-${day / 7}`}>
+          <tr className="font-normal pl-4 py-2 border dark:border-neutral-500" key={`week-${day / 7}`}>
             {week}
           </tr>
         );
@@ -106,7 +106,7 @@ function Calendar({ setSelectedProject }) {
     if (week.length > 0) {
       monthRows.push(
         <tr
-          className="font-normal pl-4 py-2 border"
+          className="font-normal pl-4 py-2 border dark:border-neutral-500"
           key={`week-${monthDays / 7 + 1}`}
         >
           {week}
@@ -115,10 +115,10 @@ function Calendar({ setSelectedProject }) {
     }
 
     return (
-      <div className="rounded-tl-md rounded-tr-md border bg-white mt-4 ">
+      <div className="rounded-tl-md rounded-tr-md border dark:border-neutral-500 bg-white dark:bg-neutral-800 mt-4 ">
         <div className="flex justify-between py-4 ">
-          <div className="ml-4 text-sm text-black/75 ">
-            <p className="text-xl font-bold text-black/75">Project Schedule</p>
+          <div className="ml-4 text-sm text-black/75 dark:text-neutral-300">
+            <p className="text-xl font-bold text-black/75 dark:text-neutral-300">Project Schedule</p>
             {getMonthName(month)} {year}
           </div>
           <div>
@@ -127,27 +127,27 @@ function Calendar({ setSelectedProject }) {
                 onClick={handlePrevMonth}
                 className="flex items-center justify-center mr-4"
               >
-                <ChevronLeftIcon className="h-10 w-10 p-3 border shadow-sm rounded-full bg-gray-200/50 text-black/75 hover:bg-white hover:shadow-md transition-all ease-in-out" />
+                <ChevronLeftIcon className="h-10 w-10 p-3 border shadow-sm rounded-full bg-gray-200/50 dark:bg-neutral-600 text-black/75 dark:text-neutral-300 hover:bg-white hover:shadow-md transition-all ease-in-out" />
               </button>
               <button
                 onClick={handleNextMonth}
                 className="flex items-center justify-center"
               >
-                <ChevronRightIcon className="h-10 w-10 p-3 border shadow-sm rounded-full bg-gray-200/50 text-black/75 hover:bg-white hover:shadow-md transition-all ease-in-out" />
+                <ChevronRightIcon className="h-10 w-10 p-3 border shadow-sm rounded-full bg-gray-200/50 dark:bg-neutral-600 text-black/75 dark:text-neutral-300 hover:bg-white hover:shadow-md transition-all ease-in-out" />
               </button>
             </div>
           </div>
         </div>
-        <table className="calendar-table text-black/50 bg-white">
+        <table className="calendar-table  text-black/50 bg-white dark:text-neutral-300 dark:bg-neutral-800">
           <thead className="text-sm text-left">
             <tr className="font-normal">
-              <th className="font-normal pl-4 py-2 border">Monday</th>
-              <th className="font-normal pl-4 py-2 border">Tuesday</th>
-              <th className="font-normal pl-4 py-2 border">Wednesday</th>
-              <th className="font-normal pl-4 py-2 border">Thursday</th>
-              <th className="font-normal pl-4 py-2 border">Friday</th>
-              <th className="font-normal pl-4 py-2 border">Saturday</th>
-              <th className="font-normal pl-4 py-2 border">Sunday</th>
+              <th className="font-normal pl-4 py-2 border dark:border-neutral-500">Monday</th>
+              <th className="font-normal pl-4 py-2 border dark:border-neutral-500">Tuesday</th>
+              <th className="font-normal pl-4 py-2 border dark:border-neutral-500">Wednesday</th>
+              <th className="font-normal pl-4 py-2 border dark:border-neutral-500">Thursday</th>
+              <th className="font-normal pl-4 py-2 border dark:border-neutral-500">Friday</th>
+              <th className="font-normal pl-4 py-2 border dark:border-neutral-500">Saturday</th>
+              <th className="font-normal pl-4 py-2 border dark:border-neutral-500">Sunday</th>
             </tr>
           </thead>
           <tbody>{monthRows}</tbody>

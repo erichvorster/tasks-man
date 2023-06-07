@@ -84,15 +84,15 @@ const TaskTable = () => {
           </div>
         </div>
       </div>
-      <div className="rounded-lg border py-2 h-[280px]  pt-0 relative shadow-sm bg-white dark:bg-neutral-800 dark:border-neutral-500 rounded-tl-md rounded-tr-md">
+      <div className="rounded-lg border py-2 md:h-[280px]  pt-0 relative shadow-sm bg-white dark:bg-neutral-800 dark:border-neutral-500 rounded-tl-md rounded-tr-md">
         <table className="w-full text-sm bg-white text-black/75 dark:bg-neutral-800/25 dark:text-neutral-300 ">
           <thead className="bg-gray-200/50 dark:bg-neutral-700/75">
             <tr className="text-left border-b dark:border-b-neutral-500">
               <th className="py-2 text-gray-500/50 dark:text-neutral-500 font-normal  pl-6">Name</th>
               <th className="py-2 text-gray-500/50 dark:text-neutral-500 font-normal">Priority</th>
-              <th className="py-2 text-gray-500/50 dark:text-neutral-500 font-normal">Tags</th>
+              <th className="py-2 text-gray-500/50 dark:text-neutral-500 font-normal hidden md:block ">Tags</th>
               <th className="py-2 text-gray-500/50 dark:text-neutral-500 font-normal">Due Date</th>
-              <th className="py-2 text-right dark:text-neutral-500 text-gray-500/50 font-normal pr-6">
+              <th className="py-2 text-right dark:text-neutral-500 text-gray-500/50 font-normal pr-6 hidden md:block ">
                 Actions
               </th>
             </tr>
@@ -126,9 +126,9 @@ const TaskTable = () => {
                     </div>
                     </Link>
                   </td>
-                  <td><Link href={`/Project/${project.id}`} ><p className="w-full py-2 ">{project.tags}</p></Link></td>
+                  <td><Link href={`/Project/${project.id}`} ><p className="w-full py-2 hidden md:block ">{project.tags}</p></Link></td>
                   <td><Link href={`/Project/${project.id}`} ><p className="w-full py-2 ">{formatDate(project.deadline)}</p></Link></td>
-                  <td className="text-right pr-5">
+                  <td className="text-right pr-5 hidden md:block ">
                     <div className="flex justify-end">
                       <PencilIcon className="h-6 w-6 p-1  cursor-pointer transition-colors ease-in-out" />
                       <TrashIcon

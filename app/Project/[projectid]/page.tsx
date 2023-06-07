@@ -92,11 +92,11 @@ const Project = ({ params }) => {
   return (
     <div>
       <div className="grid grid-cols-3 gap-3">
-        <div className="col-span-2 bg-white  rounded-md shadow-sm border pl-5 pr-5">
+        <div className="col-span-2 bg-white dark:bg-neutral-800 dark:border-neutral-500 rounded-md shadow-sm border pl-5 pr-5">
           <div className="grid grid-cols-12">
             <div className="col-span-9">
               <div className="flex items-center">
-                <h1 className="text-3xl font-bold text-black/75 mr-8 flex items-center">
+                <h1 className="text-3xl font-bold text-black/75 dark:text-neutral-300 mr-8 flex items-center">
                   <StopIcon
                     className={`h-9 w-9 `}
                     style={{ color: project.projectColor }}
@@ -104,11 +104,13 @@ const Project = ({ params }) => {
                   {project.name}
                 </h1>
                 <div className="mt-6 flex ">
-                  <p className={`mb-4 text-sm text-black/75 mr-5`}>
+                  <p
+                    className={`mb-4 text-sm text-black/75 mr-5 dark:text-neutral-300`}
+                  >
                     <span
                       className={`${getPriorityClass(
                         project.priority
-                      )} p-1 rounded text-black/75 flex items-center`}
+                      )} p-1 rounded text-black/75 flex items-center dark:text-neutral-300 `}
                     >
                       <ExclamationCircleIcon className="h-5 w-5 mr-1" />
                       {project.priority === ""
@@ -116,39 +118,39 @@ const Project = ({ params }) => {
                         : project.priority}
                     </span>
                   </p>
-                  <p className="mb-4 text-black/75 text-sm mr-5 flex items-center">
+                  <p className="mb-4 text-black/75 text-sm mr-5 flex items-center dark:text-neutral-300">
                     <CalendarIcon className="h-5 w-5 mr-1" /> {project.deadline}
                   </p>
-                  <p className="mb-4 text-black/75 text-sm mr-5 flex items-center">
+                  <p className="mb-4 text-black/75 text-sm mr-5 flex items-center dark:text-neutral-300">
                     <TagIcon className="h-5 w-5 mr-1" />
                     {project.tags}
                   </p>
                 </div>
               </div>
-              <p className="text-sm max-w-3xl text-black/75 mr-5">
+              <p className="text-sm max-w-3xl text-black/75 mr-5 dark:text-neutral-300">
                 {project.projectDescription}
               </p>
             </div>
             <div className="col-span-3 grid grid-cols-2 gap-4 mt-8 mb-4">
-              <button className="rounded-md shadow-sm border col-span-1 hover:bg-red-500/25 hover:shadow-md transition-all ease-in-out flex justify-center items-center">
-                <TrashIcon className="h-10 w-10 text-black/25" />
+              <button className="rounded-md shadow-sm border dark:border-neutral-500 col-span-1 hover:bg-red-500/25 hover:shadow-md transition-all ease-in-out flex justify-center items-center">
+                <TrashIcon className="h-10 w-10 text-black/25 dark:text-neutral-300" />
               </button>
-              <button className="rounded-md shadow-sm border col-span-1 hover:bg-green-500/25 hover:shadow-md transition-all ease-in-out flex justify-center items-center">
-                <CheckBadgeIcon className="h-10 w-10 text-black/25" />
+              <button className="rounded-md shadow-sm border dark:border-neutral-500 col-span-1 hover:bg-green-500/25 hover:shadow-md transition-all ease-in-out flex justify-center items-center">
+                <CheckBadgeIcon className="h-10 w-10 text-black/25 dark:text-neutral-300" />
               </button>
             </div>
           </div>
         </div>
         <div className="col-span-1 grid grid-cols-3 gap-2 mt-8">
-          <div className="border rounded-md p-4 shadow-sm bg-white text-black/75">
+          <div className="border rounded-md p-4 shadow-sm bg-white text-black/75 dark:text-neutral-300 dark:bg-neutral-800 dark:border-neutral-500">
             <p>Tasks not started</p>
             <p className="text-3xl font-bold mt-2">{getTasksInTodo()}</p>
           </div>
-          <div className="border rounded-md p-4 shadow-sm bg-white text-black/75">
+          <div className="border rounded-md p-4 shadow-sm bg-white text-black/75 dark:text-neutral-300 dark:bg-neutral-800 dark:border-neutral-500">
             <p>Tasks in progress</p>
             <p className="text-3xl font-bold mt-2">{getTasksInProgress()}</p>
           </div>
-          <div className="border rounded-md p-4 shadow-sm bg-white text-black/75">
+          <div className="border rounded-md p-4 shadow-sm bg-white text-black/75 dark:text-neutral-300 dark:bg-neutral-800 dark:border-neutral-500">
             <p>Tasks completed</p>
             <p className="text-3xl font-bold mt-2">{getTasksCompleted()}</p>
           </div>
@@ -166,35 +168,39 @@ const Project = ({ params }) => {
               <div className="flex mr-6">
                 <button
                   onClick={() => setToggle(false)}
-                  className={`text-sm text-black/75 rounded-tl-md p-2 border border-b-0 w-24 flex items-center justify-center ${
-                    toggle === true ? "bg-gray-200" : "bg-white"
+                  className={`text-sm text-black/75 rounded-tl-md p-2 border dark:border-neutral-500 dark:border-b-0 border-b-0 w-24 flex items-center justify-center ${
+                    toggle === true
+                      ? "bg-gray-200 dark:bg-neutral-600"
+                      : "bg-white dark:bg-neutral-800"
                   }`}
                 >
-                  <ViewColumnsIcon className="h-5 w-5 mr-1 text-black/75" />
+                  <ViewColumnsIcon className="h-5 w-5 mr-1 text-black/75 dark:text-neutral-300" />
                   Kanban
                 </button>
                 <button
                   onClick={() => setToggle(true)}
-                  className={`text-sm text-black/75 rounded-tr-md p-2 border border-b-0 w-24 flex items-center justify-center ${
-                    toggle === false ? "bg-gray-200" : "bg-white"
+                  className={`text-sm text-black/75 rounded-tr-md p-2 border dark:border-neutral-500 dark:border-b-0 border-b-0 w-24 flex items-center justify-center ${
+                    toggle === false
+                      ? "bg-gray-200 dark:bg-neutral-600"
+                      : "bg-white dark:bg-neutral-800"
                   }`}
                 >
-                  <QueueListIcon className="h-5 w-5 mr-1 text-black/75" />
+                  <QueueListIcon className="h-5 w-5 mr-1 text-black/75 dark:text-neutral-300" />
                   List
                 </button>
               </div>
               {toggle === true ? (
                 <div className="flex">
                   <button
-                    className={`text-sm text-black/75 rounded-tl-md p-2 border border-b-0 w-24 flex items-center justify-center hover:bg-white transition-all ease-in-out ${
-                      filterOption === "todo" && "bg-white"
+                    className={`text-sm text-black/75 dark:text-neutral-300 rounded-tl-md p-2 border border-b-0 dark:border-neutral-500 dark:border-b-0 w-24 flex items-center justify-center hover:bg-white transition-all ease-in-out ${
+                      filterOption === "todo" && "bg-white dark:bg-neutral-800"
                     } `}
                     onClick={() => setFilterOption("todo")}
                   >
                     To Do
                   </button>
                   <button
-                    className={`text-sm text-black/75  p-2 border border-b-0 w-24 flex items-center justify-center hover:bg-white transition-all ease-in-out ${
+                    className={`text-sm text-black/75  p-2 border border-b-0 dark:border-neutral-500 dark:border-b-0  w-24 flex items-center justify-center hover:bg-white transition-all ease-in-out ${
                       filterOption === "inProgress" && "bg-white"
                     }`}
                     onClick={() => setFilterOption("inProgress")}
@@ -202,7 +208,7 @@ const Project = ({ params }) => {
                     In Progress
                   </button>
                   <button
-                    className={`text-sm text-black/75 rounded-tr-md p-2 border border-b-0 w-24 flex items-center justify-center hover:bg-white transition-all ease-in-out ${
+                    className={`text-sm text-black/75 rounded-tr-md p-2 border dark:border-neutral-500 dark:border-b-0  border-b-0 w-24 flex items-center justify-center hover:bg-white transition-all ease-in-out ${
                       filterOption === "done" && "bg-white "
                     }`}
                     onClick={() => setFilterOption("done")}
@@ -211,7 +217,7 @@ const Project = ({ params }) => {
                   </button>
                   {filterOption !== "" && (
                     <button
-                      className={`text-sm text-black/75 rounded-tr-md p-2 border border-b-0 w-24 flex items-center justify-center hover:bg-white transition-all ease-in-out ${
+                      className={`text-sm text-black/75 rounded-tr-md p-2 border border-b-0 dark:border-neutral-500 dark:border-b-0  w-24 flex items-center justify-center hover:bg-white transition-all ease-in-out ${
                         filterOption === "done" && "bg-white"
                       }`}
                       onClick={() => setFilterOption("")}
@@ -226,43 +232,49 @@ const Project = ({ params }) => {
             </div>
             {toggle === false ? (
               <>
-                <div className="grid grid-cols-3 bg-white border border-b-0  rounded-br-0 rounded-bl-0 rounded-tr-md pb-4">
+                <div className="grid grid-cols-3 bg-white dark:bg-neutral-800 border dark:border-neutral-500 border-b-0  rounded-br-0 rounded-bl-0 rounded-tr-md pb-4">
                   <div className="flex-col">
                     <div className="text-center mt-4">
-                      <h3 className="font-bold text-black/75">To Do</h3>
+                      <h3 className="font-bold text-black/75 dark:text-neutral-300">
+                        To Do
+                      </h3>
                       <button
                         onClick={showModal}
-                        className="px-4 py-2 border rounded-md shadow-sm w-11/12 mt-2 bg-white hover:bg-gray-300/25 hover:shadow-md transition-all ease-in-out"
+                        className="px-4 py-2 border dark:border-neutral-500 rounded-md shadow-sm w-11/12 mt-2 bg-white dark:bg-neutral-800 hover:bg-gray-300/25 hover:shadow-md transition-all ease-in-out"
                       >
-                        <PlusIcon className="h-4 w-4 mx-auto bg-white p-" />
+                        <PlusIcon className="h-4 w-4 mx-auto bg-white dark:bg-neutral-800" />
                       </button>
                     </div>
                   </div>
                   <div className="flex-col">
                     <div className="text-center mt-4">
-                      <h3 className="font-bold text-black/75 ">In Progress</h3>
+                      <h3 className="font-bold text-black/75 dark:text-neutral-300">
+                        In Progress
+                      </h3>
                       <button
                         onClick={showModal}
-                        className="px-4 py-2 border rounded-md shadow-sm w-11/12 mt-2 bg-white hover:bg-gray-300/25 hover:shadow-md transition-all ease-in-out"
+                        className="px-4 py-2 border dark:border-neutral-500 rounded-md shadow-sm w-11/12 mt-2 bg-white dark:bg-neutral-800 hover:bg-gray-300/25 hover:shadow-md transition-all ease-in-out"
                       >
-                        <PlusIcon className="h-4 w-4 mx-auto bg-white " />
+                        <PlusIcon className="h-4 w-4 mx-auto bg-white dark:bg-neutral-800 " />
                       </button>
                     </div>
                   </div>
                   <div className="flex-col">
                     <div className="text-center mt-4">
-                      <h3 className="font-bold text-black/75">Done</h3>
+                      <h3 className="font-bold text-black/75 dark:bg-neutral-800">
+                        Done
+                      </h3>
                       <button
                         onClick={showModal}
-                        className="px-4 py-2 border rounded-md shadow-sm w-11/12 mt-2 bg-white hover:bg-gray-300/25 hover:shadow-md transition-all ease-in-out"
+                        className="px-4 py-2 border dark:border-neutral-500 rounded-md shadow-sm w-11/12 mt-2 bg-white dark:bg-neutral-800 hover:bg-gray-300/25 hover:shadow-md transition-all ease-in-out"
                       >
-                        <PlusIcon className="h-4 w-4 mx-auto bg-white" />
+                        <PlusIcon className="h-4 w-4 mx-auto bg-white dark:bg-neutral-800" />
                       </button>
                     </div>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-3 bg-white border shadow-sm rounded-br-md rounded-bl-md rounded-tr-0 overflow-auto max-h-[575px]">
+                <div className="grid grid-cols-3 bg-white dark:bg-neutral-800 border dark:border-neutral-500 shadow-sm rounded-br-md rounded-bl-md rounded-tr-0 overflow-auto max-h-[575px]">
                   <div className="flex-col">
                     {project.todos?.map((todo) =>
                       todo.category === "todo" ? (
@@ -293,7 +305,7 @@ const Project = ({ params }) => {
                       </div>
                     ) : (
                       <div className="text-center mt-4">
-                        <p className="text-black/75 text-sm mt-44">
+                        <p className="text-black/75 dark:text-neutral-300 text-sm mt-44">
                           This project does not have any active tasks
                         </p>
                       </div>
@@ -315,17 +327,17 @@ const Project = ({ params }) => {
                 </div>
               </>
             ) : (
-              <div className="bg-white border shadow-sm rounded-br-md rounded-bl-md rounded-tr-md overflow-auto max-h-[750px]">
+              <div className="bg-white dark:bg-neutral-800 dark:border-neutral-500 border shadow-sm rounded-br-md rounded-bl-md rounded-tr-md overflow-auto max-h-[750px]">
                 <div className="p-5 pt-12">
                   {getFilteredTasksByStage().map((todo) => (
-                    <div className="border rounded-md shadow-sm text-black/75 p-4 mb-4">
+                    <div className="border rounded-md shadow-sm text-black/75 dark:text-neutral-300  dark:border-neutral-500 p-4 mb-4">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center">
                           <h5 className="flex items-center mr-2 text-xl font-bold ">
-                            <CubeTransparentIcon className="h-8 w-8 mr-2 text-black/75 " />
+                            <CubeTransparentIcon className="h-8 w-8 mr-2 text-black/75 dark:text-neutral-300" />
                             {todo.text}
                           </h5>
-                          <p className="text-sm text-black/75">
+                          <p className="text-sm text-black/75 dark:text-neutral-300">
                             {todo.category}
                           </p>
                         </div>
@@ -335,7 +347,7 @@ const Project = ({ params }) => {
                       <hr />
                       <div className="flex items-center text-sm mt-2">
                         <div className="flex items-center mr-5">
-                          <UserIcon className="h-5 w-5 text-black/75 mr-2" />
+                          <UserIcon className="h-5 w-5 text-black/75 dark:text-neutral-300 mr-2" />
                           {todo.assignee}
                         </div>
                         <div
@@ -343,7 +355,7 @@ const Project = ({ params }) => {
                             todo.priority
                           )}`}
                         >
-                          <ExclamationCircleIcon className="h-5 w-5 text-black/75 mr-2" />
+                          <ExclamationCircleIcon className="h-5 w-5 text-black/75 dark:text-neutral-300 mr-2" />
                           {todo.priority}
                         </div>
                       </div>
@@ -354,7 +366,7 @@ const Project = ({ params }) => {
             )}
           </div>
         </div>
-        <div className="absolute bg-black h-44 left-0 -bottom-6 right-0 rounded-bl-md rounded-br-md bg-gradient-to-t from-gray-100 to bg-transparent"></div>
+        <div className="absolute bg-black dark:bg-neutral-800 h-44 left-0 -bottom-6 right-0 rounded-bl-md rounded-br-md bg-gradient-to-t from-neutral-800 to bg-transparent"></div>
       </div>
     </div>
   );

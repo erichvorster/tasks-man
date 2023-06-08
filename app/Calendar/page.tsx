@@ -11,8 +11,12 @@ const page = () => {
   return (
     <div>
       <CalendarProjcet selectedProject={selectedProject} />
-      <Calendar year={2021} setSelectedProject={setSelectedProject} />
-      {/* <CalendarRow year={2021} /> */}
+      <div className="hidden md:block">
+        <Calendar year={2021} setSelectedProject={setSelectedProject} />
+      </div>
+      <div className="md:hidden mt-12">
+        <CalendarRow year={2021} />
+      </div>
     </div>
   );
 };

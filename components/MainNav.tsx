@@ -7,6 +7,7 @@ import {
   CubeIcon,
   PlusIcon,
   StopIcon,
+  CubeTransparentIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { Modal } from "@/components/Modal";
@@ -62,15 +63,14 @@ const MainNav = ({ toggleNav, setToggleNav }) => {
       } absolute top-0 bottom-0 left-0 flex-col justify-between  transition-all ease-in-out hidden md:flex`}
     >
       <div className=" flex flex-col justify-between h-44">
-        <div className="border-b border-b-neutral-500 pl-5 py-2 flex">
-          <Image
-            src={logo}
-            height={40}
-            width={40}
-            alt="logo"
-            className="cursor-pointer"
-            onClick={() => setToggleNav(!toggleNav)}
-          />
+        <div className="border-b border-b-neutral-500 pl-4 py-2 flex items-center">
+          <div className="bg-neutral-800 p-2 rounded-md dark:bg-neutral-300">
+            <CubeTransparentIcon
+              className="w-8 h-8 cursor-pointer text-white dark:text-neutral-800"
+              onClick={() => setToggleNav(!toggleNav)}
+            />
+          </div>
+
           {toggleNav && (
             <h1 className="text-3xl font-extrabold pl-2 mt-1 cursor-pointer dark:text-neutral-300">
               HEX

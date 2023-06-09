@@ -59,7 +59,7 @@ export default function RootLayout({
           value={{ projects, setProjects, activeProject, setActiveProject }}
         >
           <ThemeProvider attribute="class">
-          <MobileNav toggleNav={toggleNav} setToggleNav={setToggleNav} />  
+          <MobileNav  />  
           <MainNav toggleNav={toggleNav} setToggleNav={setToggleNav} />
           <Dashboard toggleNav={toggleNav} setToggleNav={setToggleNav} >{children}</Dashboard>
           </ThemeProvider>

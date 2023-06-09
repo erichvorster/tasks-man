@@ -163,7 +163,7 @@ const Project = ({ params }) => {
               <Modal hideOverlay={hideModal} params={params} />
             </Overlay>
           )}
-          <div>
+          <div className="hidden md:block">
             <div className="flex ">
               <div className="mr-6 hidden md:flex">
                 <button
@@ -364,6 +364,83 @@ const Project = ({ params }) => {
                 </div>
               </div>
             )}
+          </div>
+          <div className="md:hidden">
+            <div className="flex ">
+              <div className="flex">
+                <button
+                  className={`text-sm text-black/75 dark:text-neutral-300 rounded-tl-md p-2 border border-b-0 dark:border-neutral-500 dark:border-b-0 w-24 flex items-center justify-center hover:bg-white transition-all ease-in-out ${
+                    filterOption === "todo" && "bg-white dark:bg-neutral-800"
+                  } `}
+                  onClick={() => setFilterOption("todo")}
+                >
+                  To Do
+                </button>
+                <button
+                  className={`text-sm text-black/75 dark:text-neutral-300  p-2 border border-b-0 dark:border-neutral-500 dark:border-b-0  w-24 flex items-center justify-center hover:bg-white transition-all ease-in-out ${
+                    filterOption === "inProgress" && "bg-white"
+                  }`}
+                  onClick={() => setFilterOption("inProgress")}
+                >
+                  In Progress
+                </button>
+                <button
+                  className={`text-sm text-black/75 dark:text-neutral-300 rounded-tr-md p-2 border dark:border-neutral-500 dark:border-b-0  border-b-0 w-24 flex items-center justify-center hover:bg-white transition-all ease-in-out ${
+                    filterOption === "done" && "bg-white "
+                  }`}
+                  onClick={() => setFilterOption("done")}
+                >
+                  Done
+                </button>
+                {filterOption !== "" && (
+                  <button
+                    className={`text-sm text-black/75 dark:text-neutral-300 rounded-tr-md p-2 border border-b-0 dark:border-neutral-500 dark:border-b-0  w-24 flex items-center justify-center hover:bg-white transition-all ease-in-out ${
+                      filterOption === "done" && "bg-white"
+                    }`}
+                    onClick={() => setFilterOption("")}
+                  >
+                    All
+                  </button>
+                )}
+              </div>
+            </div>
+
+            <div className="bg-white dark:bg-neutral-800 dark:border-neutral-500 border shadow-sm rounded-br-md rounded-bl-md rounded-tr-md md:overflow-auto md:max-h-[750px]">
+              <div className="p-5 pt-12">
+                {getFilteredTasksByStage().map((todo) => (
+                  <div className="border rounded-md shadow-sm text-black/75 dark:text-neutral-300  dark:border-neutral-500 p-4 mb-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center">
+                        <h5 className="flex items-center mr-2 text-xl font-bold ">
+                          <CubeTransparentIcon className="h-8 w-8 mr-2 text-black/75 dark:text-neutral-300" />
+                          {todo.text}
+                        </h5>
+                        <p className="text-sm text-black/75 dark:text-neutral-300">
+                          {todo.category}
+                        </p>
+                      </div>
+                      <div></div>
+                    </div>
+                    <div className="text-sm my-2">{todo.description}</div>
+                    <hr />
+                    <div className="flex items-center text-sm mt-2">
+                      <div className="flex items-center mr-5">
+                        <UserIcon className="h-5 w-5 text-black/75 dark:text-neutral-300 mr-2" />
+                        {todo.assignee}
+                      </div>
+                      <div
+                        className={`flex items-center rounded p-1 ${getPriorityClass(
+                          todo.priority
+                        )}`}
+                      >
+                        <ExclamationCircleIcon className="h-5 w-5 text-black/75 dark:text-neutral-300 mr-2" />
+                        {todo.priority}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
         <div className="absolute bg-black dark:bg-neutral-800 h-44 left-0 -bottom-6 right-0 rounded-bl-md rounded-br-md bg-gradient-to-t from-white to bg-transparent dark:from-neutral-800 to dark:bg-transparent hidden md:block"></div>

@@ -3,6 +3,7 @@
 import React, { useState, useContext } from "react";
 import ProjectContext from "@/context/ProjectContext";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 function CalendarRow({ setSelectedProject }) {
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -78,6 +79,7 @@ function CalendarRow({ setSelectedProject }) {
             <td className="font-normal pl-4 py-2">
               <div className="project-names mt-4">
                 {projectsData.map((project) => (
+                  <Link href={`/Project/${project.id}`}>
                   <div
                     key={project.id}
                     className="project-name text-xs rounded-md px-1 py-2 mb-1 text-black/75 flex shadow-sm border cursor-pointer hover:shadow-md transition-all ease-in-out"
@@ -93,6 +95,7 @@ function CalendarRow({ setSelectedProject }) {
                     </div>
                     <div className="w-11/12">{project.name}</div>
                   </div>
+                  </Link>
                 ))}
               </div>
             </td>

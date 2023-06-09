@@ -101,7 +101,7 @@ const TodoForm = ({ hideOverlay, params }) => {
               value={todoInput}
               onChange={handleTodoInputChange}
               placeholder="Enter todo..."
-              className="border border-gray-300 rounded-md px-2 py-1 mt-1"
+              className="border border-gray-300 dark:border-neutral-500 rounded-md px-2 py-1 mt-1"
             />
           </div>
           <div className="flex flex-col mt-6">
@@ -110,7 +110,7 @@ const TodoForm = ({ hideOverlay, params }) => {
               value={descriptionInput}
               onChange={handleDescriptionInputChange}
               placeholder="Enter description..."
-              className="h-24 border border-gray-300 rounded-md px-2 py-1 mt-1"
+              className="h-24 border border-gray-300 dark:border-neutral-500 rounded-md px-2 py-1 mt-1"
             ></textarea>
           </div>
           <div className="flex flex-col mt-6">
@@ -120,7 +120,7 @@ const TodoForm = ({ hideOverlay, params }) => {
               value={assigneeInput}
               onChange={handleAssigneeInputChange}
               placeholder="Enter assignee..."
-              className="border border-gray-300 rounded-md px-2 py-1 mt-1"
+              className="border border-gray-300 dark:border-neutral-500 rounded-md px-2 py-1 mt-1"
             />
           </div>
           <div className="grid grid-cols-3 gap-4 mt-6">
@@ -129,7 +129,7 @@ const TodoForm = ({ hideOverlay, params }) => {
               <select
                 value={priority}
                 onChange={handlePriorityChange}
-                className="border border-gray-300 rounded-md px-2 py-1 mt-1"
+                className="border border-gray-300 dark:border-neutral-500 rounded-md px-2 py-1 mt-1"
               >
                 <option value="low">Low</option>
                 <option value="medium">Medium</option>
@@ -141,7 +141,7 @@ const TodoForm = ({ hideOverlay, params }) => {
               <select
                 value={categoryInput}
                 onChange={handleCategoryInputChange}
-                className="border border-gray-300 rounded-md px-2 py-1 mt-1"
+                className="border border-gray-300 dark:border-neutral-500 rounded-md px-2 py-1 mt-1"
               >
                 <option value="todo">To Do</option>
                 <option value="inProgress">In Progress</option>
@@ -151,7 +151,7 @@ const TodoForm = ({ hideOverlay, params }) => {
             <div className="flex flex-col ">
               <label className="text-xs font-bold">Due Date</label>
               <input
-                className="border border-gray-300 rounded-md px-2 py-1 mt-1"
+                className="border border-gray-300 dark:border-neutral-500 rounded-md px-2 py-1 mt-1"
                 type="date"
                 value={dueDate}
                 onChange={handleDueDateChange}
@@ -159,12 +159,12 @@ const TodoForm = ({ hideOverlay, params }) => {
             </div>
           </div>
           <div className="mt-24 grid grid-cols-2 gap-4">
-            <button onClick={hideOverlay} className="border rounded-md py-1">
+            <button onClick={hideOverlay} className="border rounded-md dark:border-neutral-500 py-1">
               Cancel
             </button>
             <button
               type="submit"
-              className="border rounded-md py-1 bg-blue-400 text-white"
+              className="border rounded-md py-1  dark:border-neutral-500 text-white"
             >
               Add Todo
             </button>

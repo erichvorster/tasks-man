@@ -45,7 +45,7 @@ const ThemeToggle = ({
         tabIndex={0}
         onKeyDown={handleKeyDown}
         onClick={handleClick}
-        className={`cursor-pointer w-12 h-6 ${colour} rounded-full relative px-1.5 flex items-center${
+        className={`cursor-pointer w-12 h-6 ${colour} rounded-full relative px-1.5 flex mx-auto items-center${
           isOn ? "" : " justify-end"
         }`}
       >

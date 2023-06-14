@@ -8,6 +8,7 @@ import {
   PlusIcon,
   StopIcon,
   CubeTransparentIcon,
+  ChevronDoubleUpIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { Modal } from "@/components/Modal";
@@ -60,7 +61,7 @@ const MainNav = ({ toggleNav, setToggleNav }) => {
     <div
       className={`bg-gray-100 dark:bg-black ${
         !toggleNav ? "w-20" : "w-72"
-      } absolute top-0 bottom-0 left-0 flex-col justify-between  transition-all ease-in-out hidden md:flex`}
+      } absolute top-0 bottom-0 left-0 flex-col justify-between  transition-all ease-in-out duration-700 hidden md:flex`}
     >
       <div className=" flex flex-col justify-between h-44">
         <div className="border-b border-b-neutral-500 pl-4 py-2 flex items-center">
@@ -100,11 +101,20 @@ const MainNav = ({ toggleNav, setToggleNav }) => {
                 "bg-gray-400/25 rounded-bl-none rounded-br-none"
               }`}
             >
-              <BriefcaseIcon
-                className=" w-6 h-6 mr-2"
-                onClick={() => setToggleNav(true)}
-              />
-              {toggleNav && "Projects"}
+              <div className="h-6 w-6 mr-2">
+                <BriefcaseIcon
+                  className=" w-6 h-6 mr-2"
+                  onClick={() => setToggleNav(true)}
+                />
+              </div>
+              <p
+                className={`${
+                  toggleNav ? "opacity-100" : "opacity-0 hidden"
+                } transition-all ease-in-out duration-700`}
+              >
+                Projects
+              </p>
+
               {toggleNav && (
                 <PlusIcon
                   onClick={showModal}
@@ -171,11 +181,31 @@ const MainNav = ({ toggleNav, setToggleNav }) => {
       </div>
 
       <div className="">
+        <div className="w-full flex justify-center items-center">
+          <div
+            onClick={() => setToggleNav(!toggleNav)}
+            className={`border border-neutral-800 ${
+              toggleNav ? "h-96 mb-24" : "h-24 mb-8"
+            } dark:border-neutral-300 px-3 rounded-lg  transition-all ease-in-out duration-300 flex justify-center items-center cursor-pointer hover:bg-gray-400/25`}
+          >
+            <ChevronDoubleUpIcon
+              className={`text-neutral-300 h-6 w-6 ${
+                toggleNav ? "-rotate-90" : "rotate-90"
+              } transition-all ease-in-out duration-700  `}
+            />
+          </div>
+        </div>
         <div>
           <ThemeToggle />
         </div>
-        <div onClick={showModal}>
-          <Button btnText="New project" toggleNav={toggleNav} />
+        <div onClick={showModal} className="mb-5">
+          <button
+            className={`flex items-center py-2 px-4 border ${
+              toggleNav ? "px-24" : "px-3"
+            } rounded-lg mt-4 mx-auto hover:bg-gray-400/25 transition-all ease-in-out duration-700 hover:shadow-xl`}
+          >
+            <PlusIcon className="h-4 w-4 " />
+          </button>
         </div>
       </div>
       {show && (

@@ -23,7 +23,7 @@ const MobileNav = () => {
   const [showProjects, setShowProjects] = useState(false);
   const { setActiveProject, projects, setProjects } =
     useContext(ProjectContext);
-    const [show, setShow] = useState<boolean>(false);
+  const [show, setShow] = useState<boolean>(false);
   console.log(toggleNav);
 
   const showModal = () => {
@@ -69,7 +69,7 @@ const MobileNav = () => {
               <ChevronLeftIcon
                 className={`h-5 w-5 ${
                   !toggleNav ? "rotate-180" : "toratae-0"
-                } transition-all ease-in-out duration-700 delay-200`}
+                } transition-all ease-in-out duration-300 delay-200`}
                 onClick={() => setToggleNav(false)}
               />
             </div>
@@ -82,7 +82,10 @@ const MobileNav = () => {
                   !toggleNav ? "w-8/12" : "w-11/12"
                 }  group transition-colors ease-in-out`}
               >
-                <li className="cursor-pointer  flex items-center dark:text-neutral-300" onClick={() => setToggleNav(false)}>
+                <li
+                  className="cursor-pointer  flex items-center dark:text-neutral-300"
+                  onClick={() => setToggleNav(false)}
+                >
                   <HomeIcon className="w-6 h-6 mr-2" />
                   {toggleNav && "Home"}
                 </li>
@@ -122,7 +125,10 @@ const MobileNav = () => {
                         <li
                           className="cursor-pointer mb-3 flex items-center rounded-bl-md rounded-br-md"
                           key={i}
-                          onClick={() => {setActiveProject(project); setToggleNav(false)}}
+                          onClick={() => {
+                            setActiveProject(project);
+                            setToggleNav(false);
+                          }}
                         >
                           <Link
                             href={`/Project/${project.id}`}
@@ -144,7 +150,10 @@ const MobileNav = () => {
                 href="/Calendar"
                 className="flex items-center p-2 hover:bg-gray-400/25 dark:hover:bg-neutral-700 rounded-md w-11/12 transition-colors ease-in-out"
               >
-                <li className="cursor-pointer flex items-center dark:text-neutral-300" onClick={() => setToggleNav(false)}>
+                <li
+                  className="cursor-pointer flex items-center dark:text-neutral-300"
+                  onClick={() => setToggleNav(false)}
+                >
                   <CalendarDaysIcon className="w-6 h-6 mr-2" />
                   {toggleNav && "Calendar"}
                 </li>
@@ -155,21 +164,27 @@ const MobileNav = () => {
             <div className="flex justify-center">
               <ThemeToggle />
             </div>
-            <button onClick={() => {showModal(); setToggleNav(false)}} className="flex mx-auto items-center px-4 py-2 border dark:border-neutral-600 rounded-md mt-5 dark:text-neutral-300">
+            <button
+              onClick={() => {
+                showModal();
+                setToggleNav(false);
+              }}
+              className="flex mx-auto items-center px-4 py-2 border dark:border-neutral-600 rounded-md mt-5 dark:text-neutral-300"
+            >
               {" "}
               New Project <PlusIcon className="h-4 w-4 ml-2" />
             </button>
           </div>
         </div>
         {show && (
-        <Overlay>
-          <Modal
-            hideOverlay={hideModal}
-            setProjects={setProjects}
-            form={"project"}
-          />
-        </Overlay>
-      )}
+          <Overlay>
+            <Modal
+              hideOverlay={hideModal}
+              setProjects={setProjects}
+              form={"project"}
+            />
+          </Overlay>
+        )}
       </div>
     </>
   );

@@ -8,29 +8,27 @@ import { useState, useEffect } from "react";
 import { Poppins } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import MobileNav from "@/components/MobileNav";
+import ProjectData from "@/data/data";
 
-const poppins = Poppins({ subsets: ["latin"], weight:['400', '700'] });
+const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [projects, setProjects] = useState(() => {
-    return JSON.parse(localStorage.getItem("projects")) || []
-  })
+  const [projects, setProjects] = useState(ProjectData);
 
-
-
-  
   const [activeProject, setActiveProject] = useState({});
   const [toggleNav, setToggleNav] = useState(false);
 
-  console.log(projects)
+  // console.log(JSON.stringify(projects));
 
-  useEffect(() => {
-    if (projects.length > 0) {localStorage.setItem("projects", JSON.stringify(projects))}
-  }, [projects])
+  // useEffect(() => {
+  //   if (projects.length > 0) {
+  //     localStorage.setItem("projects", JSON.stringify(projects));
+  //   }
+  // }, [projects]);
 
   // useEffect(() => {
   //   // Retrieve projects from local storage on component mount
@@ -54,14 +52,18 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${poppins.className} bg-gray-100/50 dark:bg-neutral-900`} >
+      <body
+        className={`${poppins.className} bg-gray-100/50 dark:bg-neutral-900`}
+      >
         <ProjectContext.Provider
           value={{ projects, setProjects, activeProject, setActiveProject }}
         >
           <ThemeProvider attribute="class">
-          <MobileNav  />  
-          <MainNav toggleNav={toggleNav} setToggleNav={setToggleNav} />
-          <Dashboard toggleNav={toggleNav} setToggleNav={setToggleNav} >{children}</Dashboard>
+            <MobileNav />
+            <MainNav toggleNav={toggleNav} setToggleNav={setToggleNav} />
+            <Dashboard toggleNav={toggleNav} setToggleNav={setToggleNav}>
+              {children}
+            </Dashboard>
           </ThemeProvider>
         </ProjectContext.Provider>
         <div id="overlay"></div>

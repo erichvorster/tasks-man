@@ -45,14 +45,6 @@ function CalendarRow({ setSelectedProject }) {
 
     const calendarRows = [];
 
-    calendarRows.push(
-      <tr className="font-normal pl-4 py-2 border" key={`month-name`}>
-        <td className="font-normal pl-4 py-2 border" colSpan={3}>
-          {getMonthName(month)} {year}
-        </td>
-      </tr>
-    );
-
     for (let day = 0; day < monthDays; day++) {
       const currentDate = new Date(year, month, day + 1);
       const dateString = `${
@@ -68,33 +60,41 @@ function CalendarRow({ setSelectedProject }) {
       }
 
       calendarRows.push(
-        <tr className="font-normal pl-4 py-2 border border-x-0 dark:border-neutral-500" key={`day-${day}`}>
-          <td className="font-normal pl-4 py-2 border border-x-0 dark:border-neutral-500">{day + 1}</td>
+        <tr
+          className="font-normal pl-4 py-2 border border-x-0 dark:border-neutral-500 text-black/75 dark:text-neutral-300"
+          key={`day-${day}`}
+        >
+          <td className="font-normal pl-4 py-2 border border-x-0 dark:border-neutral-500">
+            {day + 1}
+          </td>
         </tr>
       );
 
       if (projectsData.length > 0) {
         calendarRows.push(
-          <tr className="font-normal pl-4 py-2 border dark:border-b-neutral-500" key={`projects-${day}`}>
+          <tr
+            className="font-normal pl-4 py-2  dark:border-b-neutral-500 text-black/75 dark:text-neutral-300"
+            key={`projects-${day}`}
+          >
             <td className="font-normal pl-4 py-2">
               <div className="project-names mt-4">
                 {projectsData.map((project) => (
                   <Link href={`/Project/${project.id}`}>
-                  <div
-                    key={project.id}
-                    className="project-name text-xs rounded-md px-1 py-2 mb-1 text-black/75 flex shadow-sm border cursor-pointer hover:shadow-md transition-all ease-in-out"
-                    onClick={() => setSelectedProject(project.id)}
-                  >
-                    <div className="w-1/12">
-                      <div
-                        className="h-full w-[3px] rounded-lg"
-                        style={{
-                          backgroundColor: project.projectColor,
-                        }}
-                      />
+                    <div
+                      key={project.id}
+                      className="project-name text-xs rounded-md px-1 py-2 mb-1 text-black/75 dark:text-neutral-300 flex shadow-sm border cursor-pointer hover:shadow-md transition-all ease-in-out"
+                      onClick={() => setSelectedProject(project.id)}
+                    >
+                      <div className="w-1/12">
+                        <div
+                          className="h-full w-[3px] rounded-lg"
+                          style={{
+                            backgroundColor: project.projectColor,
+                          }}
+                        />
+                      </div>
+                      <div className="w-11/12">{project.name}</div>
                     </div>
-                    <div className="w-11/12">{project.name}</div>
-                  </div>
                   </Link>
                 ))}
               </div>
@@ -108,7 +108,18 @@ function CalendarRow({ setSelectedProject }) {
       <div className="rounded-md border dark:border-neutral-500 bg-white dark:bg-neutral-800 md:max-h-[675px] md:overflow-auto ">
         <div className="flex justify-between py-4 sticky top-0 dark:bg-neutral-700  bg-white border-b">
           <div className="ml-4 text-sm text-black/75 ">
-            <p className="text-xl font-bold text-black/75">Project Schedule</p>
+            <p className="text-xl font-bold text-black/75 dark:text-neutral-300">
+              Project Schedule
+            </p>
+            <p className="text-lg text-black/75 dark:text-neutral-300">
+              {getMonthName(month)} {year}
+            </p>
+            <Link
+              href="/Calendar"
+              className="text-black/75 dark:text-neutral-300 transition-all ease-in-out text-xs hover:underline "
+            >
+              View Detailed Calendar
+            </Link>
           </div>
           <div>
             <div className="calendar-header flex mx-4">

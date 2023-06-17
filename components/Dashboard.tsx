@@ -9,7 +9,7 @@ const Dashboard = ({ children, toggleNav, setToggleNav }: DashboardProps) => {
     <div
       className={`absolute right-0 top-0 bottom-0 ${
         !toggleNav ? "md:left-20" : "md:left-72"
-      } left-0 h-screen mx-4 md:mx-12 pt-12 transition-all duration-700 ease-in-out`}
+      } left-0 h-screen md:overflow-hidden pt-20 md:pt-3 mx-4 md:mx-3 transition-all duration-300 ease-in-out`}
     >
       {children}
     </div>

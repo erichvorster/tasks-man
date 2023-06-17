@@ -61,7 +61,7 @@ const MainNav = ({ toggleNav, setToggleNav }) => {
     <div
       className={`bg-gray-100 dark:bg-black ${
         !toggleNav ? "w-20" : "w-72"
-      } absolute top-0 bottom-0 left-0 flex-col justify-between  transition-all ease-in-out duration-700 hidden md:flex`}
+      } absolute top-0 bottom-0 left-0 flex-col justify-between  transition-all ease-in-out duration-300 hidden md:flex`}
     >
       <div className=" flex flex-col justify-between h-44">
         <div className="border-b border-b-neutral-500 pl-4 py-2 flex items-center">
@@ -71,12 +71,14 @@ const MainNav = ({ toggleNav, setToggleNav }) => {
               onClick={() => setToggleNav(!toggleNav)}
             />
           </div>
-
-          {toggleNav && (
-            <h1 className="text-3xl font-extrabold pl-2 mt-1 cursor-pointer dark:text-neutral-300">
-              HEX
-            </h1>
-          )}
+          <p
+            className={`${
+              toggleNav ? "opacity-100" : "opacity-0"
+            } transition-all ease-in-out delay-200 text-3xl font-extrabold pl-2 mt-1 cursor-pointer dark:text-neutral-300`}
+          >
+            {" "}
+            {toggleNav && "Cube"}
+          </p>
         </div>
         <ul className="flex flex-col py-4 pl-5 border-b dark:border-b-neutral-500">
           <Link
@@ -87,7 +89,14 @@ const MainNav = ({ toggleNav, setToggleNav }) => {
           >
             <li className="cursor-pointer  flex items-center">
               <HomeIcon className="w-6 h-6 mr-2" />
-              {toggleNav && "Home"}
+              <p
+                className={`${
+                  toggleNav ? "opacity-100" : "opacity-0"
+                } transition-all ease-in-out delay-200`}
+              >
+                {" "}
+                {toggleNav && "Home"}
+              </p>
             </li>
           </Link>
           <li className="cursor-pointer flex items-center">
@@ -109,10 +118,11 @@ const MainNav = ({ toggleNav, setToggleNav }) => {
               </div>
               <p
                 className={`${
-                  toggleNav ? "opacity-100" : "opacity-0 hidden"
-                } transition-all ease-in-out duration-700`}
+                  toggleNav ? "opacity-100" : "opacity-0"
+                } transition-all ease-in-out delay-200`}
               >
-                Projects
+                {" "}
+                {toggleNav && "Projects"}
               </p>
 
               {toggleNav && (
@@ -132,24 +142,35 @@ const MainNav = ({ toggleNav, setToggleNav }) => {
             >
               {projects.length !== 0 && (
                 <div
-                  className="mt-3 max-h-[500px] overflow-auto dark:bg-neutral-900"
+                  className="mt-3 max-h-[300px] overflow-auto dark:bg-neutral-900 rounded-bl-md rounded-br-md"
                   onScroll={handleScroll}
                 >
                   {projects.map((project, i) => (
                     <li
-                      className="cursor-pointer mb-3 flex items-center rounded-bl-md rounded-br-md"
+                      className={`cursor-pointer mb-3 flex items-center ${
+                        toggleNav ? "opacity-100" : "opacity-0"
+                      } rounded-bl-md rounded-br-md  transition-all ease-in-out delay-700`}
                       key={i}
                       onClick={() => setActiveProject(project)}
                     >
                       <Link
                         href={`/Project/${project.id}`}
-                        className="flex items-center hover:bg-gray-400/25 p-2 rounded-md w-full mx-3 text-sm transition-colors ease-in-out"
+                        className={`flex items-center hover:bg-gray-400/25 p-2 rounded-md w-full mx-3 text-sm transition-colors ease-in-out `}
                       >
-                        <StopIcon
-                          className="w-5 h-5 mr-2"
-                          style={{ color: project.projectColor }}
-                        />
-                        {project.name}
+                        <div className="w-5 h-5 mr-2">
+                          <StopIcon
+                            className="w-5 h-5 "
+                            style={{ color: project.projectColor }}
+                          />
+                        </div>
+                        <p
+                          className={`${
+                            toggleNav ? "opacity-100" : "opacity-0"
+                          } text-xs`}
+                        >
+                          {" "}
+                          {project.name}
+                        </p>
                       </Link>
                     </li>
                   ))}
@@ -170,11 +191,20 @@ const MainNav = ({ toggleNav, setToggleNav }) => {
           )}
           <Link
             href="/Calendar"
-            className="flex items-center p-2 hover:bg-gray-400/25 dark:hover:bg-neutral-700 rounded-md w-11/12 transition-colors ease-in-out"
+            className={`flex items-center p-2 hover:bg-gray-400/25 dark:hover:bg-neutral-700 rounded-md w-11/12 ${
+              !toggleNav ? "w-8/12" : "w-11/12"
+            } transition-colors ease-in-out`}
           >
             <li className="cursor-pointer flex items-center ">
               <CalendarDaysIcon className="w-6 h-6 mr-2" />
-              {toggleNav && "Calendar"}
+              <p
+                className={`${
+                  toggleNav ? "opacity-100" : "opacity-0"
+                } transition-all ease-in-out delay-200`}
+              >
+                {" "}
+                {toggleNav && "Calendar"}
+              </p>
             </li>
           </Link>
         </ul>
@@ -185,13 +215,13 @@ const MainNav = ({ toggleNav, setToggleNav }) => {
           <div
             onClick={() => setToggleNav(!toggleNav)}
             className={`border border-neutral-800 ${
-              toggleNav ? "h-96 mb-24" : "h-24 mb-8"
+              toggleNav ? "h-24 mb-8" : "h-24 mb-8"
             } dark:border-neutral-300 px-3 rounded-lg  transition-all ease-in-out duration-300 flex justify-center items-center cursor-pointer hover:bg-gray-400/25`}
           >
             <ChevronDoubleUpIcon
               className={`text-neutral-300 h-6 w-6 ${
                 toggleNav ? "-rotate-90" : "rotate-90"
-              } transition-all ease-in-out duration-700  `}
+              } transition-all ease-in-out duration-300  `}
             />
           </div>
         </div>
@@ -202,7 +232,7 @@ const MainNav = ({ toggleNav, setToggleNav }) => {
           <button
             className={`flex items-center py-2 px-4 border ${
               toggleNav ? "px-24" : "px-3"
-            } rounded-lg mt-4 mx-auto hover:bg-gray-400/25 transition-all ease-in-out duration-700 hover:shadow-xl`}
+            } rounded-lg mt-4 mx-auto hover:bg-gray-400/25 transition-all ease-in-out duration-300 hover:shadow-xl`}
           >
             <PlusIcon className="h-4 w-4 " />
           </button>

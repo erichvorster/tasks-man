@@ -113,7 +113,7 @@ const TaskTable = () => {
               placeholder="Search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="text-sm bg-white dark:bg-neutral-800 shadow-none border:none"
+              className="text-sm bg-transparent shadow-none border:none outline-none"
             />
           </div>
         </div>

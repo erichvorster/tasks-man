@@ -17,11 +17,12 @@ import ProjectContext from "@/context/ProjectContext";
 import ThemeToggle from "./ThemeToggle";
 import { Overlay } from "./Overlay";
 import { Modal } from "./Modal";
+import { Project } from "@/data/data";
 
 const MobileNav = () => {
   const [toggleNav, setToggleNav] = useState(false);
   const [showProjects, setShowProjects] = useState(false);
-  const { setActiveProject, projects, setProjects } =
+  const { setActiveProject, projects, setProjects }: any =
     useContext(ProjectContext);
   const [show, setShow] = useState<boolean>(false);
   console.log(toggleNav);
@@ -121,7 +122,7 @@ const MobileNav = () => {
                 >
                   {projects.length !== 0 && (
                     <div className="mt-3 max-h-[300px] overflow-auto dark:bg-neutral-900 rounded-bl-md rounded-br-md">
-                      {projects.map((project, i) => (
+                      {projects.map((project: Project, i: number) => (
                         <li
                           className="cursor-pointer mb-3 flex items-center rounded-bl-md rounded-br-md"
                           key={i}

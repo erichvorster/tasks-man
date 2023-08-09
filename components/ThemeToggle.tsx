@@ -17,6 +17,7 @@ const ThemeToggle = ({
 
   function toggle() {
     setIsOn(!isOn);
+    //@ts-ignore
     onToggle(!isOn);
     setTheme(theme === "dark" ? "light" : "dark");
   }
@@ -25,7 +26,7 @@ const ThemeToggle = ({
     toggle();
   }
 
-  function handleKeyDown({ key }) {
+  function handleKeyDown({ key }:any) {
     if (key === "Enter") toggle();
   }
 

@@ -9,18 +9,19 @@ import {
 } from "@heroicons/react/24/outline";
 import { formatDate, getPriorityClass } from "./Helpers";
 import Link from "next/link";
+import { Project } from "@/data/data";
 
 const TaskTable = () => {
-  const { projects, setProjects } = useContext(ProjectContext);
+  const { projects, setProjects }: any = useContext(ProjectContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [filterPriority, setFilterPriority] = useState("");
   const [filterOption, setFilterOption] = useState(1);
   const projectsPerPage = 6;
 
-  function deleteProject(id) {
-    setProjects((prevProjects) =>
-      prevProjects.filter((project) => project.id !== id)
+  function deleteProject(id: string) {
+    setProjects((prevProjects: any) =>
+      prevProjects.filter((project: Project) => project.id !== id)
     );
   }
 
@@ -31,7 +32,7 @@ const TaskTable = () => {
   const indexOfFirstProject = indexOfLastProject - projectsPerPage;
 
   const filteredProjects = projects
-    .filter((project) => {
+    .filter((project: Project) => {
       const values = Object.values(project);
       for (const value of values) {
         if (
@@ -42,7 +43,7 @@ const TaskTable = () => {
       }
       return false;
     })
-    .filter((project) => {
+    .filter((project: Project) => {
       if (filterPriority === "") {
         return true;
       } else {
@@ -64,7 +65,7 @@ const TaskTable = () => {
     setCurrentPage((prevPage) => prevPage - 1);
   };
 
-  const handleFilter = (priority) => {
+  const handleFilter = (priority: string) => {
     if (priority === filterPriority) {
       setFilterPriority("");
     } else {
@@ -147,7 +148,7 @@ const TaskTable = () => {
                 </td>
               </tr>
             ) : (
-              currentProjects.map((project, i) => (
+              currentProjects.map((project: Project, i: number) => (
                 <tr
                   key={i}
                   className="border-b  hover:bg-gray-100/50 dark:border-b-neutral-700 dark:hover:bg-neutral-700/50 dark:transition-all dark:ease-in-out cursor-pointer transition-colors ease-in-out "

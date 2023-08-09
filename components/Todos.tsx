@@ -14,11 +14,8 @@ type Todo = {
   description: string;
 };
 
-
-
 const Todos = () => {
   const [show, setShow] = useState<boolean>(false);
-
 
   const showModal = () => {
     setShow(true);
@@ -27,22 +24,22 @@ const Todos = () => {
     setShow(false);
   };
 
-
-
-
   return (
     <div className="mt-6">
       {show && (
-          <Overlay>
-            <Modal hideOverlay={hideModal} />
-          </Overlay>
-        )}
+        <Overlay>
+          <Modal hideOverlay={hideModal} />
+        </Overlay>
+      )}
       <div>
         <div className="grid grid-cols-3 bg-gray-100 rounded-lg">
           <div className="flex-col">
             <div className="text-center mt-4">
               <h3 className="font-bold">To Do</h3>
-              <button onClick={showModal} className=" px-4 py-2 border-2 rounded-lg w-11/12 mt-2 bg-white">
+              <button
+                onClick={showModal}
+                className=" px-4 py-2 border-2 rounded-lg w-11/12 mt-2 bg-white"
+              >
                 <PlusIcon className="h-4 w-4 mx-auto bg-white" />
               </button>
             </div>
@@ -53,7 +50,10 @@ const Todos = () => {
           <div className="flex-col">
             <div className="text-center mt-4">
               <h3 className="font-bold">In Progress</h3>
-              <button onClick={showModal} className=" px-4 py-2 border-2 rounded-lg w-11/12 mt-2 bg-white">
+              <button
+                onClick={showModal}
+                className=" px-4 py-2 border-2 rounded-lg w-11/12 mt-2 bg-white"
+              >
                 <PlusIcon className="h-4 w-4 mx-auto bg-white" />
               </button>
             </div>
@@ -61,7 +61,10 @@ const Todos = () => {
           <div className="flex-col">
             <div className="text-center mt-4">
               <h3 className="font-bold">Done</h3>
-              <button onClick={showModal} className=" px-4 py-2 border-2 rounded-lg w-11/12 mt-2 bg-white">
+              <button
+                onClick={showModal}
+                className=" px-4 py-2 border-2 rounded-lg w-11/12 mt-2 bg-white"
+              >
                 <PlusIcon className="h-4 w-4 mx-auto bg-white" />
               </button>
             </div>

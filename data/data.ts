@@ -1,27 +1,26 @@
-type Todo = {
+
+export type TodoType = {
   id: string;
   text: string;
-  category: string;
+  category: 'todo' | 'inProgress' | 'done';
   description: string;
   dueDate: string;
-  priority: string;
+  priority: 'low' | 'medium' | 'high';
   assignee: string;
 };
 
-type Project = {
+export type Project = {
   name: string;
   deadline: string;
   tags: string;
-  priority: string;
-  todos: Todo[];
+  priority: 'low' | 'medium' | 'high'| "";
+  todos: TodoType[];
   id: string;
   projectColor: string;
   projectDescription: string;
 };
 
-type ProjectData = Project[];
-
-const ProjectData: ProjectData = [
+const ProjectData: Project[] = [
   {
     name: "Website Redesign",
     deadline: "1/17/2023",

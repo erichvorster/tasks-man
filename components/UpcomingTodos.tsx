@@ -2,9 +2,10 @@
 
 import React, { useContext } from "react";
 import ProjectContext from "@/context/ProjectContext";
+import { Project } from "@/data/data";
 
 const UpcomingTodos = () => {
-  const { projects } = useContext(ProjectContext);
+  const { projects } = useContext<any>(ProjectContext);
   return (
     <div className="mt-6">
       <h1 className="text-xl font-bold text-black/50 mb-3 ">Upcoming todos</h1>
@@ -33,7 +34,7 @@ const UpcomingTodos = () => {
             </tr>
           </thead>
           <tbody>
-            {projects.map((project) => {
+            {projects.map((project:Project) => {
               return project.todos.map((todo) => {
                 return (
                   <tr className="border-b dark:border-b-neutral-700 dark:hover:bg-neutral-700/50 hover:bg-gray-100/50 cursor-pointer transition-colors ease-in-out">

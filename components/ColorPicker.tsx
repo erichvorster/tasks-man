@@ -13,12 +13,12 @@ const colors = [
   "#6b7280", // Gray
 ];
 
-const ColorPicker = ({ onColorChange }) => {
+const ColorPicker = ({ onColorChange }: any) => {
   const [selectedColor, setSelectedColor] = useState("");
 
-  const handleColorChange = (color) => {
+  const handleColorChange = (color: string) => {
     setSelectedColor(color);
-    onColorChange(color); // Pass the selected color back to the parent component
+    onColorChange(color);
   };
 
   return (

@@ -21,9 +21,11 @@ import {
   QueueListIcon,
   ViewColumnsIcon,
 } from "@heroicons/react/24/outline";
+import { Project } from "@/data/data";
+import { TodoType } from "@/data/data";
 
-const Project = ({ params }) => {
-  const { projects } = useContext(ProjectContext);
+const ProjectPage = ({ params }: any) => {
+  const { projects } = useContext<any>(ProjectContext);
   const [show, setShow] = useState<boolean>(false);
   const [toggle, setToggle] = useState<boolean>(false);
   const [filterOption, setFilterOption] = useState<string>("");
@@ -36,7 +38,9 @@ const Project = ({ params }) => {
   };
 
   // Find the corresponding project using the projectid from params
-  const project = projects.find((project) => project.id === params.projectid);
+  const project = projects.find(
+    (project: any) => project.id === params.projectid
+  );
 
   if (!project) {
     // Handle the case when the project is not found
@@ -45,7 +49,7 @@ const Project = ({ params }) => {
 
   const getTasksInTodo = () => {
     let count = 0;
-    project.todos?.map((todo) => {
+    project.todos?.map((todo: TodoType) => {
       if (todo.category === "todo") {
         count++;
       }
@@ -56,7 +60,7 @@ const Project = ({ params }) => {
   const getTasksInProgress = () => {
     let count = 0;
 
-    project.todos?.map((todo) => {
+    project.todos?.map((todo: TodoType) => {
       if (todo.category === "inProgress") {
         count++;
       }
@@ -67,7 +71,7 @@ const Project = ({ params }) => {
   const getTasksCompleted = () => {
     let count = 0;
 
-    project.todos?.map((todo) => {
+    project.todos?.map((todo: TodoType) => {
       if (todo.category === "done") {
         count++;
       }
@@ -77,11 +81,17 @@ const Project = ({ params }) => {
 
   const getFilteredTasksByStage = () => {
     if (filterOption === "todo") {
-      return project.todos?.filter((todo) => todo.category === "todo");
+      return project.todos?.filter(
+        (todo: TodoType) => todo.category === "todo"
+      );
     } else if (filterOption === "inProgress") {
-      return project.todos?.filter((todo) => todo.category === "inProgress");
+      return project.todos?.filter(
+        (todo: TodoType) => todo.category === "inProgress"
+      );
     } else if (filterOption === "done") {
-      return project.todos?.filter((todo) => todo.category === "done");
+      return project.todos?.filter(
+        (todo: TodoType) => todo.category === "done"
+      );
     } else {
       return project.todos;
     }
@@ -160,7 +170,7 @@ const Project = ({ params }) => {
         <div className="mt-6">
           {show && (
             <Overlay>
-              <Modal hideOverlay={hideModal} params={params} />
+              <Modal form={"project"} hideOverlay={hideModal} params={params} />
             </Overlay>
           )}
           <div className="hidden md:block">
@@ -276,7 +286,7 @@ const Project = ({ params }) => {
 
                 <div className="grid grid-cols-3 bg-white dark:bg-neutral-800 border dark:border-neutral-500 shadow-sm rounded-br-md rounded-bl-md rounded-tr-0 overflow-auto max-h-[575px]">
                   <div className="flex-col">
-                    {project.todos?.map((todo) =>
+                    {project.todos?.map((todo: TodoType) =>
                       todo.category === "todo" ? (
                         <Todo
                           key={todo.id}
@@ -291,7 +301,7 @@ const Project = ({ params }) => {
                   <div className="flex-col">
                     {project.todos.length !== 0 ? (
                       <div>
-                        {project.todos?.map((todo) =>
+                        {project.todos?.map((todo: TodoType) =>
                           todo.category === "inProgress" ? (
                             <Todo
                               key={todo.id}
@@ -312,7 +322,7 @@ const Project = ({ params }) => {
                     )}
                   </div>
                   <div className="flex-col">
-                    {project.todos?.map((todo) =>
+                    {project.todos?.map((todo: TodoType) =>
                       todo.category === "done" ? (
                         <Todo
                           key={todo.id}
@@ -329,7 +339,7 @@ const Project = ({ params }) => {
             ) : (
               <div className="bg-white dark:bg-neutral-800 dark:border-neutral-500 border shadow-sm rounded-br-md rounded-bl-md rounded-tr-md md:overflow-auto md:max-h-[750px]">
                 <div className="p-5 pt-12">
-                  {getFilteredTasksByStage().map((todo) => (
+                  {getFilteredTasksByStage().map((todo: TodoType) => (
                     <div className="border rounded-md shadow-sm text-black/75 dark:text-neutral-300  dark:border-neutral-500 p-4 mb-4">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center">
@@ -407,7 +417,7 @@ const Project = ({ params }) => {
 
             <div className="bg-white dark:bg-neutral-800 dark:border-neutral-500 border shadow-sm rounded-br-md rounded-bl-md rounded-tr-md md:overflow-auto md:max-h-[750px]">
               <div className="p-5 pt-12">
-                {getFilteredTasksByStage().map((todo) => (
+                {getFilteredTasksByStage().map((todo: TodoType) => (
                   <div className="border rounded-md shadow-sm text-black/75 dark:text-neutral-300  dark:border-neutral-500 p-4 mb-4">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center">
@@ -449,4 +459,4 @@ const Project = ({ params }) => {
   );
 };
 
-export default Project;
+export default ProjectPage;

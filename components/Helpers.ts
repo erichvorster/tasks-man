@@ -1,5 +1,5 @@
 
-function formatDate(dateString) {
+function formatDate(dateString:string) {
   if (dateString === "") return;
 
   let dateParts;
@@ -30,7 +30,7 @@ function formatDate(dateString) {
 }
 
 
-  function getPriorityClass(priority) {
+  function getPriorityClass(priority:string) {
 
 
 

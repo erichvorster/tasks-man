@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import ProjectContext from "@/context/ProjectContext";
 import ColorPicker from "./ColorPicker";
+import { Project } from "@/data/data";
 
 type ProjectFormProps = {
   setProjects?: React.Dispatch<React.SetStateAction<never[]>>;
@@ -22,16 +23,16 @@ const ProjectForm = ({ setProjects, hideOverlay }: ProjectFormProps) => {
     projectColor: "", // Add a new property for project color
     projectDescription: "", // Add a new property for project description
   });
-  const { setActiveProject } = useContext(ProjectContext);
+  const { setActiveProject } = useContext<any>(ProjectContext);
 
-  const handleColorChange = (color) => {
+  const handleColorChange = (color: string) => {
     setProject((prevState) => ({
       ...prevState,
       projectColor: color, // Update the project color in state
     }));
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e:any) => {
     const { name, value } = e.target;
     setProject((prevState) => ({
       ...prevState,
@@ -39,7 +40,7 @@ const ProjectForm = ({ setProjects, hideOverlay }: ProjectFormProps) => {
     }));
   };
 
-  const handleDateChange = (e) => {
+  const handleDateChange = (e:any) => {
     const { name, value } = e.target;
     setProject((prevState) => ({
       ...prevState,
@@ -47,9 +48,10 @@ const ProjectForm = ({ setProjects, hideOverlay }: ProjectFormProps) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e:any) => {
     e.preventDefault();
     // Perform any additional actions with the form data here
+    //@ts-ignore
     setProjects((prevState) => [...prevState, project]);
 
     if (setActiveProject) {
@@ -132,7 +134,9 @@ const ProjectForm = ({ setProjects, hideOverlay }: ProjectFormProps) => {
       </div>
 
       <div className="mt-6 grid grid-cols-2 gap-4 mt-10">
-        <button className="border rounded-md py-1 dark:border-neutral-500 dark:text-neutral-300">Close</button>
+        <button className="border rounded-md py-1 dark:border-neutral-500 dark:text-neutral-300">
+          Close
+        </button>
         <button
           type="submit"
           className="border rounded-md py-1  text-white dark:border-neutral-500 dark:text-neutral-300"

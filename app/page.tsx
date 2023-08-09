@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useState, useContext } from "react";
 import TaskTable from "@/components/TaskTable";
@@ -11,10 +11,15 @@ import CalendarRow from "@/components/CalendarRow";
 import { Modal } from "@/components/Modal";
 import { Overlay } from "@/components/Overlay";
 import ProjectContext from "@/context/ProjectContext";
+import { Project } from "@/data/data";
+
+interface ProjectContextType {
+  projects: Project[];
+  setProjects: React.Dispatch<React.SetStateAction<Project[]>>;
+}
 
 const Home = () => {
-  const { setProjects } =
-  useContext(ProjectContext);
+  const { setProjects } = useContext<ProjectContextType | any>(ProjectContext);
   const [show, setShow] = useState<boolean>(false);
   const showModal = () => {
     setShow(true);
@@ -31,7 +36,10 @@ const Home = () => {
           Home
         </h1>
         <div>
-          <button onClick={showModal} className="border mt-3 rounded-md text-black/75 px-6 py-2 flex items-center shadow-sm hover:bg-white dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-neutral-100 dark:border-neutral-500 hover:shadow-md transition-all ease-in-out">
+          <button
+            onClick={showModal}
+            className="border mt-3 rounded-md text-black/75 px-6 py-2 flex items-center shadow-sm hover:bg-white dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-neutral-100 dark:border-neutral-500 hover:shadow-md transition-all ease-in-out"
+          >
             Create Project <PlusIcon className="w-4 h-4 ml-5" />
           </button>
         </div>
@@ -50,7 +58,7 @@ const Home = () => {
           </div>
         </div>
         <div className="col-span-3 md:col-span-1 ">
-          <CalendarRow year={2021} />
+          <CalendarRow />
         </div>
       </div>
       {show && (

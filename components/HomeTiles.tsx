@@ -1,9 +1,10 @@
 "use client";
+import { Project } from "@/data/data";
 
 import React, { useContext } from "react";
 import ProjectContext from "@/context/ProjectContext";
 
-const getTotalTodos = (projects) => {
+const getTotalTodos = (projects: Project[]) => {
   let totalTodos = 0;
   projects.forEach((project) => {
     totalTodos += project.todos.length;
@@ -11,7 +12,7 @@ const getTotalTodos = (projects) => {
   return totalTodos;
 };
 
-const getTotalTasksInProgress = (projects) => {
+const getTotalTasksInProgress = (projects: Project[]) => {
   let totalTasksInProgress = 0;
   projects.forEach((project) => {
     project.todos.forEach((todo) => {
@@ -23,7 +24,7 @@ const getTotalTasksInProgress = (projects) => {
   return totalTasksInProgress;
 };
 
-const getTotalTasksDueToday = (projects) => {
+const getTotalTasksDueToday = (projects: Project[]) => {
   let totalTasksDueToday = 0;
   projects.forEach((project) => {
     project.todos.forEach((todo) => {
@@ -36,7 +37,7 @@ const getTotalTasksDueToday = (projects) => {
 };
 
 const HomeTiles = () => {
-  const { projects } = useContext(ProjectContext);
+  const { projects } = useContext<any>(ProjectContext);
   return (
     <div className="grid grid-cols-4 gap-4">
       <div className="col-span-4 md:col-span-1 border rounded-md p-4 shadow-sm bg-white dark:bg-neutral-800 dark:border-neutral-600 ">

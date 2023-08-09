@@ -4,21 +4,24 @@ import React, { useState, useContext } from "react";
 import ProjectContext from "@/context/ProjectContext";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
-function Calendar({ setSelectedProject }) {
+function Calendar({ setSelectedProject }: any) {
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  const { projects } = useContext(ProjectContext);
+  const { projects } = useContext<any>(ProjectContext);
   const dates = extractDeadlines(projects);
 
-  function extractDeadlines(objects) {
+  function extractDeadlines(objects: any) {
     var dates = {};
 
     for (var i = 0; i < objects.length; i++) {
       var obj = objects[i];
       if (obj.hasOwnProperty("deadline")) {
         const date = obj.deadline;
+        //@ts-ignore
         if (dates[date]) {
+          //@ts-ignore
           dates[date].push(obj);
         } else {
+          //@ts-ignore
           dates[date] = [obj];
         }
       }
@@ -27,11 +30,11 @@ function Calendar({ setSelectedProject }) {
     return dates;
   }
 
-  const getMonthDays = (year, month) => {
+  const getMonthDays = (year: number, month: number) => {
     return new Date(year, month + 1, 0).getDate();
   };
 
-  const getMonthFirstDay = (year, month) => {
+  const getMonthFirstDay = (year: number, month: number) => {
     return new Date(year, month, 1).getDay();
   };
 
@@ -46,7 +49,9 @@ function Calendar({ setSelectedProject }) {
     let week = [];
 
     for (let i = 0; i < monthFirstDay; i++) {
-      week.push(<td key={`empty-${i}`} className="empty-cell dark:bg-neutral-700"></td>);
+      week.push(
+        <td key={`empty-${i}`} className="empty-cell dark:bg-neutral-700"></td>
+      );
     }
 
     for (let day = 1; day <= monthDays; day++) {
@@ -57,9 +62,10 @@ function Calendar({ setSelectedProject }) {
 
       let tdClassName = "";
       let projectsData = [];
-
+      //@ts-ignore
       if (dates[dateString]) {
         tdClassName = "highlight";
+        //@ts-ignore
         projectsData = dates[dateString];
       }
 
@@ -71,7 +77,7 @@ function Calendar({ setSelectedProject }) {
           <span className="absolute left-4 top-1">{day}</span>
           {projectsData.length > 0 && (
             <div className="project-names mt-4  rounded-md">
-              {projectsData.map((project) => (
+              {projectsData.map((project: any) => (
                 <div
                   key={project.id}
                   className="project-name dark:bg-neutral-700 text-xs rounded-md px-1 py-2 mb-1 text-black/75 dark:text-neutral-300 flex shadow-sm border dark:border-neutral-500 cursor-pointer hover:shadow-md transition-all ease-in-out"
@@ -95,7 +101,10 @@ function Calendar({ setSelectedProject }) {
 
       if (week.length === 7) {
         monthRows.push(
-          <tr className="font-normal pl-4 py-2 border dark:border-neutral-500" key={`week-${day / 7}`}>
+          <tr
+            className="font-normal pl-4 py-2 border dark:border-neutral-500"
+            key={`week-${day / 7}`}
+          >
             {week}
           </tr>
         );
@@ -118,7 +127,9 @@ function Calendar({ setSelectedProject }) {
       <div className="rounded-tl-md rounded-tr-md border dark:border-neutral-500 bg-white dark:bg-neutral-800 mt-4 ">
         <div className="flex justify-between py-4 ">
           <div className="ml-4 text-sm text-black/75 dark:text-neutral-300">
-            <p className="text-xl font-bold text-black/75 dark:text-neutral-300">Project Schedule</p>
+            <p className="text-xl font-bold text-black/75 dark:text-neutral-300">
+              Project Schedule
+            </p>
             {getMonthName(month)} {year}
           </div>
           <div>
@@ -141,13 +152,27 @@ function Calendar({ setSelectedProject }) {
         <table className="calendar-table  text-black/50 bg-white dark:text-neutral-300 dark:bg-neutral-800">
           <thead className="text-sm text-left">
             <tr className="font-normal">
-              <th className="font-normal pl-4 py-2 border dark:border-neutral-500">Monday</th>
-              <th className="font-normal pl-4 py-2 border dark:border-neutral-500">Tuesday</th>
-              <th className="font-normal pl-4 py-2 border dark:border-neutral-500">Wednesday</th>
-              <th className="font-normal pl-4 py-2 border dark:border-neutral-500">Thursday</th>
-              <th className="font-normal pl-4 py-2 border dark:border-neutral-500">Friday</th>
-              <th className="font-normal pl-4 py-2 border dark:border-neutral-500">Saturday</th>
-              <th className="font-normal pl-4 py-2 border dark:border-neutral-500">Sunday</th>
+              <th className="font-normal pl-4 py-2 border dark:border-neutral-500">
+                Monday
+              </th>
+              <th className="font-normal pl-4 py-2 border dark:border-neutral-500">
+                Tuesday
+              </th>
+              <th className="font-normal pl-4 py-2 border dark:border-neutral-500">
+                Wednesday
+              </th>
+              <th className="font-normal pl-4 py-2 border dark:border-neutral-500">
+                Thursday
+              </th>
+              <th className="font-normal pl-4 py-2 border dark:border-neutral-500">
+                Friday
+              </th>
+              <th className="font-normal pl-4 py-2 border dark:border-neutral-500">
+                Saturday
+              </th>
+              <th className="font-normal pl-4 py-2 border dark:border-neutral-500">
+                Sunday
+              </th>
             </tr>
           </thead>
           <tbody>{monthRows}</tbody>
@@ -156,7 +181,7 @@ function Calendar({ setSelectedProject }) {
     );
   };
 
-  const getMonthName = (month) => {
+  const getMonthName = (month: number) => {
     const monthNames = [
       "January",
       "February",

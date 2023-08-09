@@ -5,21 +5,28 @@ import ProjectContext from "@/context/ProjectContext";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
-function CalendarRow({ setSelectedProject }) {
+type CalendarRowProps = {
+  setSelectedProject: React.Dispatch<React.SetStateAction<string>>;
+};
+
+function CalendarRow({ setSelectedProject }: CalendarRowProps) {
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  const { projects } = useContext(ProjectContext);
+  const { projects } = useContext<any>(ProjectContext);
   const dates = extractDeadlines(projects);
 
-  function extractDeadlines(objects) {
+  function extractDeadlines(objects:any) {
     var dates = {};
 
     for (var i = 0; i < objects.length; i++) {
       var obj = objects[i];
       if (obj.hasOwnProperty("deadline")) {
         const date = obj.deadline;
+        //@ts-ignore
         if (dates[date]) {
+          //@ts-ignore
           dates[date].push(obj);
         } else {
+          //@ts-ignore
           dates[date] = [obj];
         }
       }
@@ -28,11 +35,11 @@ function CalendarRow({ setSelectedProject }) {
     return dates;
   }
 
-  const getMonthDays = (year, month) => {
+  const getMonthDays = (year:number, month:number) => {
     return new Date(year, month + 1, 0).getDate();
   };
 
-  const getMonthFirstDay = (year, month) => {
+  const getMonthFirstDay = (year:number, month:number) => {
     return new Date(year, month, 1).getDay();
   };
 
@@ -54,8 +61,10 @@ function CalendarRow({ setSelectedProject }) {
       let tdClassName = "";
       let projectsData = [];
 
+      //@ts-ignore
       if (dates[dateString]) {
         tdClassName = "highlight";
+        //@ts-ignore
         projectsData = dates[dateString];
       }
 
@@ -78,7 +87,7 @@ function CalendarRow({ setSelectedProject }) {
           >
             <td className="font-normal pl-4 py-2">
               <div className="project-names mt-4">
-                {projectsData.map((project) => (
+                {projectsData.map((project:any) => (
                   <Link href={`/Project/${project.id}`}>
                     <div
                       key={project.id}
@@ -145,7 +154,7 @@ function CalendarRow({ setSelectedProject }) {
     );
   };
 
-  const getMonthName = (month) => {
+  const getMonthName = (month:number) => {
     const monthNames = [
       "January",
       "February",

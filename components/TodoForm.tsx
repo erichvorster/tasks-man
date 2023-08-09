@@ -1,9 +1,15 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, ChangeEvent } from "react";
 import ProjectContext from "@/context/ProjectContext";
 import { RectangleStackIcon } from "@heroicons/react/24/outline";
+import { Project } from "@/data/data";
 
-const TodoForm = ({ hideOverlay, params }) => {
-  const { projects, setProjects, activeProject, setActiveProject } =
+type TodoFormProps = {
+  hideOverlay: () => void;
+  params: any;
+};
+
+const TodoForm = ({ hideOverlay, params }: TodoFormProps) => {
+  const { projects, setProjects, activeProject, setActiveProject }: any =
     useContext(ProjectContext);
   const [todoInput, setTodoInput] = useState("");
   const [categoryInput, setCategoryInput] = useState("todo");
@@ -18,8 +24,8 @@ const TodoForm = ({ hideOverlay, params }) => {
     return timestamp + randomNum;
   };
 
-  const addTodo = (projectId, newTodo) => {
-    const updatedProjects = projects.map((project) => {
+  const addTodo = (projectId: string, newTodo: any) => {
+    const updatedProjects = projects.map((project: Project) => {
       if (project.id === projectId) {
         const updatedTodos = [...project.todos, newTodo];
         return { ...project, todos: updatedTodos };
@@ -28,7 +34,7 @@ const TodoForm = ({ hideOverlay, params }) => {
     });
 
     setProjects(updatedProjects);
-    setActiveProject((prevActiveProject) => {
+    setActiveProject((prevActiveProject: any) => {
       if (prevActiveProject.id === projectId) {
         const updatedTodos = [...prevActiveProject.todos, newTodo];
         return { ...prevActiveProject, todos: updatedTodos };
@@ -37,31 +43,36 @@ const TodoForm = ({ hideOverlay, params }) => {
     });
   };
 
-  const handleTodoInputChange = (event) => {
+  const handleTodoInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTodoInput(event.target.value);
   };
 
-  const handleCategoryInputChange = (event) => {
+  const handleCategoryInputChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setCategoryInput(event.target.value);
   };
 
-  const handleDescriptionInputChange = (event) => {
+  const handleDescriptionInputChange = (
+    event: ChangeEvent<HTMLTextAreaElement>
+  ) => {
     setDescriptionInput(event.target.value);
   };
 
-  const handleDueDateChange = (event) => {
+  const handleDueDateChange = (event: ChangeEvent<HTMLInputElement>) => {
     setDueDate(event.target.value);
   };
 
-  const handlePriorityChange = (event) => {
+  const handlePriorityChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setPriority(event.target.value);
   };
 
-  const handleAssigneeInputChange = (event) => {
+  const handleAssigneeInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setAssigneeInput(event.target.value);
   }; // Added assignee input change handler
 
-  const handleAddTodo = (event, projectId) => {
+  const handleAddTodo = (
+    event: ChangeEvent<HTMLInputElement>,
+    projectId: string
+  ) => {
     event.preventDefault();
 
     if (todoInput.trim() === "" || descriptionInput.trim() === "") {
@@ -92,7 +103,7 @@ const TodoForm = ({ hideOverlay, params }) => {
         <RectangleStackIcon className="h-7 w-7 mr-2" /> Create Todo
       </h1>
 
-      <form onSubmit={(event) => handleAddTodo(event, activeProject.id)}>
+      <form onSubmit={(event: any) => handleAddTodo(event, activeProject.id)}>
         <div>
           <div className="flex flex-col mt-6">
             <label className="text-xs font-bold">Title</label>
@@ -159,7 +170,10 @@ const TodoForm = ({ hideOverlay, params }) => {
             </div>
           </div>
           <div className="mt-24 grid grid-cols-2 gap-4">
-            <button onClick={hideOverlay} className="border rounded-md dark:border-neutral-500 py-1">
+            <button
+              onClick={hideOverlay}
+              className="border rounded-md dark:border-neutral-500 py-1"
+            >
               Cancel
             </button>
             <button

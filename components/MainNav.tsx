@@ -19,11 +19,16 @@ import Image from "next/image";
 import logo from "../public/logo.svg";
 import Button from "@/components/Button";
 import ThemeToggle from "./ThemeToggle";
-import ThemeSwitch from "./ThemeSwitch";
+import { Project } from "@/data/data";
 
-const MainNav = ({ toggleNav, setToggleNav }) => {
+type MainNavProps = {
+  toggleNav: boolean;
+  setToggleNav: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const MainNav = ({ toggleNav, setToggleNav }: MainNavProps) => {
   const { setActiveProject, projects, setProjects } =
-    useContext(ProjectContext);
+    useContext<any>(ProjectContext);
   const [showProjects, setShowProjects] = useState(false);
   const [show, setShow] = useState<boolean>(false);
   const [isScrolledToTop, setIsScrolledToTop] = useState(false);
@@ -35,25 +40,25 @@ const MainNav = ({ toggleNav, setToggleNav }) => {
     setToggle(!toggle);
   };
 
-  const handleToggle2 = () => {
-    setToggle2(!toggle2);
-  };
+  // const handleToggle2 = () => {
+  //   setToggle2(!toggle2);
+  // };
 
   const showModal = () => {
     setShow(true);
   };
+
   const hideModal = () => {
     setShow(false);
   };
 
-  const handleScroll = (e) => {
-    const nav = e.target;
+  const handleScroll = (e: React.UIEvent<Element>) => {
+    const nav = e.target as Element;
     const scrollTop = nav.scrollTop;
     const scrollHeight = nav.scrollHeight;
     const clientHeight = nav.clientHeight;
 
     setIsScrolledToTop(scrollTop === 0);
-
     setIsScrolledToBottom(scrollTop + clientHeight === scrollHeight);
   };
 
@@ -145,7 +150,7 @@ const MainNav = ({ toggleNav, setToggleNav }) => {
                   className="mt-3 max-h-[300px] overflow-auto dark:bg-neutral-900 rounded-bl-md rounded-br-md"
                   onScroll={handleScroll}
                 >
-                  {projects.map((project, i) => (
+                  {projects.map((project: Project, i: number) => (
                     <li
                       className={`cursor-pointer mb-3 flex items-center ${
                         toggleNav ? "opacity-100" : "opacity-0"

@@ -8,23 +8,32 @@ import {
 import ProjectContext from "@/context/ProjectContext";
 import { deleteTodo } from "@/app/models/models";
 import { formatDate, getPriorityClass } from "@/components/Helpers";
+import { Project, TodoType } from "@/data/data";
 
 interface TodoProps {
   todo: any;
-  handleDeleteTodo: (id: number) => void;
+  params: any;
+  title: string;
+  desc: string;
 }
 
-const Todo: React.FC<TodoProps> = ({ todo, handleDeleteTodo, params }) => {
+const Todo: React.FC<TodoProps> = ({ todo, params }) => {
   const [dropDown, setDropDown] = useState(false);
-  const { projects, setProjects } = useContext(ProjectContext);
+  const { projects, setProjects } = useContext<any>(ProjectContext);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [showFullDescription, setShowFullDescription] = useState(false);
 
-  const project = projects.find((project) => project.id === params.projectid);
+  const project = projects.find(
+    (project: Project) => project.id === params.projectid
+  );
   const todosArray = project?.todos || [];
 
-  const updateTodoCategory = (projectId, todoId, newCategory) => {
-    const updatedState = projects.map((project) => {
+  const updateTodoCategory = (
+    projectId: string,
+    todoId: string,
+    newCategory: string
+  ) => {
+    const updatedState = projects.map((project: Project) => {
       if (project.id === projectId) {
         const updatedTodos = project.todos.map((todo) => {
           if (todo.id === todoId) {
@@ -42,14 +51,20 @@ const Todo: React.FC<TodoProps> = ({ todo, handleDeleteTodo, params }) => {
     setProjects(updatedState);
   };
 
-  const handleUpdateCategory = (projectId, todoId, newCategory) => {
+  const handleUpdateCategory = (
+    projectId: string,
+    todoId: string,
+    newCategory: string
+  ) => {
     updateTodoCategory(projectId, todoId, newCategory);
   };
 
-  const deleteTodo = (projectId, todoId) => {
-    const updatedState = projects.map((project) => {
+  const deleteTodo = (projectId: string, todoId: string) => {
+    const updatedState = projects.map((project: Project) => {
       if (project.id === projectId) {
-        const updatedTodos = project.todos.filter((todo) => todo.id !== todoId);
+        const updatedTodos = project.todos.filter(
+          (todo: TodoType) => todo.id !== todoId
+        );
 
         return { ...project, todos: updatedTodos };
       }
@@ -72,7 +87,9 @@ const Todo: React.FC<TodoProps> = ({ todo, handleDeleteTodo, params }) => {
           onClick={() => setDropDown(!dropDown)}
         >
           <div className="flex items-center">
-            <h2 className="text-xl font-bold text-black/75 dark:text-neutral-300">{todo.text}</h2>
+            <h2 className="text-xl font-bold text-black/75 dark:text-neutral-300">
+              {todo.text}
+            </h2>
           </div>
           <EllipsisHorizontalIcon
             className={`h-8 w-8 cursor-pointer text-gray-400 dark:text-neutral-300 ${
@@ -87,7 +104,9 @@ const Todo: React.FC<TodoProps> = ({ todo, handleDeleteTodo, params }) => {
         >
           <ul>
             <li className="hover:bg-gray-100 dark:hover:bg-neutral-600 py-1 transition ease-in-out">
-              <span className="pl-2 text-black/75 dark:text-neutral-300">Move</span>
+              <span className="pl-2 text-black/75 dark:text-neutral-300">
+                Move
+              </span>
               <ul className="">
                 <li
                   className="hover:bg-gray-200 dark:hover:bg-neutral-500 cursor-pointer px-4 py-1 transition ease-in-out text-black/75 dark:text-neutral-300"
@@ -119,7 +138,7 @@ const Todo: React.FC<TodoProps> = ({ todo, handleDeleteTodo, params }) => {
                 </li>
               </ul>
             </li>
-            <hr  className="dark:bg-neutral-500"/>
+            <hr className="dark:bg-neutral-500" />
             <li
               onClick={() => deleteTodo(params.projectid, todo.id)}
               className="hover:bg-gray-100 dark:hover:bg-neutral-500 hover:text-red-500 hover:font-bold cursor-pointer py-1 transition ease-in-out flex justify-between text-black/75 dark:text-neutral-300"
@@ -146,7 +165,9 @@ const Todo: React.FC<TodoProps> = ({ todo, handleDeleteTodo, params }) => {
       <div className="flex justify-between">
         <div className="flex">
           <CalendarIcon className="w-5 h-5 mr-1 text-gray-400 dark:text-neutral-300" />
-          <h1 className="text-xs text-gray-400 dark:text-neutral-300 mt-1">{todo.dueDate}</h1>
+          <h1 className="text-xs text-gray-400 dark:text-neutral-300 mt-1">
+            {todo.dueDate}
+          </h1>
         </div>
         <div className="flex items-center">
           <p className="flex text-xs items-center mr-3 bg-gray-200 dark:bg-neutral-500 p-1 rounded-md">

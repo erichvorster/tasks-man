@@ -9,6 +9,7 @@ import { Poppins } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import MobileNav from "@/components/MobileNav";
 import ProjectData from "@/data/data";
+import { Project } from "@/data/data";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -17,38 +18,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [projects, setProjects] = useState(ProjectData);
-
+  const [projects, setProjects] = useState<Project[]>(ProjectData);
   const [activeProject, setActiveProject] = useState({});
   const [toggleNav, setToggleNav] = useState(false);
-
-  // console.log(JSON.stringify(projects));
-
-  // useEffect(() => {
-  //   if (projects.length > 0) {
-  //     localStorage.setItem("projects", JSON.stringify(projects));
-  //   }
-  // }, [projects]);
-
-  // useEffect(() => {
-  //   // Retrieve projects from local storage on component mount
-  //   const storedProjects = JSON.parse(localStorage.getItem("projects"));
-  //   if (storedProjects) {
-  //     setProjects(storedProjects);
-  //   }
-  // }, []);
-  // useEffect(() => {
-  //   // Save projects to local storage when it changes
-  //   localStorage.setItem("projects", JSON.stringify(projects));
-  // }, [projects]);
-
-  // useEffect(() => {
-  //   // Retrieve projects from local storage on component mount
-  //   const storedProjects = JSON.parse(localStorage.getItem("projects"));
-  //   if (storedProjects) {
-  //     setProjects(storedProjects);
-  //   }
-  // }, []);
 
   return (
     <html lang="en">

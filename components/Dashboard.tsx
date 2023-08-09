@@ -3,7 +3,7 @@ import React, { ReactNode } from "react";
 type DashboardProps = {
   children: ReactNode;
   toggleNav: boolean;
-  setToggleNav: (toggle: boolean) => void;
+  setToggleNav: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const Dashboard = ({ children, toggleNav, setToggleNav }: DashboardProps) => {
@@ -15,6 +15,7 @@ const Dashboard = ({ children, toggleNav, setToggleNav }: DashboardProps) => {
     >
       {React.Children.map(children, (child) =>
         React.isValidElement(child)
+        //@ts-ignore
           ? React.cloneElement(child, { setToggleNav })
           : child
       )}
